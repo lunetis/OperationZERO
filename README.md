@@ -3,6 +3,7 @@ Remake Final Mission of Ace Combat Zero with Unity.
 
 * This is a personal project and currently in development.
 * Since I'm testing with DualShock 4 (PlayStation 4 Controller), I'm not sure if other gamepads are working properly in this project. (XBOX Controller, etc.)
+* Due to asset's license issue, commit histories can be deleted sometimes. (In that case, commit count will be very small.)
 
 ### TODO List:
 - [x] Input
@@ -34,4 +35,4 @@ Always TODO:
 
 [Current Development Status Example (Updated 2021.04.25)]
 
-devlog : https://velog.io/@lunetis/zero-9 (Korean language only)
+devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
