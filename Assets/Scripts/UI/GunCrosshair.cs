@@ -27,6 +27,8 @@ public class GunCrosshair : Crosshair
     // Update is called once per frame
     protected override void Update()
     {
+        if(target == null) return;
+
         float distance = Vector3.Distance(GameManager.PlayerAircraft.transform.position, target.position);
         Vector2 aircraftRotation = GameManager.PlayerAircraft.RotateValue;
         Vector3 convertedPosition = new Vector3(-aircraftRotation.y * offset.x, aircraftRotation.x * offset.y, zDistance);

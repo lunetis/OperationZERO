@@ -7,6 +7,9 @@ public class TargetObject : MonoBehaviour
     [SerializeField]
     ObjectInfo objectInfo;
 
+    bool isEnemy;
+    public bool isNextTarget;
+
     public ObjectInfo Info
     {
         get
@@ -17,17 +20,23 @@ public class TargetObject : MonoBehaviour
     
     private void Start()
     {
-        if(gameObject.layer != LayerMask.NameToLayer("Player"))
+        isEnemy = gameObject.layer != LayerMask.NameToLayer("Player");
+        if(isEnemy == true)
         {
             GameManager.TargetController.CreateTargetUI(this);
+            GameManager.Instance.AddEnemy(this);
         }
     }
 
     void OnDestroy()
     {
-        // if(GameManager.TargetController != null)
-        // {
-        //     GameManager.TargetController.RemoveTargetUI(this);
-        // }
+        if(GameManager.TargetController != null)
+        {
+            GameManager.TargetController.RemoveTargetUI(this);
+        }
+        if(isEnemy == true)
+        {
+            GameManager.Instance.RemoveEnemy(this);
+        }
     }
 }

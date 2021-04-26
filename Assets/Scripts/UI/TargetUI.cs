@@ -5,7 +5,6 @@ using TMPro;
 
 public class TargetUI : MonoBehaviour
 {
-    [SerializeField]
     TargetObject targetObject;
 
     [Header("Texts")]
@@ -27,9 +26,17 @@ public class TargetUI : MonoBehaviour
     
     [SerializeField]
     GameObject uiObject;
+    [SerializeField]
     GameObject blinkUIObject;
+    [SerializeField]
+    GameObject nextTargetText;
+    
+    [SerializeField]
+    float blinkRepeatTime;
 
     bool isTargetted;
+    bool isNextTarget;
+
     ObjectInfo objectInfo;
     RectTransform rectTransform;
 
@@ -73,11 +80,12 @@ public class TargetUI : MonoBehaviour
 
         if(isTargetted == true)
         {
-            InvokeRepeating("Blink", 0, 0.5f);
+            InvokeRepeating("Blink", 0, blinkRepeatTime);
         }
         else
         {
             CancelInvoke("Blink");
+            blinkUIObject.SetActive(true);
         }
     }
 
@@ -97,7 +105,6 @@ public class TargetUI : MonoBehaviour
         }
 
         Target = targetObject;  // execute Setter code
-        isTargetted = true;     // blink test
     }
 
     // Update is called once per frame
@@ -109,7 +116,7 @@ public class TargetUI : MonoBehaviour
         activeCamera = GameManager.Instance.cameraController.GetActiveCamera();
         Vector3 screenPosition = activeCamera.WorldToScreenPoint(targetObject.transform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetObject.transform);
-
+        nextTargetText.SetActive(targetObject.isNextTarget);
 
         // if screenPosition.z < 0, the object is behind camera
         if(screenPosition.z > 0)

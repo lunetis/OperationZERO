@@ -5520,6 +5520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 11400000, guid: 7b4042474ac313b41bc8d70d70f9788b, type: 2}
+  isNextTarget: 0
   maxSpeed: 250
   minSpeed: 20
   defaultSpeed: 60
@@ -5789,6 +5790,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8848ee0d-b2cf-46a3-8ac5-bcfe89c8fd08
     m_ActionName: Player/Pause[/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 432070748}
+        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+        m_MethodName: ChangeTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5fdd31c6-6e88-43e9-b3e8-e0425c7dae8f
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5806,7 +5823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d50c967ec88d0b4f83acb409e314590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1425386128}
+  target: {fileID: 0}
+  targetDetectDistance: 3000
   leftMissileTransform: {fileID: 1361750585}
   rightMissileTransform: {fileID: 1143742336}
   missile: {fileID: 5286992299650033890, guid: ac340c911b1a1c8439acd116fe36d84b, type: 3}
@@ -13426,7 +13444,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: <color=#ff4444>Pixy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82f21d56497cf194fb509b5d6d97ae31, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4268294594101154090, guid: 82f21d56497cf194fb509b5d6d97ae31,
     type: 2}
   m_fontSharedMaterials: []
@@ -19475,6 +19493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectInfo: {fileID: 11400000, guid: 55f9ad7849382154ba54bd8746dc9b54, type: 2}
+  isNextTarget: 0
 --- !u!1 &1427830089
 GameObject:
   m_ObjectHideFlags: 0
@@ -20546,7 +20565,7 @@ MonoBehaviour:
     Those who survive a long time on the battlefield start to think they're invincible.
     <size=24><mspace=15><color=#ff4444><b>>>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82f21d56497cf194fb509b5d6d97ae31, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4268294594101154090, guid: 82f21d56497cf194fb509b5d6d97ae31,
     type: 2}
   m_fontSharedMaterials: []
@@ -25506,7 +25525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetUIObject: {fileID: 7682833719505869377, guid: 74929ed09486b8f42bff2ff8c1d51e6a,
     type: 3}
-  lockedTarget: {fileID: 1425386130}
+  lockedTarget: {fileID: 0}
   targetArrow: {fileID: 1950429232}
 --- !u!1 &1795480556
 GameObject:

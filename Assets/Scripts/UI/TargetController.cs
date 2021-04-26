@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     public GameObject targetUIObject;
-    List<TargetUI> targetUIs;
+    List<TargetUI> targetUIs = new List<TargetUI>();
     TargetUI currentTargettedUI;
 
     [SerializeField]
@@ -28,6 +28,7 @@ public class TargetController : MonoBehaviour
         GameObject obj = Instantiate(targetUIObject);
         TargetUI targetUI = obj.GetComponent<TargetUI>();
         targetUI.Target = targetObject;
+        targetUIs.Add(targetUI);
 
         obj.transform.SetParent(transform, false);
     }
@@ -42,17 +43,24 @@ public class TargetController : MonoBehaviour
         }
     }
 
-    public void ChangeTarget(TargetObject lockedTarget)
+    public void ChangeTarget(TargetObject newTarget)
     {
+        lockedTarget = newTarget;
         targetArrow.SetTarget(lockedTarget);
         GameManager.UIController.SetTargetText(lockedTarget.Info);
         
         TargetUI targetUI = FindTargetUI(lockedTarget);
-        if(targetUI.Target != null)
+
+        Debug.Log("Search : " + lockedTarget);
+
+        if(targetUI != null && targetUI.Target != null)
         {
-            currentTargettedUI.SetTargetted(false);
+            if(currentTargettedUI != null)
+            {
+                currentTargettedUI.SetTargetted(false); // Disable Prev Target
+            }
             currentTargettedUI = targetUI;
-            targetUI.SetTargetted(true);
+            currentTargettedUI.SetTargetted(true);    // Enable Current Target
         }
     }
 

@@ -12,13 +12,20 @@ public class WeaponController : MonoBehaviour
 
     // Weapon System
     [Header("Common Weapon System")]
-    public Transform target;
-    public Transform leftMissileTransform;
-    public Transform rightMissileTransform;
+    public TargetObject target;
+
+    [SerializeField]
+    float targetDetectDistance;
+
+    [SerializeField]
+    Transform leftMissileTransform;
+    [SerializeField]
+    Transform rightMissileTransform;
 
     // Missile
     [Header("Missile")]
-    public Missile missile;
+    [SerializeField]
+    Missile missile;
     WeaponSlot[] mslSlots = new WeaponSlot[2];
 
     ObjectPool missilePool;
@@ -27,7 +34,8 @@ public class WeaponController : MonoBehaviour
 
     // Special Weapon;
     [Header("Special Weapon")]
-    public Missile specialWeapon;
+    [SerializeField]
+    Missile specialWeapon;
     WeaponSlot[] spwSlots = new WeaponSlot[2];
 
     ObjectPool specialWeaponPool;
@@ -37,17 +45,22 @@ public class WeaponController : MonoBehaviour
     
     // Machine Gun
     [Header("Machine Gun")]
-    public int bulletCnt;
-    public Transform gunTransform;
-    public float gunRPM;
-    public float vibrateAmount;
+    [SerializeField]
+    int bulletCnt;
+    [SerializeField]
+    Transform gunTransform;
+    [SerializeField]
+    float gunRPM;
+    [SerializeField]
+    float vibrateAmount;
 
     ObjectPool bulletPool;
     float fireInterval;
 
     // UI / Misc
     [Header("UI / Misc.")]
-    public MinimapController minimapController;
+    [SerializeField]
+    MinimapController minimapController;
 
     AircraftController aircraftController;
     UIController uiController;
@@ -84,6 +97,60 @@ public class WeaponController : MonoBehaviour
                 Vibrate(0);
                 break;
         }
+    }
+
+    public void ChangeTarget(InputAction.CallbackContext context)
+    {
+        if(context.action.phase == InputActionPhase.Performed)
+        {
+            TargetObject newTarget = GetNextTarget();
+            if(newTarget == null || (newTarget != null && newTarget == target)) return;
+
+            target = GetNextTarget();
+            target.isNextTarget = false;
+            GameManager.TargetController.ChangeTarget(target);
+        }
+    }
+
+    TargetObject GetNextTarget()
+    {
+        List<TargetObject> targets = GameManager.Instance.GetTargetsWithinDistance(3000);
+        TargetObject selectedTarget = null;
+
+        if(targets.Count == 0) return null;
+
+        else if(targets.Count == 1) selectedTarget = targets[0];
+
+        else
+        {
+            if(target == null) return targets[0];   // not selected
+
+            for(int i = 0; i < targets.Count; i++)
+            {
+                if(targets[i] == target)
+                {
+                    if(i == targets.Count - 1)  // last index
+                    {
+                        targets[1].isNextTarget = true;
+                        targets[0].isNextTarget = false;
+                        selectedTarget = targets[0];
+                    }
+                    else
+                    {
+                        if(i + 1 == targets.Count - 1)  // i + 1 == last index
+                        {
+                            targets[0].isNextTarget = true;
+                        }
+                        else
+                        {
+                            targets[i + 2].isNextTarget = true;
+                        }
+                        selectedTarget = targets[i + 1];
+                    }
+                }
+            }
+        }
+        return selectedTarget;
     }
 
 
@@ -174,7 +241,8 @@ public class WeaponController : MonoBehaviour
         missile.SetActive(true);
 
         Missile missileScript = missile.GetComponent<Missile>();
-        missileScript.Launch(target, aircraftController.Speed + 15, gameObject.layer);
+        Transform targetTrasnform = (target != null) ? target.transform : null;
+        missileScript.Launch(targetTrasnform, aircraftController.Speed + 15, gameObject.layer);
         
         weaponCnt--;
 
@@ -239,8 +307,8 @@ public class WeaponController : MonoBehaviour
     void SetMinimapCamera()
     {
         // Minimap
-        Vector2 distance = new Vector3(transform.position.x - target.position.x, 
-                                       transform.position.z - target.position.z);
+        Vector2 distance = new Vector3(transform.position.x - target.transform.position.x, 
+                                       transform.position.z - target.transform.position.z);
         minimapController.SetZoom(distance.magnitude);
     }
 
