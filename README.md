@@ -13,8 +13,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - [x] Missile
 - [x] Machine Gun
 - [x] UI
-- [x] Missile & Camera Lock-On << In Progress
-- [ ] **Damage System << On Progress**
+- [x] Missile & Camera Lock-On
+- [ ] **Damage System << In Progress**
 - [ ] Enemy AI
 - [ ] Sound System
 - [ ] Gameplay
