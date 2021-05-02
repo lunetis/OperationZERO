@@ -5,11 +5,11 @@ using UnityEngine;
 public class FollowTransformUI : MonoBehaviour
 {
     [SerializeField]
-    Transform targetTransform;
-    Camera cam;
+    protected Transform targetTransform;
 
-    RectTransform rectTransform;
-    RectTransform canvasRect;
+    protected Camera cam;
+    protected RectTransform rectTransform;
+    protected RectTransform canvasRect;
 
     // Recursive search
     Canvas GetCanvas(Transform parentTransform)
@@ -25,7 +25,7 @@ public class FollowTransformUI : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rectTransform = GetComponent<RectTransform>();
 
@@ -37,8 +37,10 @@ public class FollowTransformUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
+        if(targetTransform == null) return;
+        
         cam = GameManager.Instance.cameraController.GetActiveCamera();
         Vector3 screenPosition = cam.WorldToScreenPoint(targetTransform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetTransform);

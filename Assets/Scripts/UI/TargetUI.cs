@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TargetUI : MonoBehaviour
 {
     TargetObject targetObject;
 
-    [Header("Texts")]
+    [Header("UI / Texts")]
+    [SerializeField]
+    RawImage frameImage;
+
     [SerializeField]
     TextMeshProUGUI distanceText;
     [SerializeField]
@@ -36,6 +40,7 @@ public class TargetUI : MonoBehaviour
 
     bool isTargetted;
     bool isNextTarget;
+    bool isBlinking;
 
     ObjectInfo objectInfo;
     RectTransform rectTransform;
@@ -77,13 +82,22 @@ public class TargetUI : MonoBehaviour
     public void SetTargetted(bool isTargetted)
     {
         this.isTargetted = isTargetted;
+        SetBlink(isTargetted);
+        frameImage.color = GameManager.NormalColor;
+    }
 
-        if(isTargetted == true)
+    void SetBlink(bool blink)
+    {
+        if(isBlinking == blink) return;
+
+        if(blink == true)
         {
+            isBlinking = true;
             InvokeRepeating("Blink", 0, blinkRepeatTime);
         }
         else
         {
+            isBlinking = false;
             CancelInvoke("Blink");
             blinkUIObject.SetActive(true);
         }
@@ -93,6 +107,21 @@ public class TargetUI : MonoBehaviour
     {
         blinkUIObject.SetActive(!blinkUIObject.activeInHierarchy);
     }
+
+    public void SetLock(bool isLocked)
+    {
+        if(isLocked == true)
+        { 
+            SetBlink(false);
+            frameImage.color = GameManager.WarningColor;
+        }
+        else
+        {
+            SetTargetted(targetObject != null);
+            frameImage.color = GameManager.NormalColor;
+        }
+    }
+
 
     void Start()
     {

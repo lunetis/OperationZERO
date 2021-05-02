@@ -81,11 +81,6 @@ public class UIController : MonoBehaviour
     Material spriteMaterial;
     [SerializeField]
     Material fontMaterial;
-
-    [SerializeField]
-    Color normalColor;
-    [SerializeField]
-    Color warningColor;
     
     float remainTime;
     int score = 0;
@@ -121,6 +116,9 @@ public class UIController : MonoBehaviour
 
     public void AdjustFirstViewUI(Vector3 cameraRotation)
     {
+        if(cameraRotation.x > 180) cameraRotation.x -= 360;
+        if(cameraRotation.y > 180) cameraRotation.y -= 360;
+        
         Vector2 canvasResolution = new Vector2(firstViewCanvas.pixelRect.width, firstViewCanvas.pixelRect.height);
         Vector2 convertedRotation = new Vector2(cameraRotation.y * firstViewAdjustAngle.x, cameraRotation.x * firstViewAdjustAngle.y);
 
@@ -225,7 +223,7 @@ public class UIController : MonoBehaviour
 
     public void SetWarningUIColor(bool isWarning)
     {
-        Color color = (isWarning == true) ? warningColor : normalColor;
+        Color color = (isWarning == true) ? GameManager.WarningColor : GameManager.NormalColor;
         spriteMaterial.color = color;
         fontMaterial.SetColor("_FaceColor", color);
     }
@@ -239,6 +237,8 @@ public class UIController : MonoBehaviour
         mslIndicator.SetActive(true);
         spwIndicator.SetActive(false);
 
+        SetScoreText(0);
+        SetTargetText(null);
         SetWarningUIColor(false);
     }
 

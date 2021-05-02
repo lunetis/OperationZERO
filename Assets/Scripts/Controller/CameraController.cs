@@ -41,10 +41,11 @@ public class CameraController : MonoBehaviour
     public float pitchLerpAmount;
     public float pitchAmount;
 
+    Transform lockOnTargetTransform;
+
     // UI
     UIController uiController;
     public Transform targetArrowTransform;
-
 
     public void Look(InputAction.CallbackContext context)
     {
@@ -76,35 +77,74 @@ public class CameraController : MonoBehaviour
         uiController.SwitchUI((CameraIndex)cameraViewIndex);
     }
 
-
+    // Without Cockpit view
     void Rotate1stViewCamera()
     {
-        Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 180, 0);
-        firstViewCameraPivot.localEulerAngles = rotateValue;
-        uiController.AdjustFirstViewUI(rotateValue);
+        Quaternion rotateQuaternion;
+        
+        if(lockOnTargetTransform != null)
+        {
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
+        }
+        else
+        {
+            Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 180, 0);
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+        }
+        
+        firstViewCameraPivot.localRotation = rotateQuaternion;
+        uiController.AdjustFirstViewUI(rotateQuaternion.eulerAngles);
     }
 
+    // With Cockpit view
     void Rotate1stViewWithCockpitCamera()
     {
-        Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 135, 0);
-        if(rotateValue.x > 0)
-            rotateValue.x *= 0.3f;
+        Quaternion rotateQuaternion;
+        
+        if(lockOnTargetTransform != null)
+        {
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
 
-        firstViewCameraPivot.localEulerAngles = rotateValue;
-        uiController.AdjustFirstViewUI(rotateValue);
+            // + Adjust/Clamp value
+            Vector3 rotateValue = rotateQuaternion.eulerAngles;
+            if(rotateValue.x > 180) rotateValue.x -= 360;
+            if(rotateValue.y > 180) rotateValue.y -= 360;
+            rotateValue.x = Mathf.Clamp(rotateValue.x, -90, 27);
+            rotateValue.y = Mathf.Clamp(rotateValue.y, -135, 135);
+
+            rotateQuaternion = Quaternion.Euler(rotateValue);
+        }
+        else
+        {
+            Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 135, 0);
+            if(rotateValue.x > 0) rotateValue.x *= 0.3f;
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+        }
+        
+        firstViewCameraPivot.localRotation = rotateQuaternion;
+        uiController.AdjustFirstViewUI(rotateQuaternion.eulerAngles);
     }
 
     void Rotate3rdViewCamera()
     {
-        Transform cameraTransform = currentCamera.transform;
-
-        Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 180, rollValue * rollAmount);
-        Vector3 adjustPosition = new Vector3(0, pitchValue * pitchAmount - Mathf.Abs(lookValue.y) * 1.5f, -zoomValue * zoomAmount);
+        Quaternion rotateQuaternion;
         
-        thirdViewCameraPivot.localEulerAngles = rotateValue;
+        if(lockOnTargetTransform != null)
+        {
+            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
+        }
+        else
+        {
+            Vector3 rotateValue = new Vector3(lookInputValue.y * -90, lookInputValue.x * 180, rollValue * rollAmount);
+            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+        }
+
+        thirdViewCameraPivot.localRotation = rotateQuaternion;
+        Vector3 adjustPosition = new Vector3(0, pitchValue * pitchAmount - Mathf.Abs(lookValue.y) * 1.5f, -zoomValue * zoomAmount);
         thirdViewCameraPivot.localPosition = thirdPivotOriginPosition + adjustPosition;
     }
 
+    // Rotate camera by input
     public void AdjustCameraValue(float aircraftAccelValue, float aircraftRollValue, float aircraftPitchValue)
     {
         zoomValue = Mathf.Lerp(zoomValue, aircraftAccelValue, zoomLerpAmount * Time.deltaTime);
@@ -115,6 +155,19 @@ public class CameraController : MonoBehaviour
     public Camera GetActiveCamera()
     {
         return currentCamera;
+    }
+
+    public void LockOnTarget(Transform targetTransform)
+    {
+        lockOnTargetTransform = targetTransform;
+    }
+
+    public Quaternion CalculateLockOnRotation()
+    {
+        Vector3 targetLocalPosition = transform.InverseTransformPoint(lockOnTargetTransform.position);
+        Vector3 rotateVector = Quaternion.LookRotation(targetLocalPosition, transform.up).eulerAngles;
+        rotateVector.z = 0; // z value must be 0
+        return Quaternion.Euler(rotateVector); // Recalculate
     }
     
     // Start is called before the first frame update

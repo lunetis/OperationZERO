@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a10eef16b9359548b81868d54952edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
+  frameImage: {fileID: 8387989423835569048}
   distanceText: {fileID: 8387989424064108275}
   nameText: {fileID: 8387989425846633183}
   nicknameText: {fileID: 8387989424329936365}

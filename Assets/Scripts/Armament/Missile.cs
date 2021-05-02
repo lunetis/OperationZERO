@@ -8,21 +8,29 @@ public class Missile : MonoBehaviour
     Rigidbody rb;
 
     Transform target;
+    float speed;
     public string missileName;
 
+    [Header("Properties")]
+    public bool isSpecialWeapon;
     public float maxSpeed;
     public float accelAmount;
     public float turningForce;
-    public float boresightAngle;
 
+    [Space(10)]
+    public float boresightAngle;
     public float lifetime;
 
-    float speed;
+    [Space(10)]
+    public float targetSearchSpeed;
+    public float lockDistance;
 
+    [Space(10)]
     public float cooldown;
     public int payload;
 
     // UI
+    [Header("UI")]
     public Sprite missileFrameSprite;
     public Sprite missileFillSprite;
     

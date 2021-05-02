@@ -12,7 +12,7 @@ public class WeaponController : MonoBehaviour
 
     // Weapon System
     [Header("Common Weapon System")]
-    public TargetObject target;
+    TargetObject target;
 
     [SerializeField]
     float targetDetectDistance;
@@ -56,6 +56,8 @@ public class WeaponController : MonoBehaviour
 
     ObjectPool bulletPool;
     float fireInterval;
+    
+    bool isFocusingTarget;
 
     // UI / Misc
     [Header("UI / Misc.")]
@@ -101,14 +103,37 @@ public class WeaponController : MonoBehaviour
 
     public void ChangeTarget(InputAction.CallbackContext context)
     {
-        if(context.action.phase == InputActionPhase.Performed)
+        if(context.action.phase == InputActionPhase.Started)
         {
-            TargetObject newTarget = GetNextTarget();
-            if(newTarget == null || (newTarget != null && newTarget == target)) return;
+            isFocusingTarget = false;
+        }
 
-            target = GetNextTarget();
-            target.isNextTarget = false;
-            GameManager.TargetController.ChangeTarget(target);
+        // Hold Interaction Performed (0.3s)
+        else if(context.action.phase == InputActionPhase.Performed)
+        {
+            if(target == null) return;
+
+            GameManager.CameraController.LockOnTarget(target.transform);
+            isFocusingTarget = true;
+        }
+        
+        else if(context.action.phase == InputActionPhase.Canceled)
+        {
+            // Hold
+            if(isFocusingTarget == true)
+            {
+                GameManager.CameraController.LockOnTarget(null);
+            }
+            // Press
+            else
+            {
+                TargetObject newTarget = GetNextTarget();
+                if(newTarget == null || (newTarget != null && newTarget == target)) return;
+
+                target = GetNextTarget();
+                target.isNextTarget = false;
+                GameManager.TargetController.ChangeTarget(target);
+            }
         }
     }
 
@@ -241,7 +266,7 @@ public class WeaponController : MonoBehaviour
         missile.SetActive(true);
 
         Missile missileScript = missile.GetComponent<Missile>();
-        Transform targetTrasnform = (target != null) ? target.transform : null;
+        Transform targetTrasnform = (target != null && GameManager.TargetController.IsLocked == true) ? target.transform : null;
         missileScript.Launch(targetTrasnform, aircraftController.Speed + 15, gameObject.layer);
         
         weaponCnt--;
@@ -256,7 +281,7 @@ public class WeaponController : MonoBehaviour
         if(context.action.phase == InputActionPhase.Performed)
         {
             useSpecialWeapon = !useSpecialWeapon;
-            SetUI();
+            SetUIAndTarget();
         }
     }
 
@@ -269,7 +294,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void SetUI()
+    void SetUIAndTarget()
     {
         Missile switchedMissile = (useSpecialWeapon == true) ? specialWeapon : missile;
         WeaponSlot[] weaponSlots = (useSpecialWeapon == true) ? spwSlots : mslSlots;
@@ -278,6 +303,7 @@ public class WeaponController : MonoBehaviour
         uiController.SetMissileText(missileCnt);
         uiController.SetSpecialWeaponText(specialWeaponName, specialWeaponCnt);
         uiController.SwitchWeapon(weaponSlots, useSpecialWeapon, switchedMissile);
+        GameManager.TargetController.SwitchWeapon(switchedMissile);
     }
 
     void SetArmament()
@@ -332,7 +358,7 @@ public class WeaponController : MonoBehaviour
         useSpecialWeapon = false;
 
         SetArmament();
-        SetUI();
+        SetUIAndTarget();
     }
 
     void Update()

@@ -22,9 +22,25 @@ public class GameManager : MonoBehaviour
     public CameraController cameraController;
     public TargetController targetController;
 
+    public DebugText debugText;
+
     Vector3 zeroVec = new Vector3(0, 0, 0);
     
     List<TargetObject> objects = new List<TargetObject>();
+
+    [SerializeField]
+    Color normalColor;
+    [SerializeField]
+    Color warningColor;
+
+    public static Color NormalColor
+    {
+        get { return Instance.normalColor; }
+    }
+    public static Color WarningColor
+    {
+        get { return Instance.warningColor; }
+    }
 
     public static CameraController CameraController
     {
@@ -106,6 +122,13 @@ public class GameManager : MonoBehaviour
         objects.Remove(targetObject);
     }
 
+    public static float GetAngleBetweenTransform(Transform otherTransform)
+    {
+        Vector3 direction = PlayerAircraft.transform.forward;
+        Vector3 diff = otherTransform.position - PlayerAircraft.transform.position;
+        return Vector3.Angle(diff, direction);
+    }
+
     public List<TargetObject> GetTargetsWithinDistance(float distance, float searchAngle = 0, bool getNearestTarget = false)
     {
         List<TargetObject> objectsWithinDistance = new List<TargetObject>();
@@ -117,9 +140,7 @@ public class GameManager : MonoBehaviour
             // Search within searchAngle
             if(searchAngle != 0)
             {
-                Vector3 direction = playerAircraft.transform.forward;
-                Vector3 diff = targetObject.transform.position - playerAircraft.transform.position;
-                if(Vector3.Angle(diff, direction) > searchAngle) continue;
+                if(GetAngleBetweenTransform(targetObject.transform) > searchAngle) continue;
             }
 
             float targetDistance = Vector3.Distance(targetObject.transform.position, playerAircraft.transform.position);

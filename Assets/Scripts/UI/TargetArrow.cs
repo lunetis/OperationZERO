@@ -5,7 +5,7 @@ using TMPro;
 
 public class TargetArrow : MonoBehaviour
 {
-    public TargetObject targetObject;
+    TargetObject targetObject;
 
 	[Header("Arrow Transforms")]
 	[SerializeField]
@@ -34,7 +34,8 @@ public class TargetArrow : MonoBehaviour
 	[SerializeField]
 	TextMeshProUGUI mainTargetText;
 
-	bool drawLines = true;
+	bool drawLines = false;
+	bool isLocked;
 	private Camera cam;
     RectTransform canvasRect;
 
@@ -61,6 +62,9 @@ public class TargetArrow : MonoBehaviour
 
 	public void SetArrowVisible(bool visible)
 	{
+		if(targetObject == null)
+			return;
+
 		drawLines = visible;
 		targetNameText.gameObject.SetActive(visible);
 		targetNicknameText.gameObject.SetActive(visible);

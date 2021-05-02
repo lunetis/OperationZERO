@@ -7,20 +7,17 @@ public class TargetController : MonoBehaviour
     public GameObject targetUIObject;
     List<TargetUI> targetUIs = new List<TargetUI>();
     TargetUI currentTargettedUI;
-
-    [SerializeField]
     TargetObject lockedTarget;
 
     [SerializeField]
     TargetArrow targetArrow;
 
-    void Start()
+    [SerializeField]
+    TargetLock targetLock;
+
+    public bool IsLocked
     {
-        if(lockedTarget != null)
-        {
-            GameManager.UIController.SetTargetText(lockedTarget.Info);  // Set Upper Left UI
-            targetArrow.SetTarget(lockedTarget);    // Set Arrow UI
-        }
+        get { return targetLock.IsLocked; }
     }
 
     public void CreateTargetUI(TargetObject targetObject)
@@ -50,8 +47,8 @@ public class TargetController : MonoBehaviour
         GameManager.UIController.SetTargetText(lockedTarget.Info);
         
         TargetUI targetUI = FindTargetUI(lockedTarget);
+        targetLock.SetTarget(lockedTarget.transform);
 
-        Debug.Log("Search : " + lockedTarget);
 
         if(targetUI != null && targetUI.Target != null)
         {
@@ -62,6 +59,11 @@ public class TargetController : MonoBehaviour
             currentTargettedUI = targetUI;
             currentTargettedUI.SetTargetted(true);    // Enable Current Target
         }
+    }
+
+    public void SwitchWeapon(Missile missile)
+    {
+        targetLock.SwitchWeapon(missile);
     }
 
     public void ShowTargetArrow(bool show)
@@ -80,5 +82,19 @@ public class TargetController : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void SetTargetUILock(bool isLocked)
+    {
+        currentTargettedUI?.SetLock(isLocked);
+    }
+
+    void Start()
+    {
+        if(lockedTarget != null)
+        {
+            GameManager.UIController.SetTargetText(lockedTarget.Info);  // Set Upper Left UI
+            targetArrow.SetTarget(lockedTarget);    // Set Arrow UI
+        }
     }
 }
