@@ -12,27 +12,13 @@ public class AircraftController : TargetObject
     float brakeValue;
     float throttle;
 
-    public float Throttle
-    {
-        get
-        {
-            return throttle;
-        }
-    }
-
     float rollValue;
     float pitchValue;
-    float yawValue;
+    float yawRValue;
+    float yawLValue;
 
     // Aircraft Values
     float speed;
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-    }
     int damage = 0;
     int score = 0;
 
@@ -54,7 +40,7 @@ public class AircraftController : TargetObject
     [SerializeField]
     float brakeAmount;
     [SerializeField]
-    float calibrateAmount;
+    float calibrateAmount;  // Speed Calibration
 
     [SerializeField]
     float rollAmount;
@@ -63,23 +49,73 @@ public class AircraftController : TargetObject
     [SerializeField]
     float yawAmount;
 
+    [SerializeField]
+    float rotateLerpAmount;
+
     Vector3 rotateValue;
+    
+    [Header("High-G Turn")]
+    [SerializeField]
+    float highGFactor = 1.5f;
+    [SerializeField]
+    float highGTurnTime = 2.0f;
+
+    float highGCooldown;
+    float highGReciprocal;
+    bool isHighGPressed;
+    bool isHighGEnabled;
+
+    bool isHighGTurning;
+
+    [Header("Misc.")]
+    [SerializeField]
+    float stallSpeed;
+    [SerializeField]
+    float gravityFactor;
+    [SerializeField]
+    float lowAititudeThreshold;
+
+    Rigidbody rb;
+    float speedReciprocal;
+
+    // Controllers
+    CameraController cameraController;
+    UIController uiController;
+
+    // public gets
+    public float Speed
+    {
+        get { return speed; }
+    }
+
+    public float Throttle
+    {
+        get { return throttle; }
+    }
 
     public Vector3 RotateValue
     {
         get { return rotateValue; }
     }
 
-    // rotate lerp
-    [SerializeField]
-    float rotateLerpAmount;
-    Rigidbody rb;
-    
-    float speedReciprocal;
+    bool isAutoPilot;
+    public bool IsAutoPilot
+    {
+        get { return isAutoPilot; }
+    }
 
-    // Controllers
-    CameraController cameraController;
-    UIController uiController;
+    bool isStalling;
+    public bool IsStalling
+    {
+        get { return isStalling; }
+    }
+    
+    bool lowAltitude;
+    public bool LowAltitude
+    {
+        get { return lowAltitude; }
+    }
+
 
     // Input Action Event Callbacks
     // Movement Callbacks
@@ -93,7 +129,6 @@ public class AircraftController : TargetObject
         brakeValue = context.ReadValue<float>();
     }
 
-
     public void Roll(InputAction.CallbackContext context)
     {
         rollValue = context.ReadValue<float>();
@@ -104,9 +139,14 @@ public class AircraftController : TargetObject
         pitchValue = context.ReadValue<float>();
     }
 
-    public void Yaw(InputAction.CallbackContext context)
+    public void YawL(InputAction.CallbackContext context)
     {
-        yawValue = context.ReadValue<float>();
+        yawLValue = context.ReadValue<float>();
+    }
+
+    public void YawR(InputAction.CallbackContext context)
+    {
+        yawRValue = context.ReadValue<float>();
     }
 
     void SetUI()
@@ -117,16 +157,120 @@ public class AircraftController : TargetObject
         uiController.SetHeading(transform.eulerAngles.y);
     }
 
+    void CheckHighGTurn(ref float accel, ref float brake, ref float highGPitchFactor)
+    {
+        isHighGTurning = false;
+        
+        // Factor decreases 2 to 1
+        if(accelValue == 1 && brakeValue == 1) // Button
+        {
+            if(pitchValue < -0.7f)
+            {
+                if(isHighGEnabled == true)
+                {
+                    isHighGEnabled = false;
+                    isHighGPressed = true;
+                }
+
+                if(highGCooldown < 0) isHighGPressed = false;
+
+                if(isHighGEnabled == true || isHighGPressed == true)
+                {
+                    accel = 0;
+                    brake *= highGFactor * (1 + highGCooldown * highGReciprocal);
+                    highGPitchFactor = highGFactor * (1 + highGCooldown * highGReciprocal);
+
+                    highGCooldown -= Time.deltaTime;
+                    isHighGTurning = true;
+                }
+            }
+        }
+        else // Button Released
+        {
+            isHighGPressed = false;
+            isHighGEnabled = true;
+        }
+
+        if(isHighGPressed == false)
+        {
+            highGCooldown += Time.deltaTime * 2;
+            if(highGCooldown >= highGTurnTime)
+            {
+                highGCooldown = highGTurnTime;
+            }
+        }
+    }
+
+    void Autopilot(out Vector3 rotateVector)
+    {
+        rotateVector = -transform.eulerAngles;
+        if(rotateVector.x < -180) rotateVector.x += 360;
+        if(rotateVector.z < -180) rotateVector.y += 360;
+        if(rotateVector.z < -180) rotateVector.z += 360;
+
+        rotateVector.x = Mathf.Clamp(rotateVector.x * 2, -pitchAmount, pitchAmount);
+        rotateVector.z = Mathf.Clamp(rotateVector.z * 2, -rollAmount, rollAmount);
+        rotateVector.y = 0;
+    }
+
+    void Stall()
+    {
+        Quaternion targetRotation = Quaternion.Euler(90, transform.eulerAngles.y, transform.eulerAngles.z);
+        Quaternion diffQuaternion = Quaternion.Inverse(transform.rotation) * targetRotation;
+        
+        Vector3 diffAngle = diffQuaternion.eulerAngles;
+
+        // Adjustment
+        if(diffAngle.x > 180) diffAngle.x -= 360;
+        if(diffAngle.y > 180) diffAngle.y -= 360;
+        if(diffAngle.z > 180) diffAngle.z -= 360;
+        diffAngle.x = Mathf.Clamp(diffAngle.x, -pitchAmount, pitchAmount);
+        diffAngle.y = Mathf.Clamp(diffAngle.y, -yawAmount, yawAmount);
+        diffAngle.z = Mathf.Clamp(diffAngle.z, -rollAmount, rollAmount);
+        
+        // GameManager.Instance.debugText.AddText("Stall Value : " + diffAngle.ToString());
+        rotateValue = Vector3.Lerp(rotateValue, diffAngle, rotateLerpAmount * Time.deltaTime);
+    }
+
     void MoveAircraft()
     {
-        // Rotation
-        Vector3 lerpVector = new Vector3(pitchValue * pitchAmount, yawValue * yawAmount, -rollValue * rollAmount);
-        rotateValue = Vector3.Lerp(rotateValue, lerpVector, rotateLerpAmount * Time.deltaTime);
+        float accel = accelValue;
+        float brake = brakeValue;
+        float highGPitchFactor = 1;
 
+        // High-G Turn
+        CheckHighGTurn(ref accel, ref brake, ref highGPitchFactor);
+        
+        // === Rotation ===
+        Vector3 rotateVector;
+        if(speed < stallSpeed)
+        {
+            // Ignore all rotation input and head to the ground
+            isStalling = true;
+            Stall();
+        }
+        else
+        {
+            isStalling = false;
+
+            // Autopilot (Press L Shoulder + R Shoulder)
+            if(yawLValue == 1 && yawRValue == 1)
+            {
+                isAutoPilot = true;
+                Autopilot(out rotateVector);
+            }
+            // Rotation
+            else
+            {
+                isAutoPilot = false;
+                rotateVector = new Vector3(pitchValue * pitchAmount * highGPitchFactor, (yawRValue - yawLValue) * yawAmount, -rollValue * rollAmount);
+            }
+            rotateValue = Vector3.Lerp(rotateValue, rotateVector, rotateLerpAmount * Time.deltaTime);
+        }
         transform.Rotate(rotateValue * Time.deltaTime);
 
-        // Move
-        throttle = Mathf.Lerp(throttle, accelValue - brakeValue, throttleAmount * Time.deltaTime);
+        // === Move ===
+        throttle = Mathf.Lerp(throttle, accel - brake, throttleAmount * Time.deltaTime);
 
         if(throttle > 0)
         {
@@ -142,7 +286,18 @@ public class AircraftController : TargetObject
         float release = 1 - Mathf.Abs(throttle);
         speed += release * (defaultSpeed - speed) * speedReciprocal * calibrateAmount * Time.deltaTime;
         
+        // Gravity
+        float gravityFallByPitch = gravityFactor * Mathf.Sin(transform.eulerAngles.x * Mathf.Deg2Rad);
+        speed += gravityFallByPitch * Time.deltaTime;
+        
+        // Apply
         transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+    }
+
+    void CheckLowAltitude()
+    {
+        bool hit = Physics.Raycast(transform.position, Vector3.down, lowAititudeThreshold, 1 << LayerMask.NameToLayer("Ground"));
+        // DebugText("Low : " + hit);
     }
 
     void OnDamage(int damage)
@@ -172,7 +327,13 @@ public class AircraftController : TargetObject
         brakeValue = 0;
         rollValue = 0;
         pitchValue = 0;
-        yawValue = 0;
+        yawLValue = 0;
+        yawRValue = 0;
+
+        highGCooldown = highGTurnTime;
+        highGReciprocal = 1 / highGCooldown;
+        isHighGPressed = false;
+        isHighGEnabled = true;
 
         rb = GetComponent<Rigidbody>();
         cameraController = GetComponent<CameraController>();
@@ -191,5 +352,12 @@ public class AircraftController : TargetObject
         MoveAircraft();
         PassCameraControl();
         SetUI();
+        CheckLowAltitude();
+    }
+
+    // DEBUG
+    void DebugText(string text)
+    {
+        GameManager.Instance.debugText.AddText(text);
     }
 }

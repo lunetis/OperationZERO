@@ -46,9 +46,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Yaw",
+                    "name": "Yaw L",
                     "type": "Button",
                     "id": "3041eb09-1026-472b-8e67-8f951cdd4046",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Yaw R",
+                    "type": "Button",
+                    "id": "e1671f37-b650-4dec-a5f9-56d00dc06440",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -156,39 +164,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "72a68fd4-c9f1-45d3-a63b-6d04bcc7acba",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "237cccac-c83f-4126-b7c6-08d5b7083127",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "92f54648-07cc-4187-a1de-1b92306d8d0c",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Yaw",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "4b5aea47-549d-43d0-a8fd-ec7112baa909",
                     "path": "<Gamepad>/rightTrigger",
@@ -273,6 +248,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Change Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af8a7f1f-80fe-45e7-9c96-5f60801afa6a",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Yaw L",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9edf289b-d688-4a8a-b2ad-e9fd3ad1cede",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Yaw R",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
