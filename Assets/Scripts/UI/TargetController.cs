@@ -33,7 +33,7 @@ public class TargetController : MonoBehaviour
     public void RemoveTargetUI(TargetObject targetObject)
     {
         TargetUI targetUI = FindTargetUI(targetObject);
-        if(targetUI.Target != null)
+        if(targetUI?.Target != null)
         {
             targetUIs.Remove(targetUI);
             Destroy(targetUI.gameObject);

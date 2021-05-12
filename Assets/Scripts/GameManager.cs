@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return Instance.targetController;
+            return Instance?.targetController;
         }
     }
 
