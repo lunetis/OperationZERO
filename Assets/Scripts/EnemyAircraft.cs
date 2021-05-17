@@ -50,7 +50,5 @@ public class EnemyAircraft : TargetObject
     {
         transform.Rotate(new Vector3(0, rotateSpeed * Time.deltaTime, 0));
         transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
-
-        GameManager.Instance.debugText.AddText(name + " HP : " + hp);
     }
 }

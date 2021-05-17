@@ -113,8 +113,8 @@ MonoBehaviour:
   isSpecialWeapon: 0
   maxSpeed: 300
   accelAmount: 50
-  turningForce: 0
-  boresightAngle: 180
+  turningForce: 2
+  boresightAngle: 90
   lifetime: 7
   targetSearchSpeed: 60
   lockDistance: 1500
