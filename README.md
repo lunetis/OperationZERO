@@ -15,8 +15,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - [x] UI
 - [x] Missile & Camera Lock-On
 - [x] Additional Movement (Autopilot, Stall, etc)
-- [ ] **Damage System << In Progress**
-- [ ] Enemy AI
+- [x] Damage System
+- [ ] **Enemy AI << In Progress**
 - [ ] Sound System
 - [ ] Gameplay
 - [ ] Scripting
@@ -32,11 +32,9 @@ Always TODO:
 <br>
 <br>
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0502.gif)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0518.gif)
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0509.gif)
-
-[Current Development Status Example (Updated 2021.05.09)]
-- Additional Movement Implementation
+[Current Development Status Example (Updated 2021.05.18)]
+- Damage System Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
