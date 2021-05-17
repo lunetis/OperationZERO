@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57922f984b61da44a67bd1f6d6d968b, type: 3}
+  m_Name: MISSION ACCOMPLISHED
+  m_EditorClassIdentifier: 
+  labelTexture: {fileID: 2800000, guid: 08c04aa6280cebd41af2abdce8a14227, type: 3}
+  labelColor: {r: 0.33333334, g: 0.5803922, b: 1, a: 1}
+  visibleTime: 5

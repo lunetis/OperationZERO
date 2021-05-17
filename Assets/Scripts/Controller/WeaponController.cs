@@ -64,6 +64,9 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     MinimapController minimapController;
 
+    [SerializeField]
+    GunCrosshair gunCrosshair;
+
     AircraftController aircraftController;
     UIController uiController;
 
@@ -71,7 +74,7 @@ public class WeaponController : MonoBehaviour
     Gamepad gamepad;
 
     // Weapon Callbacks
-    public void Fire(InputAction.CallbackContext context)
+    public void OnFire(InputAction.CallbackContext context)
     {
         if(context.action.phase == InputActionPhase.Performed)
         {
@@ -86,7 +89,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void GunFire(InputAction.CallbackContext context)
+    public void OnGunFire(InputAction.CallbackContext context)
     {
         switch(context.action.phase)
         {
@@ -101,7 +104,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void ChangeTarget(InputAction.CallbackContext context)
+    public void OnChangeTarget(InputAction.CallbackContext context)
     {
         if(context.action.phase == InputActionPhase.Started)
         {
@@ -119,22 +122,34 @@ public class WeaponController : MonoBehaviour
         
         else if(context.action.phase == InputActionPhase.Canceled)
         {
-            // Hold
+            // Hold : Focus
             if(isFocusingTarget == true)
             {
                 GameManager.CameraController.LockOnTarget(null);
             }
-            // Press
+            // Press : Change Target
             else
             {
-                TargetObject newTarget = GetNextTarget();
-                if(newTarget == null || (newTarget != null && newTarget == target)) return;
-
-                target = GetNextTarget();
-                target.isNextTarget = false;
-                GameManager.TargetController.ChangeTarget(target);
+                ChangeTarget();
             }
         }
+    }
+
+    public void ChangeTarget()
+    {
+        TargetObject newTarget = GetNextTarget();
+        if(newTarget == null)   // No target
+        {
+            GameManager.TargetController.ChangeTarget(null);
+            gunCrosshair.SetTarget(null);
+            return;
+        }
+
+        if(newTarget != null && newTarget == target) return;
+        target = GetNextTarget();
+        target.isNextTarget = false;
+        GameManager.TargetController.ChangeTarget(target);
+        gunCrosshair.SetTarget(target.transform);
     }
 
     TargetObject GetNextTarget()
@@ -276,7 +291,7 @@ public class WeaponController : MonoBehaviour
     }
 
 
-    public void SwitchWeapon(InputAction.CallbackContext context)
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
     {
         if(context.action.phase == InputActionPhase.Performed)
         {
@@ -341,7 +356,7 @@ public class WeaponController : MonoBehaviour
     void Awake()
     {
         aircraftController = GetComponent<AircraftController>();
-        uiController = GameManager.Instance.uiController;
+        uiController = GameManager.UIController;
         gamepad = Gamepad.current;
 
         missilePool = GameManager.Instance.missileObjectPool;

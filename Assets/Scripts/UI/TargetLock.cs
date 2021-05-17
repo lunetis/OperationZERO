@@ -80,7 +80,7 @@ public class TargetLock : FollowTransformUI
             return;
         }
         
-        cam = GameManager.Instance.cameraController.GetActiveCamera();
+        cam = GameManager.CameraController.GetActiveCamera();
         Vector3 screenPosition = cam.WorldToScreenPoint(targetTransform.position);
         
         // if screenPosition.z < 0, the object is behind camera

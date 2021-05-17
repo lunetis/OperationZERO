@@ -11,16 +11,25 @@ public class GameManager : MonoBehaviour
     public ObjectPool explosionEffectObjectPool;
     public ObjectPool smokeTrailEffectObjectPool;
 
+    [SerializeField]
+    ObjectPool smokeTrailDamagePool;
+
     public ObjectPool bulletObjectPool;
     public ObjectPool bulletHitEffectObjectPool;
     public ObjectPool groundHitEffectObjectPool;
 
     public int timeLimit;
     int score;
-    public UIController uiController;
-    public AircraftController playerAircraft;
-    public CameraController cameraController;
-    public TargetController targetController;
+    [SerializeField]
+    UIController uiController;
+    [SerializeField]
+    AircraftController playerAircraft;
+    [SerializeField]
+    CameraController cameraController;
+    [SerializeField]
+    TargetController targetController;
+    [SerializeField]
+    WeaponController weaponController;
 
     public DebugText debugText;
 
@@ -44,34 +53,27 @@ public class GameManager : MonoBehaviour
 
     public static CameraController CameraController
     {
-        get
-        {
-            return Instance.cameraController;
-        }
+        get { return Instance?.cameraController; }
     }
 
     public static AircraftController PlayerAircraft
     {
-        get
-        {
-            return Instance.playerAircraft;
-        }
+        get { return Instance?.playerAircraft; }
     }
 
     public static UIController UIController
     {
-        get
-        {
-            return Instance.uiController;
-        }
+        get { return Instance?.uiController; }
     }
 
     public static TargetController TargetController
     {
-        get
-        {
-            return Instance?.targetController;
-        }
+        get { return Instance?.targetController; }
+    }
+
+    public static WeaponController WeaponController
+    {
+        get { return Instance?.weaponController; }
     }
 
     void Awake()
@@ -166,5 +168,15 @@ public class GameManager : MonoBehaviour
             objectsWithinDistance.Add(nearestTarget);
         }
         return objectsWithinDistance;
+    }
+
+    public void CreateDamageSmokeEffect(Transform transform)
+    {
+        GameObject smokeTrailObject = smokeTrailDamagePool.GetPooledObject();
+        if(smokeTrailObject != null)
+        {
+            smokeTrailObject.SetActive(true);
+            smokeTrailObject.GetComponent<SmokeTrail>()?.SetFollowTransform(transform);
+        }
     }
 }

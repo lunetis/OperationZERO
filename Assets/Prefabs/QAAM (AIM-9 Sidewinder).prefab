@@ -4889,8 +4889,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 5
+  m_Radius: 2
+  m_Height: 7
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5862371189072659226
@@ -4922,6 +4922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileName: QAAM
+  damage: 0
   isSpecialWeapon: 1
   maxSpeed: 300
   accelAmount: 60
@@ -4930,7 +4931,7 @@ MonoBehaviour:
   lifetime: 7
   targetSearchSpeed: 80
   lockDistance: 2500
-  cooldown: 7
+  cooldown: 8
   payload: 26
   missileFrameSprite: {fileID: 21300000, guid: 148878c88a6edf642a4a5e0e1dfba395, type: 3}
   missileFillSprite: {fileID: 21300000, guid: a878b967282bdd543a182d8c23f66cae, type: 3}

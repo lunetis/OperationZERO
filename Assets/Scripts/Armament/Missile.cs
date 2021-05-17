@@ -12,6 +12,10 @@ public class Missile : MonoBehaviour
     public string missileName;
 
     [Header("Properties")]
+
+    [SerializeField]
+    float damage;
+
     public bool isSpecialWeapon;
     public float maxSpeed;
     public float accelAmount;
@@ -38,11 +42,23 @@ public class Missile : MonoBehaviour
     GameObject smokeTrailEffect;
     public Transform smokeTrailPosition;
 
+    bool isHit = false;
+    bool isDisabled = false;
+
     public void Launch(Transform target, float launchSpeed, int layer)
     {
         this.target = target;
         speed = launchSpeed;
         gameObject.layer = layer;
+        
+        smokeTrailEffect = GameManager.Instance.smokeTrailEffectObjectPool.GetPooledObject();
+        if(smokeTrailEffect != null)
+        {
+            smokeTrailEffect.SetActive(true);
+            smokeTrailEffect.GetComponent<SmokeTrail>()?.SetFollowTransform(smokeTrailPosition);
+        }
+        
+        Invoke("DisableMissile", lifetime);
     }
 
     void LookAtTarget()
@@ -55,6 +71,8 @@ public class Missile : MonoBehaviour
 
         if(angle > boresightAngle)
         {
+            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+            isDisabled = true;
             target = null;
             return;
         }
@@ -65,6 +83,12 @@ public class Missile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if(target != null && other.gameObject == target.gameObject)
+        {
+            isHit = true;
+        }
+        other.gameObject.GetComponent<TargetObject>()?.OnDamage(damage, gameObject.layer);
+
         Explode();
         DisableMissile();
     }
@@ -80,6 +104,12 @@ public class Missile : MonoBehaviour
 
     void DisableMissile()
     {
+        Debug.Log("Disabled : " + target + " // " + isDisabled + " // " + isHit);
+        if(target != null && isDisabled == false && isHit == false)
+        {
+            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+        }
+
         transform.parent = parent;
         gameObject.SetActive(false);
     }
@@ -91,24 +121,12 @@ public class Missile : MonoBehaviour
         parent = transform.parent;
     }
     
-    void OnEnable()
-    {
-        smokeTrailEffect = GameManager.Instance.smokeTrailEffectObjectPool.GetPooledObject();
-        if(smokeTrailEffect != null)
-        {
-            smokeTrailEffect.transform.position = smokeTrailPosition.position;
-            smokeTrailEffect.GetComponent<ParticleSystem>().Play();
-            smokeTrailEffect.SetActive(true);
-        }
-        
-        Invoke("DisableMissile", lifetime);
-    }
 
     private void OnDisable()
     {
         if(smokeTrailEffect != null)
         {
-            smokeTrailEffect.GetComponent<ParticleSystem>().Stop();
+            smokeTrailEffect.GetComponent<SmokeTrail>().StopFollow();
         }
         
         rb.velocity = Vector3.zero;
@@ -125,13 +143,5 @@ public class Missile : MonoBehaviour
         }
 
         rb.velocity = transform.forward * speed;
-    }
-
-    void Update()
-    {
-        if(smokeTrailEffect != null)
-        {
-            smokeTrailEffect.transform.position = smokeTrailPosition.position;
-        }
     }
 }

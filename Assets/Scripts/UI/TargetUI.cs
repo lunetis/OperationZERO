@@ -122,6 +122,13 @@ public class TargetUI : MonoBehaviour
         }
     }
 
+    // Call before destroy
+    public void DestroyUI()
+    {
+        targetObject = null;
+        CancelInvoke();
+    }
+
 
     void Start()
     {
@@ -142,7 +149,7 @@ public class TargetUI : MonoBehaviour
         if(targetObject == null)
             return;
 
-        activeCamera = GameManager.Instance.cameraController.GetActiveCamera();
+        activeCamera = GameManager.CameraController.GetActiveCamera();
         Vector3 screenPosition = activeCamera.WorldToScreenPoint(targetObject.transform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetObject.transform);
         nextTargetText.SetActive(targetObject.isNextTarget);

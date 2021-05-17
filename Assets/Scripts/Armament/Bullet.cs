@@ -11,6 +11,9 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float lifetime;
 
+    [SerializeField]
+    float damage;
+    
     public void Fire(float launchSpeed, int layer)
     {
         speed += launchSpeed;
@@ -28,6 +31,7 @@ public class Bullet : MonoBehaviour
         else
         {
             effectPool = GameManager.Instance.bulletHitEffectObjectPool;
+            other.gameObject.GetComponent<TargetObject>()?.OnDamage(damage, gameObject.layer);
         }
         CreateHitEffect(effectPool);
         DisableBullet();

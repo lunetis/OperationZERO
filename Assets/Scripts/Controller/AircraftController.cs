@@ -19,7 +19,6 @@ public class AircraftController : TargetObject
 
     // Aircraft Values
     float speed;
-    int damage = 0;
     int score = 0;
 
     // public values
@@ -81,6 +80,7 @@ public class AircraftController : TargetObject
     // Controllers
     CameraController cameraController;
     UIController uiController;
+    WeaponController weaponController;
 
     // public gets
     public float Speed
@@ -228,7 +228,6 @@ public class AircraftController : TargetObject
         diffAngle.y = Mathf.Clamp(diffAngle.y, -yawAmount, yawAmount);
         diffAngle.z = Mathf.Clamp(diffAngle.z, -rollAmount, rollAmount);
         
-        // GameManager.Instance.debugText.AddText("Stall Value : " + diffAngle.ToString());
         rotateValue = Vector3.Lerp(rotateValue, diffAngle, rotateLerpAmount * Time.deltaTime);
     }
 
@@ -300,13 +299,13 @@ public class AircraftController : TargetObject
         // DebugText("Low : " + hit);
     }
 
-    void OnDamage(int damage)
+    public override void OnDamage(float damage, int layer)
     {
-        this.damage += damage;
-        uiController.SetDamageText(this.damage);
+        base.OnDamage(damage, layer);
+        uiController.SetDamage((int)(Info.HP - hp / Info.HP * 100));
     }
 
-    void OnScore(int score)
+    public void OnScore(int score)
     {
         this.score += score;
         uiController.SetScoreText(this.score);
@@ -318,9 +317,11 @@ public class AircraftController : TargetObject
         cameraController.AdjustCameraValue(zoomValue, rollValue, pitchValue);
     }
 
-    void Start()
+    protected override void Start()
     {
-        uiController = GameManager.Instance.uiController;
+        base.Start();
+
+        uiController = GameManager.UIController;
         gamepad = Gamepad.current;
 
         accelValue = 0;
@@ -343,8 +344,8 @@ public class AircraftController : TargetObject
 
         // UI
         SetUI();
-        OnDamage(0);
-        OnScore(0);
+        uiController.SetDamage(0);
+        uiController.SetScoreText(0);
     }
     
     void Update()

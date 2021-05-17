@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 510823142176030836}
   - component: {fileID: 8913707030670821499}
   - component: {fileID: 8624216443875971574}
+  - component: {fileID: 2177259689952166248}
   m_Layer: 0
-  m_Name: SmokeTrail
+  m_Name: SmokeTrail (Missile)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8366715619585494789}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 0, z: -1.56}
+  m_LocalPosition: {x: 0, y: 0, z: -4.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1304,7 +1305,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.7411765}
+        key0: {r: 1, g: 1, b: 1, a: 0.61960787}
         key1: {r: 1, g: 1, b: 1, a: 0.5686275}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -1321,7 +1322,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 22822
+        atime1: 26600
         atime2: 65535
         atime3: 65535
         atime4: 65535
@@ -4830,3 +4831,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 14
+--- !u!114 &2177259689952166248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8366715619585494789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49603618a2f48b543b1e0140b9d2c338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

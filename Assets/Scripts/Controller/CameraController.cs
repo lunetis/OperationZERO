@@ -174,7 +174,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         thirdPivotOriginPosition = thirdViewCameraPivot.localPosition;
-        uiController = GameManager.Instance.uiController;
+        uiController = GameManager.UIController;
         SetCamera();
     }
 

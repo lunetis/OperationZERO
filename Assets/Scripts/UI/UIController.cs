@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     TextMeshProUGUI speedText;
     [SerializeField]
     TextMeshProUGUI altitudeText;
+    [SerializeField]
+    AlertUIController alertUIController;
 
     [Header("1st-3rd View Control")]
     [SerializeField]
@@ -81,7 +83,11 @@ public class UIController : MonoBehaviour
     Material spriteMaterial;
     [SerializeField]
     Material fontMaterial;
-    
+
+    [Header("Colors")]
+    [SerializeField]
+    Color cautionColor;
+
     float remainTime;
     int score = 0;
 
@@ -192,10 +198,23 @@ public class UIController : MonoBehaviour
         spwText.text = text;
     }
 
-    public void SetDamageText(int damage)
+    public void SetDamage(int damage)
     {
-        string text = string.Format("<align=left>DMG<line-height=0>\n<align=right>{0}<line-height=0>", damage);
-        spwText.text = text;
+        string text = string.Format("<align=left>DMG<line-height=0>\n<align=right>{0}%<line-height=0>", damage);
+        dmgText.text = text;
+
+        if(damage < 34)
+        {
+            aircraftImage.color = GameManager.NormalColor;
+        }
+        else if(damage < 67)
+        {
+            aircraftImage.color = cautionColor;
+        }
+        else
+        {
+            aircraftImage.color = GameManager.WarningColor;
+        }
     }
 
     public void SwitchWeapon(WeaponSlot[] weaponSlots, bool useSpecialWeapon, Missile missile)
@@ -226,6 +245,11 @@ public class UIController : MonoBehaviour
         Color color = (isWarning == true) ? GameManager.WarningColor : GameManager.NormalColor;
         spriteMaterial.color = color;
         fontMaterial.SetColor("_FaceColor", color);
+    }
+
+    public void SetLabel(AlertUIController.LabelEnum labelEnum)
+    {
+        alertUIController.SetLabel(labelEnum);
     }
 
     // Start is called before the first frame update

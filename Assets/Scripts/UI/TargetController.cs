@@ -30,11 +30,14 @@ public class TargetController : MonoBehaviour
         obj.transform.SetParent(transform, false);
     }
 
+
+    // Remove from TargetUI List, stop functioning and Destroy
     public void RemoveTargetUI(TargetObject targetObject)
     {
-        TargetUI targetUI = FindTargetUI(targetObject);
+        TargetUI targetUI = FindTargetUI();
         if(targetUI?.Target != null)
         {
+            targetUI.DestroyUI();
             targetUIs.Remove(targetUI);
             Destroy(targetUI.gameObject);
         }
@@ -42,11 +45,20 @@ public class TargetController : MonoBehaviour
 
     public void ChangeTarget(TargetObject newTarget)
     {
+        // No target
+        if(newTarget == null)
+        {
+            targetArrow.SetTarget(null);
+            GameManager.UIController.SetTargetText(null);
+            targetLock.SetTarget(null);
+            return;
+        }
+
         lockedTarget = newTarget;
         targetArrow.SetTarget(lockedTarget);
         GameManager.UIController.SetTargetText(lockedTarget.Info);
         
-        TargetUI targetUI = FindTargetUI(lockedTarget);
+        TargetUI targetUI = FindTargetUI();
         targetLock.SetTarget(lockedTarget.transform);
 
 
@@ -71,7 +83,7 @@ public class TargetController : MonoBehaviour
         targetArrow.SetArrowVisible(show);
     }
 
-    public TargetUI FindTargetUI(TargetObject targetObject)
+    public TargetUI FindTargetUI()
     {
         foreach(TargetUI targetUI in targetUIs)
         {

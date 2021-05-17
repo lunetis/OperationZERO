@@ -5,10 +5,16 @@ using UnityEngine;
 public class TargetObject : MonoBehaviour
 {
     [SerializeField]
-    ObjectInfo objectInfo;
+    protected ObjectInfo objectInfo;
 
-    bool isEnemy;
+    [SerializeField]
+    protected GameObject destroyEffect;
+
+    protected bool isEnemy;
+    protected float hp;
     public bool isNextTarget;
+
+    int lastHitLayer;
 
     public ObjectInfo Info
     {
@@ -17,8 +23,60 @@ public class TargetObject : MonoBehaviour
             return objectInfo;
         }
     }
+
+    protected void DeleteMinimapSprite()
+    {
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            GameObject childObject = transform.GetChild(i).gameObject;
+            if(childObject.layer == LayerMask.NameToLayer("Minimap"))
+            {
+                Destroy(childObject);
+            }
+        }
+    }
+
+    protected void CommonDestroyFunction()
+    {
+        GameObject obj = Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        if(isEnemy == true)
+        {
+            GameManager.Instance?.RemoveEnemy(this);
+            GameManager.TargetController?.RemoveTargetUI(this);
+            GameManager.WeaponController?.ChangeTarget();
+
+            if(lastHitLayer == LayerMask.NameToLayer("Player"))
+            {
+                GameManager.PlayerAircraft.OnScore(objectInfo.Score);
+                GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Destroyed);
+            }
+        }
+        DeleteMinimapSprite();
+    }
+
+    public virtual void OnDamage(float damage, int layer)
+    {
+        hp -= damage;
+        lastHitLayer = layer;
+
+        if(lastHitLayer == LayerMask.NameToLayer("Player")) // Hit by Player
+        {
+            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Hit);
+        }
+
+        if(hp <= 0)
+        {
+            DestroyObject();
+        }
+    }
+
+    protected virtual void DestroyObject()
+    {
+        CommonDestroyFunction();
+        Destroy(gameObject);
+    }
     
-    private void Start()
+    protected virtual void Start()
     {
         isEnemy = gameObject.layer != LayerMask.NameToLayer("Player");
         if(isEnemy == true)
@@ -26,17 +84,13 @@ public class TargetObject : MonoBehaviour
             GameManager.TargetController.CreateTargetUI(this);
             GameManager.Instance.AddEnemy(this);
         }
+
+        hp = objectInfo.HP;
+        lastHitLayer = 0;
     }
 
-    void OnDestroy()
+    protected void OnDestroy()
     {
-        if(GameManager.TargetController != null)
-        {
-            GameManager.TargetController.RemoveTargetUI(this);
-        }
-        if(isEnemy == true)
-        {
-            GameManager.Instance.RemoveEnemy(this);
-        }
+        
     }
 }

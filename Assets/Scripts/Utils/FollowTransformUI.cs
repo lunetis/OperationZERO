@@ -41,7 +41,7 @@ public class FollowTransformUI : MonoBehaviour
     {
         if(targetTransform == null) return;
         
-        cam = GameManager.Instance.cameraController.GetActiveCamera();
+        cam = GameManager.CameraController.GetActiveCamera();
         Vector3 screenPosition = cam.WorldToScreenPoint(targetTransform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetTransform);
 

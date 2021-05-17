@@ -1,14 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AlertUIController : MonoBehaviour
 {
-    [Header("Warning/Alert Label Objects")]
+    [Header("Warning/Alert Label Object")]
+    [SerializeField]
+    RawImage labelImage;
 
-    List<GameObject> attackAlerts;
-    List<GameObject> statusAlerts;
+    [Space(10)]
+    [SerializeField]
+    LabelInfo destroyed;
+    [SerializeField]
+    LabelInfo hit;
+    [SerializeField]
+    LabelInfo missed;
+    [SerializeField]
+    LabelInfo missionAccomplished;
+    [SerializeField]
+    LabelInfo missionFailed;
 
+    int currentPriority;
+    float labelTimer;
+
+    public enum LabelEnum  // Used for Priority
+    {
+        Missed = 1,
+        Hit,
+        Destroyed,
+        MissionAccomplished,
+        MissionFailed
+    }
+
+    Color transparentColor = new Color(0, 0, 0, 0);
+
+    [Header("Attack Alerts")]
     // Attack
     [SerializeField]
     GameObject caution;
@@ -17,6 +44,7 @@ public class AlertUIController : MonoBehaviour
     [SerializeField]
     GameObject missileAlert;
 
+    [Header("Status Alerts")]
     // Status
     [SerializeField]
     GameObject pullUp;
@@ -25,6 +53,7 @@ public class AlertUIController : MonoBehaviour
     [SerializeField]
     GameObject damaged;
 
+    [Header("Misc.")]
     // Misc
     [SerializeField]
     GameObject autopilot;
@@ -36,6 +65,48 @@ public class AlertUIController : MonoBehaviour
     // Category : Attack
 
     // Category : Status
+    public void SetLabel(LabelEnum labelEnum)
+    {
+        LabelInfo labelInfo;
+        switch(labelEnum)
+        {
+            case LabelEnum.Missed:
+                labelInfo = missed;
+                break;
+            case LabelEnum.Hit:
+                labelInfo = hit;
+                break;
+            case LabelEnum.Destroyed:
+                labelInfo = destroyed;
+                break;
+            case LabelEnum.MissionFailed:
+                labelInfo = missionFailed;
+                break;
+            case LabelEnum.MissionAccomplished:
+                labelInfo = missionAccomplished;
+                break;
+                
+            default:    // Error case
+                labelInfo = missed;
+                break;
+        }
+
+        int labelPriority = (int)labelEnum;
+
+        if(currentPriority < labelPriority)
+        {
+            currentPriority = labelPriority;
+            labelTimer = labelInfo.VisibleTime;
+
+            labelImage.texture = labelInfo.LabelTexture;
+            labelImage.color = labelInfo.LabelColor;
+        }
+        else if(currentPriority == labelPriority)
+        {
+            labelTimer = labelInfo.VisibleTime;
+        }
+    }
+
 
     // Misc.
     void ShowAutopilotUI()
@@ -52,9 +123,7 @@ public class AlertUIController : MonoBehaviour
 
     void Start()
     {
-        // Index : Priority
-        attackAlerts = new List<GameObject>(new GameObject[]{caution, warning, missileAlert});
-        statusAlerts = new List<GameObject>(new GameObject[]{pullUp, stalling, damaged});
+        labelImage.color = transparentColor;
     }
 
     // Update is called once per frame
@@ -62,5 +131,18 @@ public class AlertUIController : MonoBehaviour
     {
         ShowAutopilotUI();
         ShowStallingUI();
+
+        if(labelTimer > 0)
+        {
+            labelTimer -= Time.deltaTime;
+            
+            // Set Invisible
+            if(labelTimer <= 0)
+            {
+                labelTimer = 0;
+                currentPriority = 0;
+                labelImage.color = transparentColor;
+            }
+        }
     }
 }
