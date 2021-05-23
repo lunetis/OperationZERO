@@ -33,8 +33,9 @@ Always TODO:
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/0518.gif)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0524.gif)
 
-[Current Development Status Example (Updated 2021.05.18)]
-- Damage System Implementation
+[Current Development Status Example (Updated 2021.05.24)]
+- Enemy Autopilot Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
