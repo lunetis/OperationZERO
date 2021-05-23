@@ -48,7 +48,6 @@ public class EnemyAircraft : TargetObject
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, rotateSpeed * Time.deltaTime, 0));
-        transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
+        
     }
 }

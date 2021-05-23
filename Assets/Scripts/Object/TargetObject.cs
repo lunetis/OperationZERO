@@ -81,8 +81,8 @@ public class TargetObject : MonoBehaviour
         isEnemy = gameObject.layer != LayerMask.NameToLayer("Player");
         if(isEnemy == true)
         {
-            GameManager.TargetController.CreateTargetUI(this);
-            GameManager.Instance.AddEnemy(this);
+            GameManager.TargetController?.CreateTargetUI(this);
+            GameManager.Instance?.AddEnemy(this);
         }
 
         hp = objectInfo.HP;
