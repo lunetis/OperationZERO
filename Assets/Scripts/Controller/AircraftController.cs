@@ -74,6 +74,10 @@ public class AircraftController : TargetObject
     [SerializeField]
     float lowAititudeThreshold;
 
+    
+    [SerializeField]
+    List<JetEngineController> jetEngineControllers;
+
     Rigidbody rb;
     float speedReciprocal;
 
@@ -317,6 +321,14 @@ public class AircraftController : TargetObject
         cameraController.AdjustCameraValue(zoomValue, rollValue, pitchValue);
     }
 
+    void JetEngineControl()
+    {
+        foreach(JetEngineController jet in jetEngineControllers)
+        {
+            jet.InputValue = throttle;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -354,6 +366,7 @@ public class AircraftController : TargetObject
         PassCameraControl();
         SetUI();
         CheckLowAltitude();
+        JetEngineControl();
     }
 
     // DEBUG

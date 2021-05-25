@@ -14,6 +14,12 @@ public class JetEngineController : MonoBehaviour
     [SerializeField]
     float brakeLerpAmount;
 
+    float inputValue;
+    public float InputValue
+    {
+        set { inputValue = value; }
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,7 +32,7 @@ public class JetEngineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float lerpAmount = (throttleAmount > GameManager.PlayerAircraft.Throttle) ? brakeLerpAmount : accelLerpAmount;
+        float lerpAmount = (throttleAmount > inputValue) ? brakeLerpAmount : accelLerpAmount;
         throttleAmount = Mathf.Lerp(throttleAmount, GameManager.PlayerAircraft.Throttle, lerpAmount * Time.deltaTime);
         particleColor.a = throttleAmount * initAlpha;
         particleMainModule.startColor = particleColor;

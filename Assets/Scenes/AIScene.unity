@@ -857,6 +857,7 @@ MonoBehaviour:
   turningForce: 1.5
   zRotateMaxThreshold: 0.3
   zRotateAmount: 135
+  zRotateLerpAmount: 1.5
   initialWaypoints:
   - {fileID: 1789038085}
   waypointMinHeight: 50

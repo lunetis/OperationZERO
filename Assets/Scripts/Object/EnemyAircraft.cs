@@ -8,11 +8,6 @@ public class EnemyAircraft : TargetObject
     float destroyDelay = 1;
 
     [SerializeField]
-    float rotateSpeed;
-    [SerializeField]
-    float moveSpeed;
-
-    [SerializeField]
     Transform smokeTransformParent;
     
     protected override void DestroyObject() 
@@ -43,11 +38,5 @@ public class EnemyAircraft : TargetObject
     protected override void Start()
     {
         base.Start();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
