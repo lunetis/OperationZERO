@@ -6,27 +6,32 @@ public class AircraftAI : MonoBehaviour
 {
     [Header("Aircraft Settings")]
     [SerializeField]
-    float maxSpeed;
+    float maxSpeed = 300;
     [SerializeField]
-    float minSpeed;
+    float minSpeed = 30;
     [SerializeField]
-    float defaultSpeed;
+    float defaultSpeed = 60;
 
     float speed;
     
     [Header("Accel/Rotate Values")]
     [SerializeField]
-    float speedLerpAmount;
+    float speedLerpAmount = 1.0f;
     [SerializeField]
-    float turningForce;
+    float turningForce = 1.0f;
+
+    float currentTurningForce;
     
     [Header("Z Rotate Values")]
     [SerializeField]
-    float zRotateMaxThreshold = 0.5f;
+    float zRotateMaxThreshold = 0.3f;
     [SerializeField]
-    float zRotateAmount = 90;
+    float zRotateAmount = 135;
+    [SerializeField]
+    float zRotateLerpAmount = 1.5f;
 
     float turningTime;
+    float currentTurningTime;
 
     [Header("Waypoint")]
     [SerializeField]
@@ -54,8 +59,6 @@ public class AircraftAI : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField]
-    DebugText debugText;
-    [SerializeField]
     GameObject waypointObject;
 
     public static Vector3 RandomPointInBounds(Bounds bounds)
@@ -69,6 +72,8 @@ public class AircraftAI : MonoBehaviour
 
     void CreateWaypoint()
     {
+        if(areaCollider == null) return;
+        
         float height = Random.Range(waypointMinHeight, waypointMaxHeight);
         Vector3 waypointPosition = RandomPointInBounds(areaCollider.bounds);
 
@@ -86,8 +91,10 @@ public class AircraftAI : MonoBehaviour
             waypointPosition.y += height + hit.distance;
         }
 
-        Instantiate(waypointObject, waypointPosition, Quaternion.identity);
-
+        if(waypointObject != null)
+        {
+            Instantiate(waypointObject, waypointPosition, Quaternion.identity);
+        }
         currentWaypoint = waypointPosition;
     }
 
@@ -96,7 +103,6 @@ public class AircraftAI : MonoBehaviour
         if(waypointQueue.Count == 0)
         {
             CreateWaypoint();
-            Debug.Log("new waypoint");
         }
         else
         {
@@ -106,6 +112,9 @@ public class AircraftAI : MonoBehaviour
         waypointDistance = Vector3.Distance(transform.position, currentWaypoint);
         prevWaypointDistance = waypointDistance;
         isComingClose = false;
+
+        currentTurningForce = Random.Range(0.5f * turningForce, turningForce);
+        turningTime = 1 / currentTurningForce;
     }
 
     void CheckWaypoint()
@@ -139,7 +148,7 @@ public class AircraftAI : MonoBehaviour
         float delta = Quaternion.Angle(transform.rotation, lookRotation);
         if (delta > 0f)
         {
-            float lerpAmount = Mathf.SmoothDampAngle(delta, 0.0f, ref rotateAmount, turningTime);
+            float lerpAmount = Mathf.SmoothDampAngle(delta, 0.0f, ref rotateAmount, currentTurningTime);
             lerpAmount = 1.0f - (lerpAmount / delta);
             
             Vector3 eulerAngle = lookRotation.eulerAngles;
@@ -159,7 +168,7 @@ public class AircraftAI : MonoBehaviour
         if(diff < -180) diff += 360;
         
         prevRotY = transform.eulerAngles.y;
-        zRotateValue = Mathf.Lerp(zRotateValue, Mathf.Clamp(diff / zRotateMaxThreshold, -1, 1), turningForce * Time.deltaTime);
+        zRotateValue = Mathf.Lerp(zRotateValue, Mathf.Clamp(diff / zRotateMaxThreshold, -1, 1), zRotateLerpAmount * Time.deltaTime);
     }
 
     void Move()
@@ -171,7 +180,10 @@ public class AircraftAI : MonoBehaviour
     void Start()
     {
         speed = defaultSpeed;
+
+        currentTurningForce = turningForce;
         turningTime = 1 / turningForce;
+        currentTurningTime = turningTime;
 
         prevRotY = 0;
         currRotY = 0;
@@ -190,5 +202,7 @@ public class AircraftAI : MonoBehaviour
         ZAxisRotate();
         Rotate();
         Move();
+
+        currentTurningTime = Mathf.Lerp(currentTurningTime, turningTime, 1);
     }
 }
