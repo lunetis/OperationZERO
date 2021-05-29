@@ -33,7 +33,7 @@ public class JetEngineController : MonoBehaviour
     void Update()
     {
         float lerpAmount = (throttleAmount > inputValue) ? brakeLerpAmount : accelLerpAmount;
-        throttleAmount = Mathf.Lerp(throttleAmount, GameManager.PlayerAircraft.Throttle, lerpAmount * Time.deltaTime);
+        throttleAmount = Mathf.Lerp(throttleAmount, inputValue, lerpAmount * Time.deltaTime);
         particleColor.a = throttleAmount * initAlpha;
         particleMainModule.startColor = particleColor;
     }

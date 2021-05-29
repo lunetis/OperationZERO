@@ -803,8 +803,6 @@ MonoBehaviour:
     type: 3}
   isNextTarget: 0
   destroyDelay: 1
-  rotateSpeed: 5
-  moveSpeed: 30
   smokeTransformParent: {fileID: 1629986148}
 --- !u!136 &639826020
 CapsuleCollider:
@@ -851,9 +849,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 300
-  minSpeed: 20
-  defaultSpeed: 100
-  speedLerpAmount: 10
+  minSpeed: 60
+  defaultSpeed: 90
+  accelerateLerpAmount: 3
+  accelerateAmount: 30
   turningForce: 1.5
   zRotateMaxThreshold: 0.3
   zRotateAmount: 135
@@ -863,9 +862,7 @@ MonoBehaviour:
   waypointMinHeight: 50
   waypointMaxHeight: 500
   areaCollider: {fileID: 211158730}
-  debugText: {fileID: 935457413}
-  waypointObject: {fileID: 9107909613741472107, guid: 2d8267a6178818a429456f4acd305429,
-    type: 3}
+  jetEngineControllers: []
 --- !u!96 &639826023
 TrailRenderer:
   serializedVersion: 2

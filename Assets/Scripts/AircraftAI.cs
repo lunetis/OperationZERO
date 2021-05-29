@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AircraftAI : MonoBehaviour
+public class AircraftAI : TargetObject
 {
     [Header("Aircraft Settings")]
     [SerializeField]
@@ -13,13 +13,19 @@ public class AircraftAI : MonoBehaviour
     float defaultSpeed = 60;
 
     float speed;
+    float targetSpeed;
+    bool isAcceleration;
     
     [Header("Accel/Rotate Values")]
     [SerializeField]
-    float speedLerpAmount = 1.0f;
+    float accelerateLerpAmount = 1.0f;
+    [SerializeField]
+    float accelerateAmount = 50.0f;
+    float currentAccelerate;
+    float accelerateReciprocal;
+
     [SerializeField]
     float turningForce = 1.0f;
-
     float currentTurningForce;
     
     [Header("Z Rotate Values")]
@@ -57,9 +63,13 @@ public class AircraftAI : MonoBehaviour
     float rotateAmount;
     float zRotateValue;
 
-    [Header("DEBUG")]
+    [Header("Misc.")]
     [SerializeField]
-    GameObject waypointObject;
+    [Range(0, 1)]
+    float evasionRate = 0.5f;
+
+    [SerializeField]
+    List<JetEngineController> jetEngineControllers;
 
     public static Vector3 RandomPointInBounds(Bounds bounds)
     {
@@ -68,6 +78,17 @@ public class AircraftAI : MonoBehaviour
             Random.Range(bounds.min.y, bounds.max.y),
             Random.Range(bounds.min.z, bounds.max.z)
         );
+    }
+
+    void RandomizeSpeedAndTurn()
+    {
+        // Speed
+        targetSpeed = Random.Range(minSpeed, maxSpeed);
+        isAcceleration = (speed < targetSpeed);
+
+        // TurningForce
+        currentTurningForce = Random.Range(0.5f * turningForce, turningForce);
+        turningTime = 1 / currentTurningForce;
     }
 
     void CreateWaypoint()
@@ -91,10 +112,6 @@ public class AircraftAI : MonoBehaviour
             waypointPosition.y += height + hit.distance;
         }
 
-        if(waypointObject != null)
-        {
-            Instantiate(waypointObject, waypointPosition, Quaternion.identity);
-        }
         currentWaypoint = waypointPosition;
     }
 
@@ -113,8 +130,7 @@ public class AircraftAI : MonoBehaviour
         prevWaypointDistance = waypointDistance;
         isComingClose = false;
 
-        currentTurningForce = Random.Range(0.5f * turningForce, turningForce);
-        turningTime = 1 / currentTurningForce;
+        RandomizeSpeedAndTurn();
     }
 
     void CheckWaypoint()
@@ -171,19 +187,58 @@ public class AircraftAI : MonoBehaviour
         zRotateValue = Mathf.Lerp(zRotateValue, Mathf.Clamp(diff / zRotateMaxThreshold, -1, 1), zRotateLerpAmount * Time.deltaTime);
     }
 
+
+    void AdjustSpeed()
+    {
+        currentAccelerate = 0;
+        if(isAcceleration == true && speed < targetSpeed)
+        {
+            currentAccelerate = accelerateAmount;
+        }
+        else if(isAcceleration == false && speed > targetSpeed)
+        {
+            currentAccelerate = -accelerateAmount;
+        }
+        speed += currentAccelerate * Time.deltaTime;
+
+        currentTurningTime = Mathf.Lerp(currentTurningTime, turningTime, 1);
+    }
+
     void Move()
     {
         transform.Translate(new Vector3(0, 0, speed) * Time.deltaTime);
     }
 
-
-    void Start()
+    void JetEngineControl()
     {
-        speed = defaultSpeed;
+        foreach(JetEngineController jet in jetEngineControllers)
+        {
+            jet.InputValue = currentAccelerate * accelerateReciprocal;
+        }
+    }
+
+
+    public override void OnWarning()
+    {
+        Debug.Log("OnWarning");
+        float rate = Random.Range(0.0f, 1.0f);
+        if(rate <= evasionRate)
+        {
+            ChangeWaypoint();
+        }
+    }
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        speed = targetSpeed = defaultSpeed;
+
+        accelerateReciprocal = 1 / accelerateAmount;
 
         currentTurningForce = turningForce;
-        turningTime = 1 / turningForce;
-        currentTurningTime = turningTime;
+        currentTurningTime = turningTime = 1 / turningForce;
 
         prevRotY = 0;
         currRotY = 0;
@@ -193,16 +248,20 @@ public class AircraftAI : MonoBehaviour
         {
             waypointQueue.Enqueue(t);
         }
+
         ChangeWaypoint();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         CheckWaypoint();
         ZAxisRotate();
         Rotate();
+        
+        AdjustSpeed();
         Move();
+        JetEngineControl();
 
-        currentTurningTime = Mathf.Lerp(currentTurningTime, turningTime, 1);
+        CheckMissileDistance();
     }
 }

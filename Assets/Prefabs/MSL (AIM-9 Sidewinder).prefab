@@ -109,11 +109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileName: MSL
-  damage: 50
+  damage: 10
   isSpecialWeapon: 0
   maxSpeed: 300
   accelAmount: 50
-  turningForce: 2
+  turningForce: 1.5
   boresightAngle: 90
   lifetime: 7
   targetSearchSpeed: 60

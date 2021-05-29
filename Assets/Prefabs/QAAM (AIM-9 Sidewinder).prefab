@@ -4922,7 +4922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileName: QAAM
-  damage: 0
+  damage: 15
   isSpecialWeapon: 1
   maxSpeed: 300
   accelAmount: 60

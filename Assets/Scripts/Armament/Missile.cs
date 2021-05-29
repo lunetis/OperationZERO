@@ -7,7 +7,7 @@ public class Missile : MonoBehaviour
     Transform parent;
     Rigidbody rb;
 
-    Transform target;
+    TargetObject target;
     float speed;
     public string missileName;
 
@@ -44,10 +44,21 @@ public class Missile : MonoBehaviour
 
     bool isHit = false;
     bool isDisabled = false;
+    bool hasWarned = false;
 
-    public void Launch(Transform target, float launchSpeed, int layer)
+    public bool HasWarned
+    {
+        get { return hasWarned; }
+        set { hasWarned = value; }
+    }
+
+    public void Launch(TargetObject target, float launchSpeed, int layer)
     {
         this.target = target;
+
+        // Send Message to object that it is locked on
+        target?.AddLockedMissile(this);
+
         speed = launchSpeed;
         gameObject.layer = layer;
         
@@ -66,14 +77,18 @@ public class Missile : MonoBehaviour
         if(target == null)
             return;
 
-        Vector3 targetDir = target.position - transform.position;
+        Vector3 targetDir = target.transform.position - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
 
         if(angle > boresightAngle)
         {
             GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
             isDisabled = true;
+            
+            // Send Message to object that it is no more locked on
+            target.RemoveLockedMissile(this);
             target = null;
+            
             return;
         }
 
@@ -104,12 +119,19 @@ public class Missile : MonoBehaviour
 
     void DisableMissile()
     {
-        Debug.Log("Disabled : " + target + " // " + isDisabled + " // " + isHit);
-        if(target != null && isDisabled == false && isHit == false)
+        hasWarned = false;
+        
+        // Send Message to object that it is no more locked on
+        if(target != null)
         {
-            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
-        }
+            target.RemoveLockedMissile(this);
 
+            if(isDisabled == false && isHit == false)
+            {
+                GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+            }
+        }
+        
         transform.parent = parent;
         gameObject.SetActive(false);
     }

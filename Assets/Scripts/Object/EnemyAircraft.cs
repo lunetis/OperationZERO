@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAircraft : TargetObject
+public class EnemyAircraft : AircraftAI
 {
     [SerializeField]
     float destroyDelay = 1;

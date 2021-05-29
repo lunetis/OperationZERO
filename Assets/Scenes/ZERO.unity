@@ -2176,7 +2176,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245166178}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1000, y: 1, z: 1000}
@@ -4344,6 +4344,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &389362628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2877160634197634789, guid: 68e0b62aeb6c5794e97e9329ad4cacdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2017924109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4a0498a0cbd1e48acbed2929a8b0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &395449090
 GameObject:
   m_ObjectHideFlags: 0
@@ -14787,6 +14799,21 @@ MonoBehaviour:
   destroyEffect: {fileID: 1556574608389113247, guid: 8d4b3caee090b1247bf61af54d4d0905,
     type: 3}
   isNextTarget: 0
+  maxSpeed: 300
+  minSpeed: 30
+  defaultSpeed: 60
+  accelerateLerpAmount: 1
+  accelerateAmount: 50
+  turningForce: 1
+  zRotateMaxThreshold: 0.3
+  zRotateAmount: 135
+  zRotateLerpAmount: 1.5
+  initialWaypoints: []
+  waypointMinHeight: 0
+  waypointMaxHeight: 0
+  areaCollider: {fileID: 0}
+  evasionRate: 0
+  jetEngineControllers: []
   destroyDelay: 3
   smokeTransformParent: {fileID: 1623154455}
 --- !u!136 &984443295
@@ -17943,6 +17970,18 @@ MonoBehaviour:
   autopilot: {fileID: 3205970}
   fire: {fileID: 1228321294}
   missileReloading: {fileID: 1101613498}
+--- !u!114 &1307044259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2877160634197634789, guid: 68e0b62aeb6c5794e97e9329ad4cacdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1589763574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4a0498a0cbd1e48acbed2929a8b0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1317331472
 GameObject:
   m_ObjectHideFlags: 0
@@ -19872,7 +19911,6 @@ GameObject:
   - component: {fileID: 1425386128}
   - component: {fileID: 1425386129}
   - component: {fileID: 1425386130}
-  - component: {fileID: 1425386131}
   m_Layer: 12
   m_Name: F-15C Pixy
   m_TagString: Untagged
@@ -19927,33 +19965,25 @@ MonoBehaviour:
   destroyEffect: {fileID: 1556574608389113247, guid: 8d4b3caee090b1247bf61af54d4d0905,
     type: 3}
   isNextTarget: 0
-  destroyDelay: 1
-  smokeTransformParent: {fileID: 2058984603}
---- !u!114 &1425386131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425386127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a62c35f096ad7d4b8d5126ebcf3df75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 300
-  minSpeed: 30
-  defaultSpeed: 100
-  speedLerpAmount: 1
+  maxSpeed: 200
+  minSpeed: 60
+  defaultSpeed: 90
+  accelerateLerpAmount: 1
+  accelerateAmount: 20
   turningForce: 1
   zRotateMaxThreshold: 0.3
   zRotateAmount: 135
-  zRotateLerpAmount: 1
+  zRotateLerpAmount: 1.5
   initialWaypoints: []
   waypointMinHeight: 500
   waypointMaxHeight: 1000
   areaCollider: {fileID: 245166179}
-  waypointObject: {fileID: 0}
+  evasionRate: 0.99
+  jetEngineControllers:
+  - {fileID: 389362628}
+  - {fileID: 1307044259}
+  destroyDelay: 1
+  smokeTransformParent: {fileID: 2058984603}
 --- !u!1 &1427830089
 GameObject:
   m_ObjectHideFlags: 0

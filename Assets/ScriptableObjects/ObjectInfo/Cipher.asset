@@ -16,3 +16,5 @@ MonoBehaviour:
   objectNickname: Cipher
   score: 5000
   hp: 100
+  mainTarget: 0
+  warningDistance: 150
