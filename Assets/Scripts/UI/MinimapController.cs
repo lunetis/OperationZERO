@@ -84,6 +84,8 @@ public class MinimapController : MonoBehaviour
 
     public void ShowBorderIndicator(Vector3 position)
     {
+        if(target == null) return;
+        
         float reciprocal;
         float rotation;
         Vector2 distance = new Vector3(minimapCamera.transform.position.x - position.x, minimapCamera.transform.position.z - position.z);
@@ -128,7 +130,7 @@ public class MinimapController : MonoBehaviour
         indicator.gameObject.SetActive(false);
     }
 
-    public float GetCameraViewSize()
+    public float GetInitCameraViewSize()
     {
         return minimapCamera.orthographicSize;
     }
@@ -153,6 +155,8 @@ public class MinimapController : MonoBehaviour
 
     void AdjustCameraTransform()
     {
+        if(target == null) return;
+        
         // Camera position adjustment
         Vector3 position;
         float cameraRotation;

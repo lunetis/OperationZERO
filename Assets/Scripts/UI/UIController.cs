@@ -77,6 +77,8 @@ public class UIController : MonoBehaviour
     [Header("Minimap Misc.")]
     [SerializeField]
     MinimapCompass minimapCompass;
+    [SerializeField]
+    MinimapController minimapController;
 
     [Header("Materials")]
     [SerializeField]
@@ -90,6 +92,12 @@ public class UIController : MonoBehaviour
 
     float remainTime;
     int score = 0;
+    float damage = 0;
+
+    public MinimapController MinimapController
+    {
+        get { return minimapController; }
+    }
 
     // Center
     public void SetSpeed(int speed)
@@ -198,11 +206,8 @@ public class UIController : MonoBehaviour
         spwText.text = text;
     }
 
-    public void SetDamage(int damage)
+    void SetAircraftDamageUI()
     {
-        string text = string.Format("<align=left>DMG<line-height=0>\n<align=right>{0}%<line-height=0>", damage);
-        dmgText.text = text;
-
         if(damage < 34)
         {
             aircraftImage.color = GameManager.NormalColor;
@@ -215,6 +220,15 @@ public class UIController : MonoBehaviour
         {
             aircraftImage.color = GameManager.WarningColor;
         }
+    }
+
+    public void SetDamage(int damage)
+    {
+        string text = string.Format("<align=left>DMG<line-height=0>\n<align=right>{0}%<line-height=0>", damage);
+        dmgText.text = text;
+
+        this.damage = damage;
+        SetAircraftDamageUI();
     }
 
     public void SwitchWeapon(WeaponSlot[] weaponSlots, bool useSpecialWeapon, Missile missile)
@@ -242,9 +256,21 @@ public class UIController : MonoBehaviour
 
     public void SetWarningUIColor(bool isWarning)
     {
-        Color color = (isWarning == true) ? GameManager.WarningColor : GameManager.NormalColor;
+        Color color;
+        if(isWarning == true)
+        {
+            color = GameManager.WarningColor;
+            aircraftImage.color = GameManager.WarningColor;
+        }
+        else
+        {
+            color = GameManager.NormalColor;
+            SetAircraftDamageUI();
+        }
+        
         spriteMaterial.color = color;
         fontMaterial.SetColor("_FaceColor", color);
+
     }
 
     public void SetLabel(AlertUIController.LabelEnum labelEnum)

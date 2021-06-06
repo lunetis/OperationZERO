@@ -6,7 +6,7 @@ using UnityEngine;
 public class MinimapSprite : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    public MinimapController minimapController;
+    MinimapController minimapController;
     public float iconSize;
     public float depth;
 
@@ -14,10 +14,20 @@ public class MinimapSprite : MonoBehaviour
 
     float initSize;
 
-    void Start()
+    public void SetMinimapSpriteVisible(bool visible)
+    {
+        spriteRenderer.enabled = visible;
+    }
+
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        initSize = iconSize / minimapController.GetCameraViewSize();
+    }
+
+    void Start()
+    {
+        minimapController = GameManager.UIController.MinimapController;
+        initSize = iconSize / minimapController.smallViewSize;
         depth *= 0.01f;
     }
 

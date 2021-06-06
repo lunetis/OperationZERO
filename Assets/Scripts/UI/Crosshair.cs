@@ -18,7 +18,7 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Vector2 aircraftRotation = GameManager.PlayerAircraft.RotateValue;
+        Vector2 aircraftRotation = GameManager.AircraftController.RotateValue;
         Vector3 convertedPosition = new Vector3(-aircraftRotation.y * offset.x, aircraftRotation.x * offset.y, zDistance);
         transform.localPosition = Vector3.Lerp(transform.localPosition, convertedPosition, lerpAmount);
     }

@@ -71,7 +71,7 @@ public class TargetLock : FollowTransformUI
             return;
         }
 
-        float distance = Vector3.Distance(targetTransform.position, GameManager.PlayerAircraft.transform.position);
+        float distance = Vector3.Distance(targetTransform.position, GameManager.AircraftController.transform.position);
 
         // Exceed lockable distance
         if(distance > lockDistance)

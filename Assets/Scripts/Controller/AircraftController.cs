@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AircraftController : TargetObject
+public class AircraftController : MonoBehaviour
 {
     Gamepad gamepad;
 
@@ -19,7 +19,6 @@ public class AircraftController : TargetObject
 
     // Aircraft Values
     float speed;
-    int score = 0;
 
     // public values
     [Header("Aircraft Settings")]
@@ -84,7 +83,6 @@ public class AircraftController : TargetObject
     // Controllers
     CameraController cameraController;
     UIController uiController;
-    WeaponController weaponController;
 
     // public gets
     public float Speed
@@ -151,6 +149,11 @@ public class AircraftController : TargetObject
     public void YawR(InputAction.CallbackContext context)
     {
         yawRValue = context.ReadValue<float>();
+    }
+
+    public void DisableControl()
+    {
+        GetComponent<PlayerInput>().enabled = false;
     }
 
     void SetUI()
@@ -303,18 +306,6 @@ public class AircraftController : TargetObject
         // DebugText("Low : " + hit);
     }
 
-    public override void OnDamage(float damage, int layer)
-    {
-        base.OnDamage(damage, layer);
-        uiController.SetDamage((int)(Info.HP - hp / Info.HP * 100));
-    }
-
-    public void OnScore(int score)
-    {
-        this.score += score;
-        uiController.SetScoreText(this.score);
-    }
-
     void PassCameraControl()
     {
         float zoomValue = accelValue - brakeValue;
@@ -329,12 +320,9 @@ public class AircraftController : TargetObject
         }
     }
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         uiController = GameManager.UIController;
-        gamepad = Gamepad.current;
 
         accelValue = 0;
         brakeValue = 0;
@@ -356,8 +344,6 @@ public class AircraftController : TargetObject
 
         // UI
         SetUI();
-        uiController.SetDamage(0);
-        uiController.SetScoreText(0);
     }
     
     void Update()
@@ -367,11 +353,5 @@ public class AircraftController : TargetObject
         SetUI();
         CheckLowAltitude();
         JetEngineControl();
-    }
-
-    // DEBUG
-    void DebugText(string text)
-    {
-        GameManager.Instance.debugText.AddText(text);
     }
 }

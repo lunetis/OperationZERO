@@ -16,11 +16,11 @@ public class TargetObject : MonoBehaviour
 
     int lastHitLayer;
 
-    List<Missile> lockedMissiles = new List<Missile>();
+    protected List<Missile> lockedMissiles = new List<Missile>();
     protected bool isWarning;
     
     Collider objectCollider;
-    bool isDestroyed;
+    protected bool isDestroyed;
 
     public ObjectInfo Info
     {
@@ -30,6 +30,19 @@ public class TargetObject : MonoBehaviour
         }
     }
 
+    bool isLocking;
+    public bool IsLocking
+    {
+        get { return isLocking; }
+        set { isLocking = value; }
+    }
+
+    bool isOnMissleAlert;
+    public bool IsOnMissleAlert
+    {
+        get { return isOnMissleAlert; }
+        set { isOnMissleAlert = value; }
+    }
 
     // Public Functions
     public virtual void OnDamage(float damage, int layer)
@@ -49,17 +62,17 @@ public class TargetObject : MonoBehaviour
         }
     }
 
-    public virtual void OnWarning()
+    public virtual void OnMissileAlert()
     {
 
     }
-
-    public void AddLockedMissile(Missile missile)
+    
+    public virtual void AddLockedMissile(Missile missile)
     {
         lockedMissiles.Add(missile);
     }
 
-    public void RemoveLockedMissile(Missile missile)
+    public virtual void RemoveLockedMissile(Missile missile)
     {
         lockedMissiles.Remove(missile);
     }
@@ -88,7 +101,7 @@ public class TargetObject : MonoBehaviour
 
         if(executeWarning)
         {
-            OnWarning();
+            OnMissileAlert();
         }
 
         if(existWarningMissile == true)

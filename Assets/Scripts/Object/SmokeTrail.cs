@@ -24,6 +24,15 @@ public class SmokeTrail : MonoBehaviour
         particle.Stop();
     }
 
+    void OnEnable()
+    {
+        if(followTransform != null)
+        {
+            transform.position = followTransform.position;
+        }
+        particle.Clear();
+    }
+
     void Update()
     {
         if(followTransform != null)

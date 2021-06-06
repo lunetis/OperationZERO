@@ -22,6 +22,6 @@ public class ParticleAutoDestroy : MonoBehaviour
 
     private void OnDisable() {
         
-        CancelInvoke("Disable");
+        CancelInvoke();
     }
 }

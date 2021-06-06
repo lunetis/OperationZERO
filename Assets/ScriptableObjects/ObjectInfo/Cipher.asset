@@ -15,6 +15,6 @@ MonoBehaviour:
   objectName: F-15C
   objectNickname: Cipher
   score: 5000
-  hp: 100
+  hp: 1
   mainTarget: 0
   warningDistance: 150

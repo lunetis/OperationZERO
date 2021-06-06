@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
 
+    [Header("Object Pools")]
     public ObjectPool missileObjectPool;
     public ObjectPool specialWeaponObjectPool;
     public ObjectPool explosionEffectObjectPool;
@@ -18,18 +20,29 @@ public class GameManager : MonoBehaviour
     public ObjectPool bulletHitEffectObjectPool;
     public ObjectPool groundHitEffectObjectPool;
 
+    [Header("Game Properties")]
     public int timeLimit;
     int score;
+
+    [Header("Controllers")]
     [SerializeField]
     UIController uiController;
     [SerializeField]
-    AircraftController playerAircraft;
+    AircraftController aircraftController;
+    [SerializeField]
+    PlayerAircraft playerAircraft;
     [SerializeField]
     CameraController cameraController;
     [SerializeField]
     TargetController targetController;
     [SerializeField]
     WeaponController weaponController;
+
+    [Header("Game Over Control")]
+    [SerializeField]
+    List<GameObject> disableOnGameOverObjects;
+    [SerializeField]
+    List<GameObject> enableOnGameOverObjects;
 
     public DebugText debugText;
 
@@ -56,7 +69,12 @@ public class GameManager : MonoBehaviour
         get { return Instance?.cameraController; }
     }
 
-    public static AircraftController PlayerAircraft
+    public static AircraftController AircraftController
+    {
+        get { return Instance?.aircraftController; }
+    }
+
+    public static PlayerAircraft PlayerAircraft
     {
         get { return Instance?.playerAircraft; }
     }
@@ -178,5 +196,36 @@ public class GameManager : MonoBehaviour
             smokeTrailObject.SetActive(true);
             smokeTrailObject.GetComponent<SmokeTrail>()?.SetFollowTransform(transform);
         }
+    }
+
+    public void GameOver(bool controllable = true)
+    {
+        foreach(GameObject obj in disableOnGameOverObjects)
+        {
+            obj.SetActive(false);
+        }
+
+        foreach(GameObject obj in enableOnGameOverObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        if(controllable == false)
+        {
+            aircraftController.DisableControl();
+        }
+    }
+
+    public void Quit()
+    {
+        Debug.Log("quit");
+        Application.Quit();
+    }
+
+    
+    // DEBUG
+    public static void PrintDebugText(string text)
+    {
+        Instance.debugText.AddText(text);
     }
 }

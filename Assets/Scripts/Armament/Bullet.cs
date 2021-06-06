@@ -69,6 +69,6 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        CancelInvoke("DisableBullet");
+        CancelInvoke();
     }
 }

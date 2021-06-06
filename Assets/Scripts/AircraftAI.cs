@@ -52,7 +52,7 @@ public class AircraftAI : TargetObject
     [SerializeField]
     BoxCollider areaCollider;
 
-    Vector3 currentWaypoint;
+    protected Vector3 currentWaypoint;
     
     float prevWaypointDistance;
     float waypointDistance;
@@ -67,9 +67,17 @@ public class AircraftAI : TargetObject
     [SerializeField]
     [Range(0, 1)]
     float evasionRate = 0.5f;
+    
+    [SerializeField]
+    float newWaypointDistance = 500;
 
     [SerializeField]
     List<JetEngineController> jetEngineControllers;
+
+    public float Speed
+    {
+        get { return speed; }
+    }
 
     public static Vector3 RandomPointInBounds(Bounds bounds)
     {
@@ -78,6 +86,16 @@ public class AircraftAI : TargetObject
             Random.Range(bounds.min.y, bounds.max.y),
             Random.Range(bounds.min.z, bounds.max.z)
         );
+    }
+
+    // If you want to change waypoint selection, override this function
+    protected virtual Vector3 CreateWaypoint()
+    {
+        if(areaCollider != null)
+            return CreateWaypointWithinArea();
+        else
+            return CreateWaypointAroundItself();
+
     }
 
     void RandomizeSpeedAndTurn()
@@ -91,9 +109,9 @@ public class AircraftAI : TargetObject
         turningTime = 1 / currentTurningForce;
     }
 
-    void CreateWaypoint()
+    Vector3 CreateWaypointWithinArea()
     {
-        if(areaCollider == null) return;
+        if(areaCollider == null) return currentWaypoint;
         
         float height = Random.Range(waypointMinHeight, waypointMaxHeight);
         Vector3 waypointPosition = RandomPointInBounds(areaCollider.bounds);
@@ -109,17 +127,50 @@ public class AircraftAI : TargetObject
         else
         {
             Physics.Raycast(waypointPosition, Vector3.up, out hit);
+            
+            if(hit.distance == 0)
+            {
+                waypointPosition.y = height;
+            }
+            else
+            {
+                waypointPosition.y += height + hit.distance;
+            }
+        }
+
+        return waypointPosition;
+    }
+
+    Vector3 CreateWaypointAroundItself()
+    {
+        float distance = Random.Range(newWaypointDistance * 0.7f, newWaypointDistance);
+        float height = Random.Range(waypointMinHeight, waypointMaxHeight);
+        float angle = Random.Range(0, 360);
+        Vector3 directionVector = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
+        Vector3 waypointPosition = transform.position + directionVector * distance;
+
+        RaycastHit hit;
+        Physics.Raycast(waypointPosition, Vector3.down, out hit);
+
+        if(hit.distance != 0)
+        {
+            waypointPosition.y += height - hit.distance;
+        }
+        // New waypoint is below ground
+        else
+        {
+            Physics.Raycast(waypointPosition, Vector3.up, out hit);
             waypointPosition.y += height + hit.distance;
         }
 
-        currentWaypoint = waypointPosition;
+        return waypointPosition;
     }
 
     void ChangeWaypoint()
     {
         if(waypointQueue.Count == 0)
         {
-            CreateWaypoint();
+            currentWaypoint = CreateWaypoint();
         }
         else
         {
@@ -218,9 +269,8 @@ public class AircraftAI : TargetObject
     }
 
 
-    public override void OnWarning()
+    public override void OnMissileAlert()
     {
-        Debug.Log("OnWarning");
         float rate = Random.Range(0.0f, 1.0f);
         if(rate <= evasionRate)
         {
@@ -244,12 +294,15 @@ public class AircraftAI : TargetObject
         currRotY = 0;
 
         waypointQueue = new Queue<Transform>();
-        foreach(Transform t in initialWaypoints)
-        {
-            waypointQueue.Enqueue(t);
-        }
 
-        ChangeWaypoint();
+        if(initialWaypoints.Count > 0)
+        {
+            foreach(Transform t in initialWaypoints)
+            {
+                waypointQueue.Enqueue(t);
+            }
+        }
+        ChangeWaypoint();      
     }
 
     protected virtual void Update()

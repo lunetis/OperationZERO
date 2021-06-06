@@ -116,6 +116,30 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=0.3)"
+                },
+                {
+                    "name": "[DEBUG] Self Destroy",
+                    "type": "Button",
+                    "id": "7ef60fd4-ced8-482c-a204-03e7913f9a13",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)"
+                },
+                {
+                    "name": "[DEBUG] Restart",
+                    "type": "Button",
+                    "id": "ae6b1e18-e679-4c36-b072-6bf128cf3f00",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)"
+                },
+                {
+                    "name": "[DEBUG] Quit",
+                    "type": "Button",
+                    "id": "82824aaf-5d9e-4fdf-aa09-d91b08c4cce8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)"
                 }
             ],
             "bindings": [
@@ -270,6 +294,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Yaw R",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6097caeb-de60-4716-9370-f00940bda778",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "[DEBUG] Self Destroy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb985af6-d26e-4fa2-84ea-6f4fddf26da8",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "[DEBUG] Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2e4ed4b-9c51-49aa-8d16-95aebded04e8",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "[DEBUG] Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -37,6 +37,7 @@ public class Missile : MonoBehaviour
     [Header("UI")]
     public Sprite missileFrameSprite;
     public Sprite missileFillSprite;
+    public MinimapSprite minimapSprite;
     
     // Effect
     GameObject smokeTrailEffect;
@@ -52,9 +53,17 @@ public class Missile : MonoBehaviour
         set { hasWarned = value; }
     }
 
+    public bool IsDisabled
+    {
+        get { return isDisabled; }
+    }
+
     public void Launch(TargetObject target, float launchSpeed, int layer)
     {
         this.target = target;
+        
+        minimapSprite.SetMinimapSpriteVisible(target != null);
+        isDisabled = (target == null);
 
         // Send Message to object that it is locked on
         target?.AddLockedMissile(this);
@@ -65,8 +74,8 @@ public class Missile : MonoBehaviour
         smokeTrailEffect = GameManager.Instance.smokeTrailEffectObjectPool.GetPooledObject();
         if(smokeTrailEffect != null)
         {
-            smokeTrailEffect.SetActive(true);
             smokeTrailEffect.GetComponent<SmokeTrail>()?.SetFollowTransform(smokeTrailPosition);
+            smokeTrailEffect.SetActive(true);
         }
         
         Invoke("DisableMissile", lifetime);
@@ -82,7 +91,10 @@ public class Missile : MonoBehaviour
 
         if(angle > boresightAngle)
         {
-            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+            // UI
+            ShowMissedLabel();
+            minimapSprite.SetMinimapSpriteVisible(false);
+
             isDisabled = true;
             
             // Send Message to object that it is no more locked on
@@ -128,12 +140,21 @@ public class Missile : MonoBehaviour
 
             if(isDisabled == false && isHit == false)
             {
-                GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+                ShowMissedLabel();
             }
         }
         
+        isDisabled = true;
         transform.parent = parent;
         gameObject.SetActive(false);
+    }
+
+    void ShowMissedLabel()
+    {
+        if(gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameManager.UIController.SetLabel(AlertUIController.LabelEnum.Missed);
+        }
     }
 
 
@@ -153,7 +174,7 @@ public class Missile : MonoBehaviour
         
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        CancelInvoke("DisableMissile");
+        CancelInvoke();
     }
 
     void FixedUpdate()

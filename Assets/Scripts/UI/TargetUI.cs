@@ -98,7 +98,7 @@ public class TargetUI : MonoBehaviour
         else
         {
             isBlinking = false;
-            CancelInvoke("Blink");
+            CancelInvoke();
             blinkUIObject.SetActive(true);
         }
     }
@@ -146,10 +146,11 @@ public class TargetUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(targetObject == null)
+        activeCamera = GameManager.CameraController.GetActiveCamera();
+
+        if(targetObject == null && activeCamera == null)
             return;
 
-        activeCamera = GameManager.CameraController.GetActiveCamera();
         Vector3 screenPosition = activeCamera.WorldToScreenPoint(targetObject.transform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetObject.transform);
         nextTargetText.SetActive(targetObject.isNextTarget);

@@ -154,6 +154,7 @@ public class CameraController : MonoBehaviour
     
     public Camera GetActiveCamera()
     {
+        if(GameManager.PlayerAircraft == null) return null;
         return currentCamera;
     }
 
