@@ -22,10 +22,10 @@ Remake Final Mission of Ace Combat Zero with Unity.
   - [x] Firing missile to Player
 - [ ] **Game Over Direction  << In Progress**
 - [ ] Sound System
-- [ ] Gameplay
+- [ ] Checking Gameplay Process
 - [ ] Scripting
 - [ ] AWACS
-- [ ] Directing
+- [ ] Campaign Direction (ZERO)
 
 *This list can be changed at anytime.*
 
