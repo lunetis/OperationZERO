@@ -22,8 +22,15 @@ public class PlayerAircraft : TargetObject
     float destroyDelay = 1;
 
     [SerializeField]
+    float rotateSpeedOnDestroy = 600;
+
+    [SerializeField]
     Transform smokeTransformParent;
+
     
+    [SerializeField]
+    List<TrailRenderer> contrails;
+
     [SerializeField]
     GameObject aircraftModel;
 
@@ -33,6 +40,16 @@ public class PlayerAircraft : TargetObject
     public float MissileEmergencyDistance
     {
         get { return missileEmergencyDistance; }
+    }
+
+    // Ground/Object Collision
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || 
+           other.gameObject.GetComponent<TargetObject>() != null)
+        {
+            DestroyObjectImmediate();
+        }
     }
 
     public override void OnDamage(float damage, int layer)
@@ -55,8 +72,22 @@ public class PlayerAircraft : TargetObject
     protected override void DestroyObject() 
     {
         CommonDestroyFunction();
-        GameManager.Instance.GameOver(false);
+        GameManager.Instance.GameOver(true, false);
         Invoke("DelayedDestroy", destroyDelay);
+
+        foreach(TrailRenderer trailRenderer in contrails)
+        {
+            trailRenderer.emitting = false;
+        }
+    }
+
+    void DestroyObjectImmediate() 
+    {
+        CancelInvoke();
+        CommonDestroyFunction();
+        GameManager.Instance.GameOver(true, true);
+
+        DelayedDestroy();
     }
 
     public override void AddLockedMissile(Missile missile)
@@ -68,14 +99,22 @@ public class PlayerAircraft : TargetObject
     void DelayedDestroy()
     {
         GameObject obj = Instantiate(destroyEffect, transform.position, Quaternion.identity);
-        // obj.transform.localScale *= 2;
         Destroy(aircraftModel);
-        GetComponent<Collider>().enabled = false;
+
+        Collider[] colliders = GetComponents<Collider>();
+        foreach(Collider col in colliders)
+        {
+            col.enabled = false;
+        }
         GetComponent<AircraftController>().enabled = false;
     }
 
     public void SelfDestruct()
     {
+        for(int i = 0; i < smokeTransformParent.childCount; i++)
+        {
+            GameManager.Instance.CreateDamageSmokeEffect(smokeTransformParent.GetChild(i));
+        }
         DestroyObject();
     }
 
@@ -112,6 +151,8 @@ public class PlayerAircraft : TargetObject
         
         uiController.SetDamage(0);
         uiController.SetScoreText(0);
+
+        rotateSpeedOnDestroy *= Random.Range(0.5f, 1.0f);
     }
 
     // Update is called once per frame
@@ -119,7 +160,7 @@ public class PlayerAircraft : TargetObject
     {
         if(isDestroyed == true)
         {
-            transform.Rotate(0, 0, 600 * Time.deltaTime);
+            transform.Rotate(0, 0, rotateSpeedOnDestroy * Time.deltaTime);
         }
     }
 }

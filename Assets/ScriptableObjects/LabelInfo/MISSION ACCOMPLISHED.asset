@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   labelTexture: {fileID: 2800000, guid: 08c04aa6280cebd41af2abdce8a14227, type: 3}
   labelColor: {r: 0.33333334, g: 0.5803922, b: 1, a: 1}
-  visibleTime: 5
+  visibleTime: 10000

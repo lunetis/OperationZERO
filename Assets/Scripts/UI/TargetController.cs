@@ -43,6 +43,17 @@ public class TargetController : MonoBehaviour
         }
     }
 
+    public void RemoveAllTargetUI()
+    {
+        if(targetUIs.Count == 0) return;
+        
+        foreach(TargetUI targetUI in targetUIs)
+        {
+            Destroy(targetUI.gameObject);
+        }
+        targetUIs.Clear();
+    }
+
     public void ChangeTarget(TargetObject newTarget)
     {
         // No target

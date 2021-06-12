@@ -40,9 +40,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Over Control")]
     [SerializeField]
+    List<GameObject> disableOnGameOver;
+    [SerializeField]
     List<GameObject> disableOnGameOverObjects;
     [SerializeField]
     List<GameObject> enableOnGameOverObjects;
+
+    [SerializeField]
+    DeathCam deathCam;
 
     public DebugText debugText;
 
@@ -99,11 +104,6 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
         }
     }
 
@@ -198,21 +198,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver(bool controllable = true)
+    public void GameOver(bool isDead, bool isInstantDeath = false)
     {
-        foreach(GameObject obj in disableOnGameOverObjects)
+        // Set UI
+        UIController.SetLabel(AlertUIController.LabelEnum.MissionFailed);
+        
+        foreach(TargetObject obj in objects)
         {
-            obj.SetActive(false);
+            obj.DeleteMinimapSprite();
         }
+        targetController.RemoveAllTargetUI();
+        objects.Clear();
+        weaponController.ChangeTarget();
 
-        foreach(GameObject obj in enableOnGameOverObjects)
+        if(isDead)
         {
-            obj.SetActive(true);
-        }
+            foreach(GameObject obj in disableOnGameOverObjects)
+            {
+                obj.SetActive(false);
+            }
+            foreach(GameObject obj in enableOnGameOverObjects)
+            {
+                obj.SetActive(true);
+            }
 
-        if(controllable == false)
-        {
             aircraftController.DisableControl();
+            deathCam.PlayAnimation(isInstantDeath);
         }
     }
 
@@ -220,6 +231,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("quit");
         Application.Quit();
+    }
+
+    public void Restart()
+    {
+        Debug.Log("restart");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     

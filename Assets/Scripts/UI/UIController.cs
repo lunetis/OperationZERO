@@ -149,13 +149,15 @@ public class UIController : MonoBehaviour
 
     void SetTime()
     {
+        remainTime -= Time.deltaTime;
+        
         if(remainTime <= 0)
         {
+            GameManager.Instance.GameOver(false);
             remainTime = 0;
             return;
         }
 
-        remainTime -= Time.deltaTime;
         int seconds = (int)remainTime;
 
         int min = seconds / 60;
@@ -295,6 +297,6 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetTime();
+        if(remainTime > 0) SetTime();
     }
 }

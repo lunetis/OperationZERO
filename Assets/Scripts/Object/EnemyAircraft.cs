@@ -24,12 +24,10 @@ public class EnemyAircraft : AircraftAI
         
         if(rate < playerTrackingRate || distance > minimumPlayerDistance)
         {
-            Debug.Log("Tracking");
             return GameManager.PlayerAircraft.transform.position;
         }
         else
         {
-            Debug.Log("Not Tracking");
             return base.CreateWaypoint();
         }
     }

@@ -19,7 +19,7 @@ public class TargetObject : MonoBehaviour
     protected List<Missile> lockedMissiles = new List<Missile>();
     protected bool isWarning;
     
-    Collider objectCollider;
+    protected Collider objectCollider;
     protected bool isDestroyed;
 
     public ObjectInfo Info
@@ -58,7 +58,6 @@ public class TargetObject : MonoBehaviour
         if(hp <= 0 && isDestroyed == false)
         {
             DestroyObject();
-            isDestroyed = true;
         }
     }
 
@@ -114,7 +113,7 @@ public class TargetObject : MonoBehaviour
         }
     }
 
-    protected void DeleteMinimapSprite()
+    public void DeleteMinimapSprite()
     {
         for(int i = 0; i < transform.childCount; i++)
         {
@@ -128,6 +127,8 @@ public class TargetObject : MonoBehaviour
 
     protected void CommonDestroyFunction()
     {
+        isDestroyed = true;
+
         GameObject obj = Instantiate(destroyEffect, transform.position, Quaternion.identity);
         if(isEnemy == true)
         {
@@ -146,8 +147,9 @@ public class TargetObject : MonoBehaviour
 
     protected virtual void DestroyObject()
     {
-        objectCollider.enabled = false;
         CommonDestroyFunction();
+        objectCollider.enabled = false;
+        
         Destroy(gameObject);
     }
     
