@@ -20,8 +20,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
   - [x] Autopilot
   - [x] Missile Evasion
   - [x] Firing missile to Player
-- [ ] **Game Over Direction  << In Progress**
-- [ ] Sound System
+- [x] Game Over Direction
+- [ ] **Sound System << In Progress**
 - [ ] Checking Gameplay Process
 - [ ] Scripting
 - [ ] AWACS
@@ -37,8 +37,9 @@ Always TODO:
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/0607.gif)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0613.gif)
 
-[Current Development Status Example (Updated 2021.06.07)]
-- AI: Missile Firing Implementation
+[Current Development Status Example (Updated 2021.06.13)]
+- Game Over Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
