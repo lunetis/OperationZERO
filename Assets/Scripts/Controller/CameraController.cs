@@ -84,12 +84,12 @@ public class CameraController : MonoBehaviour
         
         if(lockOnTargetTransform != null)
         {
-            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.fixedDeltaTime);
         }
         else
         {
             Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 180, 0);
-            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.fixedDeltaTime);
         }
         
         firstViewCameraPivot.localRotation = rotateQuaternion;
@@ -103,7 +103,7 @@ public class CameraController : MonoBehaviour
         
         if(lockOnTargetTransform != null)
         {
-            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.fixedDeltaTime);
 
             // + Adjust/Clamp value
             Vector3 rotateValue = rotateQuaternion.eulerAngles;
@@ -118,7 +118,7 @@ public class CameraController : MonoBehaviour
         {
             Vector3 rotateValue = new Vector3(lookValue.y * -90, lookValue.x * 135, 0);
             if(rotateValue.x > 0) rotateValue.x *= 0.3f;
-            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(firstViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.fixedDeltaTime);
         }
         
         firstViewCameraPivot.localRotation = rotateQuaternion;
@@ -131,12 +131,12 @@ public class CameraController : MonoBehaviour
         
         if(lockOnTargetTransform != null)
         {
-            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, CalculateLockOnRotation(), lerpAmount * Time.fixedDeltaTime);
         }
         else
         {
             Vector3 rotateValue = new Vector3(lookInputValue.y * -90, lookInputValue.x * 180, rollValue * rollAmount);
-            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.deltaTime);
+            rotateQuaternion = Quaternion.Lerp(thirdViewCameraPivot.localRotation, Quaternion.Euler(rotateValue), lerpAmount * Time.fixedDeltaTime);
         }
 
         thirdViewCameraPivot.localRotation = rotateQuaternion;
@@ -147,9 +147,9 @@ public class CameraController : MonoBehaviour
     // Rotate camera by input
     public void AdjustCameraValue(float aircraftAccelValue, float aircraftRollValue, float aircraftPitchValue)
     {
-        zoomValue = Mathf.Lerp(zoomValue, aircraftAccelValue, zoomLerpAmount * Time.deltaTime);
-        rollValue = Mathf.Lerp(rollValue, aircraftRollValue, rollLerpAmount * Time.deltaTime);
-        pitchValue = Mathf.Lerp(pitchValue, aircraftPitchValue, pitchLerpAmount * Time.deltaTime);
+        zoomValue = Mathf.Lerp(zoomValue, aircraftAccelValue, zoomLerpAmount * Time.fixedDeltaTime);
+        rollValue = Mathf.Lerp(rollValue, aircraftRollValue, rollLerpAmount * Time.fixedDeltaTime);
+        pitchValue = Mathf.Lerp(pitchValue, aircraftPitchValue, pitchLerpAmount * Time.fixedDeltaTime);
     }
     
     public Camera GetActiveCamera()
@@ -180,9 +180,9 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        lookValue = Vector2.Lerp(lookValue, lookInputValue, lerpAmount * Time.deltaTime);
+        lookValue = Vector2.Lerp(lookValue, lookInputValue, lerpAmount * Time.fixedDeltaTime);
 
         switch((CameraIndex)cameraViewIndex)
         {

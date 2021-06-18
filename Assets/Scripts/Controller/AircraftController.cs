@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class AircraftController : MonoBehaviour
 {
     Gamepad gamepad;
@@ -187,7 +188,7 @@ public class AircraftController : MonoBehaviour
                     brake *= highGFactor * (1 + highGCooldown * highGReciprocal);
                     highGPitchFactor = highGFactor * (1 + highGCooldown * highGReciprocal);
 
-                    highGCooldown -= Time.deltaTime;
+                    highGCooldown -= Time.fixedDeltaTime;
                     isHighGTurning = true;
                 }
             }
@@ -200,7 +201,7 @@ public class AircraftController : MonoBehaviour
 
         if(isHighGPressed == false)
         {
-            highGCooldown += Time.deltaTime * 2;
+            highGCooldown += Time.fixedDeltaTime * 2;
             if(highGCooldown >= highGTurnTime)
             {
                 highGCooldown = highGTurnTime;
@@ -235,7 +236,7 @@ public class AircraftController : MonoBehaviour
         diffAngle.y = Mathf.Clamp(diffAngle.y, -yawAmount, yawAmount);
         diffAngle.z = Mathf.Clamp(diffAngle.z, -rollAmount, rollAmount);
         
-        rotateValue = Vector3.Lerp(rotateValue, diffAngle, rotateLerpAmount * Time.deltaTime);
+        rotateValue = Vector3.Lerp(rotateValue, diffAngle, rotateLerpAmount * Time.fixedDeltaTime);
     }
 
     void MoveAircraft()
@@ -271,33 +272,33 @@ public class AircraftController : MonoBehaviour
                 isAutoPilot = false;
                 rotateVector = new Vector3(pitchValue * pitchAmount * highGPitchFactor, (yawRValue - yawLValue) * yawAmount, -rollValue * rollAmount);
             }
-            rotateValue = Vector3.Lerp(rotateValue, rotateVector, rotateLerpAmount * Time.deltaTime);
+            rotateValue = Vector3.Lerp(rotateValue, rotateVector, rotateLerpAmount * Time.fixedDeltaTime);
         }
-        transform.Rotate(rotateValue * Time.deltaTime);
+
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotateValue * Time.fixedDeltaTime));
 
         // === Move ===
-        throttle = Mathf.Lerp(throttle, accel - brake, throttleAmount * Time.deltaTime);
+        throttle = Mathf.Lerp(throttle, accel - brake, throttleAmount * Time.fixedDeltaTime);
 
         if(throttle > 0)
         {
             float accelEase = (maxSpeed + (transform.position.y * 0.01f) - speed) * speedReciprocal;
-            speed += throttle * accelAmount * accelEase * Time.deltaTime;
+            speed += throttle * accelAmount * accelEase * Time.fixedDeltaTime;
         }
         else if(throttle < 0)
         {
             float brakeEase = (speed - minSpeed) * speedReciprocal;
-            speed += throttle * brakeAmount * brakeEase * Time.deltaTime;
+            speed += throttle * brakeAmount * brakeEase * Time.fixedDeltaTime;
         }
 
         float release = 1 - Mathf.Abs(throttle);
-        speed += release * (defaultSpeed - speed) * speedReciprocal * calibrateAmount * Time.deltaTime;
+        speed += release * (defaultSpeed - speed) * speedReciprocal * calibrateAmount * Time.fixedDeltaTime;
         
         // Gravity
         float gravityFallByPitch = gravityFactor * Mathf.Sin(transform.eulerAngles.x * Mathf.Deg2Rad);
-        speed += gravityFallByPitch * Time.deltaTime;
-        
-        // Apply
-        transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+        speed += gravityFallByPitch * Time.fixedDeltaTime;
+
+        rb.velocity = transform.forward * speed;
     }
 
     void CheckLowAltitude()
@@ -345,13 +346,17 @@ public class AircraftController : MonoBehaviour
         // UI
         SetUI();
     }
-    
+
     void Update()
     {
-        MoveAircraft();
-        PassCameraControl();
         SetUI();
         CheckLowAltitude();
         JetEngineControl();
+    }
+    
+    void FixedUpdate()
+    {
+        MoveAircraft();
+        PassCameraControl();
     }
 }

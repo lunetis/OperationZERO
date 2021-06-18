@@ -155,7 +155,6 @@ public class UIController : MonoBehaviour
         {
             GameManager.Instance.GameOver(false);
             remainTime = 0;
-            return;
         }
 
         int seconds = (int)remainTime;

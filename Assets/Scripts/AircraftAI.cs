@@ -74,6 +74,8 @@ public class AircraftAI : TargetObject
     [SerializeField]
     List<JetEngineController> jetEngineControllers;
 
+    Rigidbody rb;
+
     public float Speed
     {
         get { return speed; }
@@ -235,7 +237,7 @@ public class AircraftAI : TargetObject
         if(diff < -180) diff += 360;
         
         prevRotY = transform.eulerAngles.y;
-        zRotateValue = Mathf.Lerp(zRotateValue, Mathf.Clamp(diff / zRotateMaxThreshold, -1, 1), zRotateLerpAmount * Time.deltaTime);
+        zRotateValue = Mathf.Lerp(zRotateValue, Mathf.Clamp(diff / zRotateMaxThreshold, -1, 1), zRotateLerpAmount * Time.fixedDeltaTime);
     }
 
 
@@ -250,14 +252,14 @@ public class AircraftAI : TargetObject
         {
             currentAccelerate = -accelerateAmount;
         }
-        speed += currentAccelerate * Time.deltaTime;
+        speed += currentAccelerate * Time.fixedDeltaTime;
 
-        currentTurningTime = Mathf.Lerp(currentTurningTime, turningTime, 1);
+        currentTurningTime = Mathf.Lerp(currentTurningTime, turningTime, Time.fixedDeltaTime);
     }
 
     void Move()
     {
-        transform.Translate(new Vector3(0, 0, speed) * Time.deltaTime);
+        rb.velocity = transform.forward * speed;
     }
 
     void JetEngineControl()
@@ -282,6 +284,8 @@ public class AircraftAI : TargetObject
     protected override void Start()
     {
         base.Start();
+
+        rb = GetComponent<Rigidbody>();
 
         speed = targetSpeed = defaultSpeed;
 
@@ -308,13 +312,15 @@ public class AircraftAI : TargetObject
     protected virtual void Update()
     {
         CheckWaypoint();
+        JetEngineControl();
+        CheckMissileDistance();
+    }
+
+    private void FixedUpdate()
+    {
         ZAxisRotate();
-        Rotate();
-        
         AdjustSpeed();
         Move();
-        JetEngineControl();
-
-        CheckMissileDistance();
+        Rotate();
     }
 }

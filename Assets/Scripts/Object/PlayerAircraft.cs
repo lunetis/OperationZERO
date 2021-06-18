@@ -106,7 +106,13 @@ public class PlayerAircraft : TargetObject
         {
             col.enabled = false;
         }
+
         GetComponent<AircraftController>().enabled = false;
+        
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        
     }
 
     public void SelfDestruct()
