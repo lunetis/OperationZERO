@@ -9,10 +9,19 @@ public class JetEngineController : MonoBehaviour
     float throttleAmount;
     Color particleColor;
 
+    [Header("Common")]
     [SerializeField]
     float accelLerpAmount;
     [SerializeField]
     float brakeLerpAmount;
+
+    [Header("Sounds")]
+    [SerializeField]
+    float maxVolume = 0.2f;
+    [SerializeField]
+    float lowpassValue = 2500;
+    AudioSource audioSource;
+    AudioLowPassFilter audioLowPassFilter;
 
     float inputValue;
     public float InputValue
@@ -20,9 +29,22 @@ public class JetEngineController : MonoBehaviour
         set { inputValue = value; }
     }
 
+    void SetEngineAudio()
+    {
+        audioSource.volume = throttleAmount * maxVolume;
+    }
+
+    public void SetAudioEffect(bool is1stView)
+    {
+        audioLowPassFilter.cutoffFrequency = (is1stView == true) ? lowpassValue : 22000;
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioLowPassFilter = GetComponent<AudioLowPassFilter>();
+
         particleMainModule = GetComponent<ParticleSystem>().main;
         particleColor = particleMainModule.startColor.color;
         initAlpha = particleColor.a;
@@ -36,5 +58,7 @@ public class JetEngineController : MonoBehaviour
         throttleAmount = Mathf.Lerp(throttleAmount, inputValue, lerpAmount * Time.deltaTime);
         particleColor.a = throttleAmount * initAlpha;
         particleMainModule.startColor = particleColor;
+
+        if(audioSource != null) SetEngineAudio();
     }
 }

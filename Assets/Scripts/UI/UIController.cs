@@ -90,6 +90,14 @@ public class UIController : MonoBehaviour
     [SerializeField]
     Color cautionColor;
 
+    [Header("Sounds")]
+    [SerializeField]
+    AudioClip spwChangeAudioClip;
+    [SerializeField]
+    AudioClip mslChangeAudioClip;
+
+    AudioSource audioSource;
+
     float remainTime;
     int score = 0;
     float damage = 0;
@@ -232,7 +240,8 @@ public class UIController : MonoBehaviour
         SetAircraftDamageUI();
     }
 
-    public void SwitchWeapon(WeaponSlot[] weaponSlots, bool useSpecialWeapon, Missile missile)
+
+    public void SwitchWeapon(WeaponSlot[] weaponSlots, bool useSpecialWeapon, Missile missile, bool playAudio = true)
     {
         mslIndicator.SetActive(!useSpecialWeapon);
         spwIndicator.SetActive(useSpecialWeapon);
@@ -240,6 +249,12 @@ public class UIController : MonoBehaviour
         // Justify that weaponSlots contains 2 slots
         leftMslCooldownImage.SetWeaponData(weaponSlots[0], missile.missileFrameSprite, missile.missileFillSprite);
         rightMslCooldownImage.SetWeaponData(weaponSlots[1], missile.missileFrameSprite, missile.missileFillSprite);
+
+        if(playAudio == true)
+        {
+            AudioClip audioClip = (useSpecialWeapon == true) ? spwChangeAudioClip : mslChangeAudioClip;
+            audioSource.PlayOneShot(audioClip);
+        }
     }
 
     public void SwitchUI(CameraController.CameraIndex index)
@@ -277,6 +292,11 @@ public class UIController : MonoBehaviour
     public void SetLabel(AlertUIController.LabelEnum labelEnum)
     {
         alertUIController.SetLabel(labelEnum);
+    }
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update

@@ -11,6 +11,9 @@ public class LabelInfo : ScriptableObject
     Color labelColor;
     [SerializeField]
     float visibleTime;
+    
+    [SerializeField]
+    AudioClip audioClip;
 
     public Texture LabelTexture
     {
@@ -25,5 +28,10 @@ public class LabelInfo : ScriptableObject
     public float VisibleTime
     {
         get { return visibleTime; }
+    }
+
+    public AudioClip AudioClip
+    {
+        get { return audioClip; }
     }
 }

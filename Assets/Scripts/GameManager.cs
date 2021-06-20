@@ -211,6 +211,11 @@ public class GameManager : MonoBehaviour
         objects.Clear();
         weaponController.ChangeTarget();
 
+        foreach(GameObject obj in disableOnGameOver)
+        {
+            obj.SetActive(false);
+        }
+
         if(isDead)
         {
             foreach(GameObject obj in disableOnGameOverObjects)

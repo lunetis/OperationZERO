@@ -47,6 +47,8 @@ public class Missile : MonoBehaviour
     bool isDisabled = false;
     bool hasWarned = false;
 
+    AudioSource audioSource;
+
     public bool HasWarned
     {
         get { return hasWarned; }
@@ -161,6 +163,7 @@ public class Missile : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         parent = transform.parent;
     }
     

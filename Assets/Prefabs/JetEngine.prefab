@@ -4819,7 +4819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accelLerpAmount: 1
-  brakeLerpAmount: 4
+  brakeLerpAmount: 1
 --- !u!1 &7424813845484111576
 GameObject:
   m_ObjectHideFlags: 0

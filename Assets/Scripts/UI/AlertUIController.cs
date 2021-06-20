@@ -25,10 +25,37 @@ public class AlertUIController : MonoBehaviour
     [SerializeField]
     LabelInfo missionFailed;
 
+    [Header("Sounds")]
+    [SerializeField]
+    float voiceAlertRepeatTime = 1.5f;
+    [SerializeField]
+    float missileCautionAlertRepeatTime = 1.0f;
+    [SerializeField]
+    float missileWarningAlertRepeatTime = 0.2f;
+    [SerializeField]
+    float missileEmergencyAlertRepeatTime = 0.1f;
+
+    [SerializeField]
+    AudioClip warningBeepAlertClip;
+    [SerializeField]
+    AudioClip missileBeepAlertClip;
+    [SerializeField]
+    AudioClip missileVoiceAlertClip;
+    [SerializeField]
+    AudioClip stallVoiceAlertClip;
+
+    [SerializeField]
+    AudioSource voiceAudioSource;
+    [SerializeField]
+    AudioSource alertAudioSource;
+    [SerializeField]
+    AudioSource labelAudioSource;
+
+    bool isPlayingVoiceAlert = false;
+
     int currentPriority;
     float labelTimer;
     PlayerAircraft.WarningStatus prevWarningStatus = PlayerAircraft.WarningStatus.NONE;
-
 
     public enum LabelEnum  // Used for Priority
     {
@@ -102,6 +129,7 @@ public class AlertUIController : MonoBehaviour
 
         int labelPriority = (int)labelEnum;
 
+        // Show new label
         if(currentPriority < labelPriority)
         {
             currentPriority = labelPriority;
@@ -109,7 +137,13 @@ public class AlertUIController : MonoBehaviour
 
             labelImage.texture = labelInfo.LabelTexture;
             labelImage.color = labelInfo.LabelColor;
+
+            if(labelInfo.AudioClip != null)
+            {
+                labelAudioSource.PlayOneShot(labelInfo.AudioClip);
+            }
         }
+        // Initialize visible time
         else if(currentPriority == labelPriority)
         {
             labelTimer = labelInfo.VisibleTime;
@@ -186,6 +220,63 @@ public class AlertUIController : MonoBehaviour
                 GameManager.UIController.SetWarningUIColor(false);
                 break;
         }
+
+        SetAlertAudio();
+    }
+
+
+    void SetAlertAudio()
+    {
+        switch(prevWarningStatus)
+        {
+            case PlayerAircraft.WarningStatus.MISSILE_ALERT_EMERGENCY:
+                CancelInvoke("PlayMissileBeepAudio");
+                CancelInvoke("PlayWarningBeepAudio");
+                InvokeRepeating("PlayMissileBeepAudio", 0, missileWarningAlertRepeatTime);
+                 if(isPlayingVoiceAlert == false) InvokeRepeating("PlayMissileVoiceAudio", 0, voiceAlertRepeatTime);
+                break;
+                
+            case PlayerAircraft.WarningStatus.MISSILE_ALERT:
+                CancelInvoke("PlayMissileBeepAudio");
+                CancelInvoke("PlayWarningBeepAudio");
+                InvokeRepeating("PlayMissileBeepAudio", 0, missileCautionAlertRepeatTime);
+                if(isPlayingVoiceAlert == false) InvokeRepeating("PlayMissileVoiceAudio", 0, voiceAlertRepeatTime);
+                break;
+                
+            case PlayerAircraft.WarningStatus.WARNING:
+                CancelInvoke("PlayMissileBeepAudio");
+                CancelInvoke("PlayMissileVoiceAudio");
+                InvokeRepeating("PlayWarningBeepAudio", missileCautionAlertRepeatTime * 0.2f, missileCautionAlertRepeatTime);
+                break;
+                
+            case PlayerAircraft.WarningStatus.NONE:
+                CancelInvoke("PlayMissileBeepAudio");
+                CancelInvoke("PlayWarningBeepAudio");
+                CancelInvoke("PlayMissileVoiceAudio");
+                isPlayingVoiceAlert = false;
+                break;
+        }
+    }
+
+    void PlayWarningBeepAudio()
+    {
+        alertAudioSource.PlayOneShot(warningBeepAlertClip);
+    }
+
+    void PlayMissileBeepAudio()
+    {
+        alertAudioSource.PlayOneShot(missileBeepAlertClip);
+    }
+
+    void PlayMissileVoiceAudio()
+    {
+        isPlayingVoiceAlert = true;
+        voiceAudioSource.PlayOneShot(missileVoiceAlertClip);
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 
     void Start()

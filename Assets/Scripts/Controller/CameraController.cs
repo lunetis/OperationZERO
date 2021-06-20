@@ -43,6 +43,18 @@ public class CameraController : MonoBehaviour
 
     Transform lockOnTargetTransform;
 
+    [SerializeField]
+    JetEngineController jetEngineController;
+
+    [Header("Sounds")]
+    [SerializeField]
+    AudioClip engineInClip;
+    [SerializeField]
+    AudioClip engineOutClip;
+
+    [SerializeField]
+    AudioSource engineAudioSource;
+
     // UI
     UIController uiController;
     public Transform targetArrowTransform;
@@ -59,6 +71,7 @@ public class CameraController : MonoBehaviour
             lookValue = Vector3.zero;
             cameraViewIndex = (++cameraViewIndex) % 3;
             SetCamera();
+            SetEngineAudio();
         }
     }
 
@@ -169,6 +182,27 @@ public class CameraController : MonoBehaviour
         Vector3 rotateVector = Quaternion.LookRotation(targetLocalPosition, transform.up).eulerAngles;
         rotateVector.z = 0; // z value must be 0
         return Quaternion.Euler(rotateVector); // Recalculate
+    }
+
+    void SetEngineAudio()
+    {
+        switch((CameraIndex)cameraViewIndex)
+        {
+            case CameraIndex.FirstView:
+                engineAudioSource.clip = engineInClip;
+                engineAudioSource.Play();
+                jetEngineController.SetAudioEffect(true);
+                break;
+                
+            case CameraIndex.ThirdView:
+                engineAudioSource.clip = engineOutClip;
+                engineAudioSource.Play();
+                jetEngineController.SetAudioEffect(false);
+                break;
+
+            default:
+                break;
+        }
     }
     
     // Start is called before the first frame update

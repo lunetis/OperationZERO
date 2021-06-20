@@ -67,6 +67,22 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     GunCrosshair gunCrosshair;
 
+    [Header("Sounds")]
+    [SerializeField]
+    AudioClip ammunitionZeroClip;
+    [SerializeField]
+    AudioClip cooldownClip;
+
+    [SerializeField]
+    AudioSource voiceAudioSource;
+    [SerializeField]
+    AudioSource weaponAudioSource;
+    [SerializeField]
+    AudioSource missileAudioSource;
+
+    [SerializeField]
+    GunAudio gunAudio;
+
     AircraftController aircraftController;
     UIController uiController;
 
@@ -95,10 +111,12 @@ public class WeaponController : MonoBehaviour
         {
             case InputActionPhase.Performed:
                 InvokeRepeating("FireMachineGun", 0, fireInterval);
+                gunAudio.IsFiring = true;
                 break;
 
             case InputActionPhase.Canceled:
                 CancelInvoke("FireMachineGun");
+                gunAudio.IsFiring = false;
                 Vibrate(0);
                 break;
         }
@@ -249,13 +267,16 @@ public class WeaponController : MonoBehaviour
         // Ammunition Zero!
         if(weaponCnt <= 0)
         {
-            Debug.Log("Ammunition Zero!");
+            if(voiceAudioSource.isPlaying == false)
+            {
+                voiceAudioSource.PlayOneShot(ammunitionZeroClip);
+            }
             return;
         }
         // Not available : Beep sound
         if(availableWeaponSlot == null)
         {
-            Debug.Log("Cooldown!");
+            weaponAudioSource.PlayOneShot(cooldownClip);
             return;
         }
 
@@ -288,6 +309,8 @@ public class WeaponController : MonoBehaviour
 
         uiController.SetMissileText(missileCnt);
         uiController.SetSpecialWeaponText(specialWeaponName, specialWeaponCnt);
+        
+        missileAudioSource.PlayOneShot(SoundManager.Instance.GetMissileLaunchClip());
     }
 
 
@@ -309,7 +332,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void SetUIAndTarget()
+    void SetUIAndTarget(bool playAudio = true)
     {
         Missile switchedMissile = (useSpecialWeapon == true) ? specialWeapon : missile;
         WeaponSlot[] weaponSlots = (useSpecialWeapon == true) ? spwSlots : mslSlots;
@@ -317,7 +340,7 @@ public class WeaponController : MonoBehaviour
         uiController.SetGunText(bulletCnt);
         uiController.SetMissileText(missileCnt);
         uiController.SetSpecialWeaponText(specialWeaponName, specialWeaponCnt);
-        uiController.SwitchWeapon(weaponSlots, useSpecialWeapon, switchedMissile);
+        uiController.SwitchWeapon(weaponSlots, useSpecialWeapon, switchedMissile, playAudio);
         GameManager.TargetController.SwitchWeapon(switchedMissile);
     }
 
@@ -373,7 +396,7 @@ public class WeaponController : MonoBehaviour
         useSpecialWeapon = false;
 
         SetArmament();
-        SetUIAndTarget();
+        SetUIAndTarget(false);
     }
 
     void Update()
