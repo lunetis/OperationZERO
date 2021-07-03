@@ -22,7 +22,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
   - [x] Firing missile to Player
 - [x] Game Over Direction
 - [x] Sound System
-- [ ] **Checking Gameplay Process << In Progress**
+- [x] Phase System & Pixy's Special Weapon
+- [ ] **Gameplay Process << In Progress**
 - [ ] Scripting
 - [ ] AWACS
 - [ ] Campaign Direction (ZERO)
@@ -38,7 +39,9 @@ Always TODO:
 
 [![Video Label](http://img.youtube.com/vi/x_ejFJRhHUQ/0.jpg)](https://youtu.be/x_ejFJRhHUQ)
 
-[Current Development Status Example (Updated 2021.06.20)]
-- Sound System Implementation
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0704.gif)
+
+[Current Development Status Example (Updated 2021.07.04)]
+- Phase System & Pixy's Special Weapon Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
