@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         else
         {
             effectPool = GameManager.Instance.bulletHitEffectObjectPool;
-            other.gameObject.GetComponent<TargetObject>()?.OnDamage(damage, gameObject.layer);
+            other.gameObject.GetComponent<TargetObject>()?.OnDamage(damage, gameObject.layer, gameObject.tag);
         }
         CreateHitEffect(effectPool);
         DisableBullet();

@@ -221,13 +221,13 @@ public class AlertUIController : MonoBehaviour
                 break;
         }
 
-        SetAlertAudio();
+        SetAlertAudio(warningStatus);
     }
 
 
-    void SetAlertAudio()
+    void SetAlertAudio(PlayerAircraft.WarningStatus warningStatus)
     {
-        switch(prevWarningStatus)
+        switch(warningStatus)
         {
             case PlayerAircraft.WarningStatus.MISSILE_ALERT_EMERGENCY:
                 CancelInvoke("PlayMissileBeepAudio");
@@ -274,10 +274,15 @@ public class AlertUIController : MonoBehaviour
         voiceAudioSource.PlayOneShot(missileVoiceAlertClip);
     }
 
-    void OnDisable()
+    public void OnGameOver()
     {
         CancelInvoke();
+        HideAllAttackAlertUI();
+        alertParent.SetActive(false);
+        
+        GameManager.UIController.SetWarningUIColor(false);
     }
+
 
     void Start()
     {

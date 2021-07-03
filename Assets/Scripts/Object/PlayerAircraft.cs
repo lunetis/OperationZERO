@@ -42,6 +42,22 @@ public class PlayerAircraft : TargetObject
         get { return missileEmergencyDistance; }
     }
 
+    public override void AddLockedMissile(Missile missile)
+    {
+        base.AddLockedMissile(missile);
+        missileIndicatorController.AddMissileIndicator(missile);
+    }
+
+    public void DisableAllMissiles()
+    {
+        foreach(Missile lockedMissile in lockedMissiles)
+        {
+            lockedMissile.RemoveTarget();
+        }
+        lockedMissiles.Clear();
+    }
+
+
     // Ground/Object Collision
     void OnCollisionEnter(Collision other)
     {
@@ -52,7 +68,7 @@ public class PlayerAircraft : TargetObject
         }
     }
 
-    public override void OnDamage(float damage, int layer)
+    public override void OnDamage(float damage, int layer, string tag = "")
     {
         base.OnDamage(damage, layer);
         uiController.SetDamage((int)(Info.HP - hp / Info.HP * 100));
@@ -88,12 +104,6 @@ public class PlayerAircraft : TargetObject
         GameManager.Instance.GameOver(true, true);
 
         DelayedDestroy();
-    }
-
-    public override void AddLockedMissile(Missile missile)
-    {
-        base.AddLockedMissile(missile);
-        missileIndicatorController.AddMissileIndicator(missile);
     }
 
     void DelayedDestroy()

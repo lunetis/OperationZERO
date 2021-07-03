@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public ObjectPool missileObjectPool;
     public ObjectPool specialWeaponObjectPool;
     public ObjectPool explosionEffectObjectPool;
+    public ObjectPool mpbmEffectObjectPool;
     public ObjectPool smokeTrailEffectObjectPool;
 
     [SerializeField]
@@ -39,6 +41,10 @@ public class GameManager : MonoBehaviour
     WeaponController weaponController;
 
     [Header("Game Over Control")]
+    bool isGameOver = false;
+    
+    [SerializeField]
+    UnityEvent executeOnGameOver;
     [SerializeField]
     List<GameObject> disableOnGameOver;
     [SerializeField]
@@ -97,6 +103,11 @@ public class GameManager : MonoBehaviour
     public static WeaponController WeaponController
     {
         get { return Instance?.weaponController; }
+    }
+
+    public bool IsGameOver
+    {
+        get { return isGameOver; }
     }
 
     void Awake()
@@ -200,6 +211,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(bool isDead, bool isInstantDeath = false)
     {
+        isGameOver = true;
+
         // Set UI
         UIController.SetLabel(AlertUIController.LabelEnum.MissionFailed);
         
@@ -207,6 +220,9 @@ public class GameManager : MonoBehaviour
         {
             obj.DeleteMinimapSprite();
         }
+
+        executeOnGameOver.Invoke();
+
         targetController.RemoveAllTargetUI();
         objects.Clear();
         weaponController.ChangeTarget();

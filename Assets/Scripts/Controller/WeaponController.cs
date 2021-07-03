@@ -158,8 +158,11 @@ public class WeaponController : MonoBehaviour
         TargetObject newTarget = GetNextTarget();
         if(newTarget == null)   // No target
         {
+            GameManager.CameraController.LockOnTarget(null);
             GameManager.TargetController.ChangeTarget(null);
             gunCrosshair.SetTarget(null);
+            target = null;
+            
             return;
         }
 
@@ -199,7 +202,7 @@ public class WeaponController : MonoBehaviour
                         {
                             targets[0].isNextTarget = true;
                         }
-                        else
+                        else    // something that is not last and before last index
                         {
                             targets[i + 2].isNextTarget = true;
                         }

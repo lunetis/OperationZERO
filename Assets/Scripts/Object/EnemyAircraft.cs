@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAircraft : AircraftAI
 {
+    [Header("EnemyAircraft Properties")]
     [SerializeField]
     float destroyDelay = 1;
 
@@ -19,6 +20,11 @@ public class EnemyAircraft : AircraftAI
 
     protected override Vector3 CreateWaypoint()
     {
+        if(GameManager.Instance == null || GameManager.PlayerAircraft == null)
+        {
+            return base.CreateWaypoint();
+        }
+
         float rate = Random.Range(0.0f, 1.0f);
         float distance = Vector3.Distance(transform.position, GameManager.PlayerAircraft.transform.position);
         
@@ -45,7 +51,7 @@ public class EnemyAircraft : AircraftAI
         Destroy(gameObject);
     }
 
-    public override void OnDamage(float damage, int layer)
+    public override void OnDamage(float damage, int layer, string tag = "")
     {
         base.OnDamage(damage, layer);
 
@@ -65,6 +71,5 @@ public class EnemyAircraft : AircraftAI
     protected override void Update()
     {
         base.Update();
-        // currentWaypoint = GameManager.PlayerAircraft.transform.position;
     }
 }

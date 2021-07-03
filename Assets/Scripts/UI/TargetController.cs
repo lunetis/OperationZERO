@@ -22,9 +22,12 @@ public class TargetController : MonoBehaviour
 
     public void CreateTargetUI(TargetObject targetObject)
     {
+        if(targetObject.TargetUI != null) return;
+        
         GameObject obj = Instantiate(targetUIObject);
         TargetUI targetUI = obj.GetComponent<TargetUI>();
         targetUI.Target = targetObject;
+        targetObject.TargetUI = targetUI;
         targetUIs.Add(targetUI);
 
         obj.transform.SetParent(transform, false);
@@ -34,12 +37,20 @@ public class TargetController : MonoBehaviour
     // Remove from TargetUI List, stop functioning and Destroy
     public void RemoveTargetUI(TargetObject targetObject)
     {
-        TargetUI targetUI = FindTargetUI();
-        if(targetUI?.Target != null)
+        TargetUI foundUI = null;
+        foreach(TargetUI targetUI in targetUIs)
         {
-            targetUI.DestroyUI();
-            targetUIs.Remove(targetUI);
-            Destroy(targetUI.gameObject);
+            if(targetUI.Target == targetObject)
+            {
+                foundUI = targetUI;
+                break;
+            }
+        }
+
+        if(foundUI != null)
+        {
+            targetUIs.Remove(foundUI);
+            Destroy(foundUI.gameObject);
         }
     }
 
@@ -109,7 +120,10 @@ public class TargetController : MonoBehaviour
 
     public void SetTargetUILock(bool isLocked)
     {
-        currentTargettedUI?.SetLock(isLocked);
+        if(currentTargettedUI)
+        {
+            currentTargettedUI.SetLock(isLocked);
+        }
     }
 
     void Start()

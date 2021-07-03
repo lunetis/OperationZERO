@@ -22,12 +22,22 @@ public class TargetObject : MonoBehaviour
     protected Collider objectCollider;
     protected bool isDestroyed;
 
+    protected TargetUI targetUI;
+
+    public TargetUI TargetUI
+    {
+        get { return targetUI; }
+        set { targetUI = value; }
+    }
+
     public ObjectInfo Info
     {
-        get
-        {
-            return objectInfo;
-        }
+        get { return objectInfo; }
+    }
+
+    public List<Missile> LockedMissiles
+    {
+        get { return lockedMissiles; }
     }
 
     bool isLocking;
@@ -45,7 +55,7 @@ public class TargetObject : MonoBehaviour
     }
 
     // Public Functions
-    public virtual void OnDamage(float damage, int layer)
+    public virtual void OnDamage(float damage, int layer, string tag = "")
     {
         hp -= damage;
         lastHitLayer = layer;
@@ -121,6 +131,18 @@ public class TargetObject : MonoBehaviour
             if(childObject.layer == LayerMask.NameToLayer("Minimap"))
             {
                 Destroy(childObject);
+            }
+        }
+    }
+
+    public void SetMinimapSpriteVisible(bool visible)
+    {
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            GameObject childObject = transform.GetChild(i).gameObject;
+            if(childObject.layer == LayerMask.NameToLayer("Minimap"))
+            {
+                childObject.SetActive(visible);
             }
         }
     }

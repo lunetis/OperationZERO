@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189565695}
   - component: {fileID: 189565694}
+  - component: {fileID: 189565696}
   - component: {fileID: 189565693}
   m_Layer: 0
   m_Name: Main Camera
@@ -206,6 +207,18 @@ Transform:
   m_Father: {fileID: 639826021}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189565696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189565692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69a2fc8d16c6974aa23bf76cfc875dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211158729
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +790,7 @@ GameObject:
   - component: {fileID: 639826021}
   - component: {fileID: 639826020}
   - component: {fileID: 639826019}
-  - component: {fileID: 639826022}
+  - component: {fileID: 639826024}
   - component: {fileID: 639826023}
   m_Layer: 12
   m_Name: F-15C Pixy
@@ -802,8 +815,30 @@ MonoBehaviour:
   destroyEffect: {fileID: 1556574608389113247, guid: 8d4b3caee090b1247bf61af54d4d0905,
     type: 3}
   isNextTarget: 0
+  maxSpeed: 300
+  minSpeed: 30
+  defaultSpeed: 60
+  accelerateLerpAmount: 1
+  accelerateAmount: 50
+  turningForce: 1
+  zRotateMaxThreshold: 0.3
+  zRotateAmount: 135
+  zRotateLerpAmount: 1.5
+  initialWaypoints: []
+  waypointMinHeight: 300
+  waypointMaxHeight: 1000
+  areaCollider: {fileID: 0}
+  evasionRate: 0.5
+  newWaypointDistance: 500
+  minimumWaypointChangeDelay: 2
+  jetEngineControllers: []
+  waypointDebugObject: {fileID: 9107909613741472107, guid: 2d8267a6178818a429456f4acd305429,
+    type: 3}
+  debugText: {fileID: 935457413}
   destroyDelay: 1
   smokeTransformParent: {fileID: 1629986148}
+  playerTrackingRate: 0.5
+  minimumPlayerDistance: 2000
 --- !u!136 &639826020
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -836,33 +871,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &639826022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639826018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a62c35f096ad7d4b8d5126ebcf3df75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 300
-  minSpeed: 60
-  defaultSpeed: 90
-  accelerateLerpAmount: 3
-  accelerateAmount: 30
-  turningForce: 1.5
-  zRotateMaxThreshold: 0.3
-  zRotateAmount: 135
-  zRotateLerpAmount: 1.5
-  initialWaypoints:
-  - {fileID: 1789038085}
-  waypointMinHeight: 50
-  waypointMaxHeight: 500
-  areaCollider: {fileID: 211158730}
-  jetEngineControllers: []
 --- !u!96 &639826023
 TrailRenderer:
   serializedVersion: 2
@@ -961,6 +969,22 @@ TrailRenderer:
   m_MinVertexDistance: 1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!54 &639826024
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639826018}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &713056964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,8 +1248,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 294.60004, y: -66.08002}
-  m_SizeDelta: {x: 500, y: 60}
+  m_AnchoredPosition: {x: 294.60004, y: -130}
+  m_SizeDelta: {x: 499.57, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935457413
 MonoBehaviour:
@@ -1262,10 +1286,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 45
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 45
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1402,7 +1426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1511718082a8334ab8856986ec8e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapController: {fileID: 0}
   iconSize: 300
   depth: 0
   showBorderIndicator: 1
@@ -1472,7 +1495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1355584814
 Transform:
   m_ObjectHideFlags: 0

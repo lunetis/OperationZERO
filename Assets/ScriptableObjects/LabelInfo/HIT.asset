@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: HIT
   m_EditorClassIdentifier: 
   labelTexture: {fileID: 2800000, guid: f4ed7d97c32099d45a1da5f1b943472d, type: 3}
-  labelColor: {r: 0.6666667, g: 1, b: 0.6666667, a: 1}
+  labelColor: {r: 0.6666667, g: 1, b: 0.6666667, a: 0.78431374}
   visibleTime: 1.5
+  audioClip: {fileID: 0}

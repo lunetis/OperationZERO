@@ -104,6 +104,12 @@ public class EnemyWeaponController : MonoBehaviour
 
     void LaunchMissile()
     {
+        if(GameManager.Instance.IsGameOver == true)
+        {
+            CancelInvoke();
+            return;
+        }
+        
         if(isLocked == false) return;
         
         // Get from Object Pool and Launch
@@ -114,6 +120,14 @@ public class EnemyWeaponController : MonoBehaviour
 
         Missile missileScript = missile.GetComponent<Missile>();
         missileScript.Launch(targetObject, aircraftAI.Speed + 15, gameObject.layer);
+    }
+
+    void OnDisable()
+    {
+        if(targetObject != null)
+        {
+            targetObject.IsLocking = false;
+        }
     }
 
     // Start is called before the first frame update

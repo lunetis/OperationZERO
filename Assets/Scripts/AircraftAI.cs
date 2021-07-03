@@ -6,11 +6,11 @@ public class AircraftAI : TargetObject
 {
     [Header("Aircraft Settings")]
     [SerializeField]
-    float maxSpeed = 300;
+    float maxSpeed = 200;
     [SerializeField]
-    float minSpeed = 30;
+    float minSpeed = 60;
     [SerializeField]
-    float defaultSpeed = 60;
+    float defaultSpeed = 90;
 
     float speed;
     float targetSpeed;
@@ -20,7 +20,7 @@ public class AircraftAI : TargetObject
     [SerializeField]
     float accelerateLerpAmount = 1.0f;
     [SerializeField]
-    float accelerateAmount = 50.0f;
+    float accelerateAmount = 20.0f;
     float currentAccelerate;
     float accelerateReciprocal;
 
@@ -32,7 +32,7 @@ public class AircraftAI : TargetObject
     [SerializeField]
     float zRotateMaxThreshold = 0.3f;
     [SerializeField]
-    float zRotateAmount = 135;
+    float zRotateAmount = 90;
     [SerializeField]
     float zRotateLerpAmount = 1.5f;
 
@@ -45,9 +45,9 @@ public class AircraftAI : TargetObject
     Queue<Transform> waypointQueue;
     
     [SerializeField]
-    float waypointMinHeight;
+    float waypointMinHeight = 250;
     [SerializeField]
-    float waypointMaxHeight;
+    float waypointMaxHeight = 1000;
 
     [SerializeField]
     BoxCollider areaCollider;
@@ -72,7 +72,19 @@ public class AircraftAI : TargetObject
     float newWaypointDistance = 500;
 
     [SerializeField]
+    float minimumWaypointChangeDelay = 2.0f;
+    float waypointChangeDelay = 0;
+
+
+    [SerializeField]
     List<JetEngineController> jetEngineControllers;
+
+    [Space(10)]    
+    [Header("DEBUG")]
+    [SerializeField]
+    GameObject waypointDebugObject;
+    [SerializeField]
+    DebugText debugText;
 
     Rigidbody rb;
 
@@ -97,7 +109,6 @@ public class AircraftAI : TargetObject
             return CreateWaypointWithinArea();
         else
             return CreateWaypointAroundItself();
-
     }
 
     void RandomizeSpeedAndTurn()
@@ -150,19 +161,20 @@ public class AircraftAI : TargetObject
         float angle = Random.Range(0, 360);
         Vector3 directionVector = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
         Vector3 waypointPosition = transform.position + directionVector * distance;
+        Vector3 raycastPosition = waypointPosition;
+        raycastPosition.y = 5000;
 
         RaycastHit hit;
-        Physics.Raycast(waypointPosition, Vector3.down, out hit);
+        Physics.Raycast(raycastPosition, Vector3.down, out hit);
 
         if(hit.distance != 0)
         {
-            waypointPosition.y += height - hit.distance;
+            waypointPosition.y += height - (5000 - hit.distance);
         }
-        // New waypoint is below ground
+        // New waypoint is outside of the map
         else
         {
-            Physics.Raycast(waypointPosition, Vector3.up, out hit);
-            waypointPosition.y += height + hit.distance;
+            waypointPosition.y = height;
         }
 
         return waypointPosition;
@@ -170,6 +182,8 @@ public class AircraftAI : TargetObject
 
     void ChangeWaypoint()
     {
+        waypointChangeDelay = minimumWaypointChangeDelay;
+        
         if(waypointQueue.Count == 0)
         {
             currentWaypoint = CreateWaypoint();
@@ -177,6 +191,11 @@ public class AircraftAI : TargetObject
         else
         {
             currentWaypoint = waypointQueue.Dequeue().position;
+        }
+
+        if(waypointDebugObject != null)
+        {
+            Instantiate(waypointDebugObject, currentWaypoint, Quaternion.identity);
         }
         
         waypointDistance = Vector3.Distance(transform.position, currentWaypoint);
@@ -191,9 +210,16 @@ public class AircraftAI : TargetObject
         if(currentWaypoint == null) return;
         waypointDistance = Vector3.Distance(transform.position, currentWaypoint);
 
-        if(waypointDistance >= prevWaypointDistance) // Aircraft is going farther from the waypoint
+        if(debugText)
         {
-            if(isComingClose == true)
+            debugText.AddText("Dist : " + waypointDistance + " // prev : " + prevWaypointDistance);
+            debugText.AddText("Waypoint : " + currentWaypoint);
+            debugText.AddText("isComingClose : " + isComingClose);
+        }
+
+        if(waypointDistance > prevWaypointDistance) // Aircraft is going farther from the waypoint
+        {
+            if(isComingClose == true && waypointChangeDelay <= 0)
             {
                 ChangeWaypoint();
             }
@@ -314,6 +340,8 @@ public class AircraftAI : TargetObject
         CheckWaypoint();
         JetEngineControl();
         CheckMissileDistance();
+
+        if(waypointChangeDelay > 0) waypointChangeDelay -= Time.deltaTime;
     }
 
     private void FixedUpdate()

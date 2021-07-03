@@ -42,6 +42,13 @@ public class TargetUI : MonoBehaviour
     bool isNextTarget;
     bool isBlinking;
 
+    bool isInvisible;
+
+    public bool IsInvisible
+    {
+        set { isInvisible = value; }
+    }
+
     ObjectInfo objectInfo;
     RectTransform rectTransform;
 
@@ -61,6 +68,11 @@ public class TargetUI : MonoBehaviour
             nicknameText.text = objectInfo.ObjectNickname;
             targetText.gameObject.SetActive(objectInfo.MainTarget);
         }
+    }
+
+    public GameObject UIObject
+    {
+        get { return uiObject; }
     }
 
     RectTransform canvasRect;
@@ -123,7 +135,7 @@ public class TargetUI : MonoBehaviour
     }
 
     // Call before destroy
-    public void DestroyUI()
+    void OnDestroy()
     {
         targetObject = null;
         CancelInvoke();
@@ -132,6 +144,7 @@ public class TargetUI : MonoBehaviour
 
     void Start()
     {
+        isInvisible = true;
         rectTransform = GetComponent<RectTransform>();
 
         Canvas canvas = GetCanvas(transform.parent);
@@ -171,7 +184,7 @@ public class TargetUI : MonoBehaviour
                             screenPosition.y < 0 || screenPosition.y > canvasRect.sizeDelta.y);
 
 
-        uiObject.SetActive(distance < hideDistance);
+        uiObject.SetActive(isInvisible == true && distance < hideDistance);
         GameManager.TargetController.ShowTargetArrow(isOutsideOfCamera && distance < hideDistance);
     }
 }
