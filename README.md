@@ -1,4 +1,7 @@
 # AceCombatZERO
+
+[[한국어 Readme]](https://github.com/lunetis/AceCombatZERO/blob/main/README.kr.md)
+
 Remake Final Mission of Ace Combat Zero with Unity.
 
 * This is a personal project and currently in development.
@@ -22,7 +25,7 @@ Remake Final Mission of Ace Combat Zero with Unity.
   - [x] Firing missile to Player
 - [x] Game Over Direction
 - [x] Sound System
-- [x] Phase System & Pixy's Special Weapon
+- [x] Phase System & Special Weapon
 - [ ] **Gameplay Process << In Progress**
 - [ ] Scripting
 - [ ] AWACS
@@ -39,9 +42,13 @@ Always TODO:
 
 [![Video Label](http://img.youtube.com/vi/x_ejFJRhHUQ/0.jpg)](https://youtu.be/x_ejFJRhHUQ)
 
+(YouTube Link)
+
+<br>
+
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/0704.gif)
 
 [Current Development Status Example (Updated 2021.07.04)]
-- Phase System & Pixy's Special Weapon Implementation
+- Phase System & Special Weapon Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
