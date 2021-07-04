@@ -1,6 +1,6 @@
 # AceCombatZERO
 
-[[English Readme]](https://github.com/lunetis/AceCombatZERO/edit/main/README.md)
+[[English Readme]](https://github.com/lunetis/AceCombatZERO/blob/main/README.md)
 
 에이스 컴뱃 제로의 마지막 미션 "ZERO"를 유니티 엔진으로 구현하는 프로젝트입니다.
 
