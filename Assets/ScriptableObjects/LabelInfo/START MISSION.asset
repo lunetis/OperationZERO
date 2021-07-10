@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57922f984b61da44a67bd1f6d6d968b, type: 3}
+  m_Name: START MISSION
+  m_EditorClassIdentifier: 
+  labelTexture: {fileID: 2800000, guid: 848d4cb492129404bb3f084d26eb7694, type: 3}
+  labelColor: {r: 0.6666667, g: 1, b: 0.6666667, a: 0.78431374}
+  visibleTime: 3
+  audioClip: {fileID: 0}

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class AlertUIController : MonoBehaviour
 {
+    [SerializeField]
+    bool showStartMissionLabel;
+
     [Header("Timers")]
     [SerializeField]
     float warningBlinkTime = 0.7f;
@@ -14,6 +17,10 @@ public class AlertUIController : MonoBehaviour
     RawImage labelImage;
 
     [Space(10)]
+    [SerializeField]
+    LabelInfo startMission;
+    [SerializeField]
+    LabelInfo missionUpdated;
     [SerializeField]
     LabelInfo destroyed;
     [SerializeField]
@@ -59,7 +66,9 @@ public class AlertUIController : MonoBehaviour
 
     public enum LabelEnum  // Used for Priority
     {
-        Missed = 1,
+        StartMission = 1,
+        MissionUpdated,
+        Missed,
         Hit,
         Destroyed,
         MissionAccomplished,
@@ -106,6 +115,12 @@ public class AlertUIController : MonoBehaviour
         LabelInfo labelInfo;
         switch(labelEnum)
         {
+            case LabelEnum.StartMission:
+                labelInfo = startMission;
+                break;
+            case LabelEnum.MissionUpdated:
+                labelInfo = missionUpdated;
+                break;
             case LabelEnum.Missed:
                 labelInfo = missed;
                 break;
@@ -287,6 +302,11 @@ public class AlertUIController : MonoBehaviour
     void Start()
     {
         labelImage.color = transparentColor;
+
+        if(showStartMissionLabel == true)
+        {
+            SetLabel(LabelEnum.StartMission);
+        }
     }
 
     // Update is called once per frame

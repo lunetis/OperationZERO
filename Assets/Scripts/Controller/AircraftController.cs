@@ -151,12 +151,7 @@ public class AircraftController : MonoBehaviour
     {
         yawRValue = context.ReadValue<float>();
     }
-
-    public void DisableControl()
-    {
-        GetComponent<PlayerInput>().enabled = false;
-    }
-
+    
     void SetUI()
     {
         uiController.SetSpeed((int)(speed * 10));

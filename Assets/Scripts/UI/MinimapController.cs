@@ -42,6 +42,7 @@ public class MinimapController : MonoBehaviour
     Vector2 cameraSize;
     float sizeReciprocal;
     int minimapIndex;
+    int savedMinimapIndex;  // saved on pause
 
     // Input Event
     public void ChangeMinimapView(InputAction.CallbackContext context)
@@ -52,6 +53,21 @@ public class MinimapController : MonoBehaviour
             SetCamera();
         }
     }
+
+    public void SetPauseMinimapCamera(bool isPaused)
+    {
+        if(isPaused)
+        {
+            savedMinimapIndex = minimapIndex;
+            minimapIndex = (int)MinimapIndex.Entire;
+        }
+        else
+        {
+            minimapIndex = savedMinimapIndex;
+        }
+        SetCamera();
+    }
+
 
     // Change visibility and minimapCamera's size and culling mask
     public void SetCamera()
@@ -70,6 +86,7 @@ public class MinimapController : MonoBehaviour
                 
             case MinimapIndex.Entire:
                 minimapCamera.orthographicSize = entireViewSize;
+                minimapCamera.cullingMask |= (1 << LayerMask.NameToLayer("Minimap (Player)"));
                 break;
         }
 

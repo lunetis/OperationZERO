@@ -104,7 +104,6 @@ public class PixyScript : EnemyAircraft
 
     public void ActivateEnemy()
     {
-        Debug.Log("Activated");
         hp = objectInfo.HP;
         IsAttackable = true;
     }

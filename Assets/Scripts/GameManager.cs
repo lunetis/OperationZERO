@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
+
+    [SerializeField]
+    PlayerInput playerInput;
 
     [Header("Object Pools")]
     public ObjectPool missileObjectPool;
@@ -40,7 +44,32 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     WeaponController weaponController;
 
+    [Header("Pause Control")]
+    bool isPaused = false;
+
+    [SerializeField]
+    FadeController fadeController;
+
+    [SerializeField]
+    PauseController pauseController;
+
+    [SerializeField]
+    List<GameObject> hideOnPause;
+    [SerializeField]
+    GameObject pauseUICanvas;
+
     [Header("Game Over Control")]
+    [SerializeField]
+    GameObject gameOverUICanvas;
+    [SerializeField]
+    AudioSource gameOverAudioSource;
+
+    [SerializeField]
+    PauseController gameOverController;
+
+    [SerializeField]
+    List<GameObject> disableOnShowGameOverUI;
+
     bool isGameOver = false;
     
     [SerializeField]
@@ -56,8 +85,6 @@ public class GameManager : MonoBehaviour
     DeathCam deathCam;
 
     public DebugText debugText;
-
-    Vector3 zeroVec = new Vector3(0, 0, 0);
     
     List<TargetObject> objects = new List<TargetObject>();
 
@@ -70,6 +97,7 @@ public class GameManager : MonoBehaviour
     {
         get { return Instance.normalColor; }
     }
+
     public static Color WarningColor
     {
         get { return Instance.warningColor; }
@@ -105,17 +133,19 @@ public class GameManager : MonoBehaviour
         get { return Instance?.weaponController; }
     }
 
+    public static PlayerInput PlayerInput
+    {
+        get { return Instance?.playerInput; }
+    }
+
     public bool IsGameOver
     {
         get { return isGameOver; }
     }
 
-    void Awake()
+    public bool IsPaused
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
+        get { return isPaused; }
     }
 
 
@@ -131,16 +161,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        uiController.SetRemainTime(timeLimit);
-    }
-
     public float GetDistanceFromPlayer(Transform otherTransform)
     {
         return Vector3.Distance(otherTransform.position, playerAircraft.transform.position);
     }
-
 
     // Enemy Target Control
     public void AddEnemy(TargetObject targetObject)
@@ -211,7 +235,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(bool isDead, bool isInstantDeath = false)
     {
-        isGameOver = true;
+        float gameOverFadeOutDelay = 3.0f;
+
 
         // Set UI
         UIController.SetLabel(AlertUIController.LabelEnum.MissionFailed);
@@ -243,27 +268,146 @@ public class GameManager : MonoBehaviour
                 obj.SetActive(true);
             }
 
-            aircraftController.DisableControl();
+            playerInput.enabled = false;
             deathCam.PlayAnimation(isInstantDeath);
+
+            gameOverFadeOutDelay = 7.0f;
+
+            if(isGameOver == false)
+            {
+                gameOverAudioSource.Play();
+            } 
+        }
+        
+        isGameOver = true;
+        Invoke("GameOverFadeOut", gameOverFadeOutDelay);
+    }
+
+    // Show/Hide Pause UI Canvas, Hide/Show other UIs, Set TimeScale
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if(context.action.phase == InputActionPhase.Started)
+        {
+            if(isGameOver == true) return;
+            Pause();
         }
     }
 
-    public void Quit()
+    public void Pause()
     {
-        Debug.Log("quit");
-        Application.Quit();
+        Time.timeScale = (isPaused == true) ? 1 : 0;
+        isPaused = (Time.timeScale == 0);
+        uiController.MinimapController.SetPauseMinimapCamera(isPaused);
+
+        foreach(GameObject obj in hideOnPause)
+        {
+            obj.SetActive(!isPaused);
+        }
+        pauseUICanvas.SetActive(isPaused);
+
+        AudioListener.pause = isPaused;
+
+        string actionMapName = (isPaused == true) ? "UI" : "Player";
+        playerInput.SwitchCurrentActionMap(actionMapName);
+        pauseController.enabled = isPaused;
     }
 
-    public void Restart()
+    public void RestartFromCheckpoint()
     {
-        Debug.Log("restart");
+        playerInput.enabled = false;
+        pauseController.enabled = false;
+        gameOverController.enabled = false;
+
+        fadeController.OnFadeOutComplete.AddListener(RestartFromCheckpointEvent);
+        fadeController.FadeOut();
+    }
+
+    void RestartFromCheckpointEvent()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void RestartMission()
+    {
+        playerInput.enabled = false;
+        pauseController.enabled = false;
+        gameOverController.enabled = false;
+
+        fadeController.OnFadeOutComplete.AddListener(RestartMissionEvent);
+        fadeController.FadeOut();
+    }
+    
+    void RestartMissionEvent()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitMission()
+    {
+        playerInput.enabled = false;
+        pauseController.enabled = false;
+        gameOverController.enabled = false;
+
+        fadeController.OnFadeOutComplete.AddListener(QuitMissionEvent);
+        fadeController.FadeOut();
+    }
+    
+    void QuitMissionEvent()
+    {
+        Application.Quit();
+    }
+
+
+    void GameOverFadeOut()
+    {
+        CancelInvoke();
+
+        fadeController.OnFadeOutComplete.AddListener(ShowGameOverUI);
+        fadeController.FadeOut(true);
+    }
+    
+    // Game Over Control
+    void ShowGameOverUI()
+    {
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        EnablePlayerInput(false);
+        gameOverUICanvas.SetActive(true);
+
+        foreach(GameObject obj in disableOnShowGameOverUI)
+        {
+            obj.SetActive(false);
+        }
+    }
+    
+    public void EnablePlayerInput(bool usePlayerActionMap = true)
+    {
+        playerInput.enabled = true;
+        playerInput.actions.Disable();
+
+        string actionMapName = (usePlayerActionMap == true) ? "Player" : "UI";
+        playerInput.SwitchCurrentActionMap(actionMapName);
+    }
     
     // DEBUG
     public static void PrintDebugText(string text)
     {
         Instance.debugText.AddText(text);
     }
+
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+    }
+
+    void Start()
+    {
+        uiController.SetRemainTime(timeLimit);
+    }
+
 }

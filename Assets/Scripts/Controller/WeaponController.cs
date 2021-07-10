@@ -109,7 +109,7 @@ public class WeaponController : MonoBehaviour
     {
         switch(context.action.phase)
         {
-            case InputActionPhase.Performed:
+            case InputActionPhase.Started:
                 InvokeRepeating("FireMachineGun", 0, fireInterval);
                 gunAudio.IsFiring = true;
                 break;
