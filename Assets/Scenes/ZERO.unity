@@ -2152,7 +2152,7 @@ MonoBehaviour:
   bulletObjectPool: {fileID: 566341500}
   bulletHitEffectObjectPool: {fileID: 299215082}
   groundHitEffectObjectPool: {fileID: 266573870}
-  timeLimit: 2
+  timeLimit: 900
   uiController: {fileID: 1304348718}
   aircraftController: {fileID: 432070746}
   playerAircraft: {fileID: 432070749}
@@ -8495,11 +8495,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9f08beedc761b4eb956bf57604e3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showStartMissionLabel: 0
+  showStartMissionLabel: 1
   warningBlinkTime: 0.3
   labelImage: {fileID: 567782181}
-  startMission: {fileID: 0}
-  missionUpdated: {fileID: 0}
+  startMission: {fileID: 11400000, guid: d2a71014b1c1bfb40b40220961240c2d, type: 2}
+  missionUpdated: {fileID: 11400000, guid: fc8208397e4b428478e134b19435b3cc, type: 2}
   destroyed: {fileID: 11400000, guid: b0562823c0ae25343b626015949b1c1d, type: 2}
   hit: {fileID: 11400000, guid: e880d14dee8aa274682ed2fcc64dad36, type: 2}
   missed: {fileID: 11400000, guid: 5bc540c438e540246b5970768a2a79e1, type: 2}
