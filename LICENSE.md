@@ -27,6 +27,7 @@ Other assets may have different licenses.
 
 Since **ACE COMBAT 7 Font is made for "ACE COMBAT™ 7: SKIES UNKNOWN" exclusively**, there can be a copyright issue.
 - ACE COMBAT™ 7: SKIES UNKNOWN Typeface : created by [NIPPON DESIGN CENTER ON-SCREEN CREATIVE DIVISION](https://ndcosd.jp/ace-combat-7-skies-unknown), https://www.moddb.com/mods/codename-vanilla-acecombat7/addons/aces07-regular
+- Korean UI/Subtitle Font : Nanum Square (나눔스퀘어) , created by NAVER Corporation, https://hangeul.naver.com/font (SIL OPEN FONT LICENSE)
 - Subtitles use "Verdana" font, which is provided with Microsoft Windows. This font cannot be distributed without permissions. 
 (Although some webpages are providing download service...)
 
