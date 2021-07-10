@@ -26,9 +26,8 @@
 - [x] 게임 오버 연출
 - [x] 사운드
 - [x] 페이즈 시스템/보스 특수무기
-- [ ] **게임플레이 << 진행중**
-- [ ] 대사 및 자막
-- [ ] AWACS (조기경보기) 시스템
+- [x] 일시정지/게임 오버 UI
+- [ ] **대사 및 자막 << 진행중**
 - [ ] 미션 스크립팅 (ZERO)
 
 *이 리스트는 개발자 마음대로 바뀔 수 있습니다.*
@@ -40,15 +39,9 @@ Always TODO:
 <br>
 <br>
 
-[![Video Label](http://img.youtube.com/vi/x_ejFJRhHUQ/0.jpg)](https://youtu.be/x_ejFJRhHUQ)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0710.gif)
 
-(유튜브 링크)
-
-<br>
-
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0704.gif)
-
-[현재 구현 예시 (Updated 2021.07.04)]
-- 페이즈 시스템/보스 특수무기
+[현재 구현 예시 (Updated 2021.07.10)]
+- 일시정지/게임 오버 UI
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
