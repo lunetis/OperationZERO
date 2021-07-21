@@ -95,12 +95,21 @@ public class UIController : MonoBehaviour
     AudioClip spwChangeAudioClip;
     [SerializeField]
     AudioClip mslChangeAudioClip;
+    [SerializeField]
+    AudioClip timeLowAudioClip;
 
     AudioSource audioSource;
 
     float remainTime;
     int score = 0;
     float damage = 0;
+    bool isTimeLow = false;
+    bool isRedTimerActive = false;
+
+    public bool IsRedTimerActive
+    {
+        set { isRedTimerActive = value; }
+    }
 
     public MinimapController MinimapController
     {
@@ -158,9 +167,16 @@ public class UIController : MonoBehaviour
     void SetTime()
     {
         remainTime -= Time.deltaTime;
+
+        if(isRedTimerActive == false && remainTime < 10 && isTimeLow == false)
+        {
+            InvokeRepeating("PlayTimeLowAudioClip", 0, 1);
+            isTimeLow = true;
+        }
         
         if(remainTime <= 0)
         {
+            CancelInvoke();
             GameManager.Instance.GameOver(false);
             remainTime = 0;
         }
@@ -172,6 +188,16 @@ public class UIController : MonoBehaviour
         int millisec = (int)((remainTime - seconds) * 100);
         string text = string.Format("TIME <mspace=18>{0:00}</mspace>:<mspace=18>{1:00}</mspace>:<mspace=18>{2:00}</mspace>", min, sec, millisec);
         timeText.text = text;
+    }
+
+    void PlayTimeLowAudioClip()
+    {
+        if(isRedTimerActive == true || GameManager.Instance.IsGameOver == true)
+        {
+            CancelInvoke();
+            return;
+        }
+        audioSource.PlayOneShot(timeLowAudioClip);
     }
 
     public void SetScoreText(int score)
@@ -302,7 +328,6 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        remainTime = GameManager.Instance.timeLimit;
         firstViewAdjustAngle = new Vector2(1 / firstViewAdjustAngle.x, 1 / firstViewAdjustAngle.y);
 
         mslIndicator.SetActive(true);
@@ -316,6 +341,6 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(remainTime > 0) SetTime();
+        if(remainTime > 0 && GameManager.Instance.IsGameOver == false) SetTime();
     }
 }

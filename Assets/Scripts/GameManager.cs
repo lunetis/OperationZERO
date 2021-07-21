@@ -26,10 +26,6 @@ public class GameManager : MonoBehaviour
     public ObjectPool bulletHitEffectObjectPool;
     public ObjectPool groundHitEffectObjectPool;
 
-    [Header("Game Properties")]
-    public int timeLimit;
-    int score;
-
     [Header("Controllers")]
     [SerializeField]
     UIController uiController;
@@ -43,6 +39,13 @@ public class GameManager : MonoBehaviour
     TargetController targetController;
     [SerializeField]
     WeaponController weaponController;
+
+    
+    [Header("Mission Managers")]
+    [SerializeField]
+    ScriptManager scriptManager;
+    [SerializeField]
+    MissionManager missionManager;
 
     [Header("Pause Control")]
     bool isPaused = false;
@@ -131,6 +134,16 @@ public class GameManager : MonoBehaviour
     public static WeaponController WeaponController
     {
         get { return Instance?.weaponController; }
+    }
+
+    public static ScriptManager ScriptManager
+    {
+        get { return Instance?.scriptManager; }
+    }
+
+    public static MissionManager MissionManager
+    {
+        get { return Instance?.missionManager; }
     }
 
     public static PlayerInput PlayerInput
@@ -235,8 +248,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(bool isDead, bool isInstantDeath = false)
     {
-        float gameOverFadeOutDelay = 3.0f;
-
+        float gameOverFadeOutDelay = 5.0f;
 
         // Set UI
         UIController.SetLabel(AlertUIController.LabelEnum.MissionFailed);
@@ -280,6 +292,8 @@ public class GameManager : MonoBehaviour
         }
         
         isGameOver = true;
+        scriptManager.ClearScriptQueue();
+        missionManager.OnGameOver(isDead);
         Invoke("GameOverFadeOut", gameOverFadeOutDelay);
     }
 
@@ -404,10 +418,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
     }
-
-    void Start()
-    {
-        uiController.SetRemainTime(timeLimit);
-    }
-
 }

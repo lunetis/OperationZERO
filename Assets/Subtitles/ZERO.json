@@ -1,0 +1,234 @@
+{
+    "scripts": [
+        {
+            "subtitleKey": "A1_1",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "preDelay": 2,
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A1_2",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        },
+        {
+            "subtitleKey": "P1_1",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 1
+        },
+        {
+            "subtitleKey": "A1_3",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "preDelay": 1.5
+        },
+        {
+            "subtitleKey": "P1_2",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 2
+        },
+        {
+            "subtitleKey": "P1_3",
+            "name": "Pixy",
+            "side": "E"
+        },
+
+
+        {
+            "subtitleKey": "A2_1",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true,
+            "preDelay": 3
+        },
+        {
+            "subtitleKey": "A2_2",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "invokeMethodName": "OnPhaseStart",
+            "invokeMethodDelay": 2
+        },
+        {
+            "subtitleKey": "P2_1",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 2
+        },
+        {
+            "subtitleKey": "P2_2",
+            "name": "Pixy",
+            "side": "E"
+        },
+
+        
+        {
+            "subtitleKey": "P2_S1",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P2_S2",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P2_S3",
+            "name": "Pixy",
+            "side": "E"
+        },
+
+        
+        {
+            "subtitleKey": "P2_3",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P2_4",
+            "name": "Pixy",
+            "side": "E"
+        },
+
+
+        {
+            "subtitleKey": "P3_0",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 2,
+            "invokeMethodName": "OnPhaseStart",
+            "invokeMethodDelay": 2.5
+        },
+
+        
+        {
+            "subtitleKey": "P3_1",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 3
+        },
+        {
+            "subtitleKey": "P3_2",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_3",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_5",
+            "name": "Pixy",
+            "side": "E",
+            "preDelay": 1
+        },
+        {
+            "subtitleKey": "P3_6",
+            "name": "Pixy",
+            "side": "E"
+        },
+        
+        {
+            "subtitleKey": "A3_1",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        },
+
+
+        
+        {
+            "subtitleKey": "A3_T5",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A3_T4",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A3_T3",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A3_T2.5",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A3_T2",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        {
+            "subtitleKey": "A3_T1",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "isImportant": true
+        },
+        
+        {
+            "subtitleKey": "A1_X",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        },
+        {
+            "subtitleKey": "A3_X",
+            "name": "AWACS Eagle Eye",
+            "side": "A",
+            "preDelay": 1.5
+        },
+
+            
+        {
+            "subtitleKey": "P3_T5",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_T4",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_T3",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_T2.5",
+            "name": "Pixy",
+            "side": "E"
+        },
+        {
+            "subtitleKey": "P3_T1",
+            "name": "Pixy",
+            "side": "E"
+        },
+        
+        {
+            "subtitleKey": "AX_1",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        },
+        {
+            "subtitleKey": "AX_2",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        },
+        {
+            "subtitleKey": "AX_3",
+            "name": "AWACS Eagle Eye",
+            "side": "A"
+        }
+    ]
+}

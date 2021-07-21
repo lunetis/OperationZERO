@@ -67,10 +67,10 @@ public class AlertUIController : MonoBehaviour
     public enum LabelEnum  // Used for Priority
     {
         StartMission = 1,
-        MissionUpdated,
         Missed,
         Hit,
         Destroyed,
+        MissionUpdated,
         MissionAccomplished,
         MissionFailed
     }

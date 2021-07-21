@@ -184,7 +184,8 @@ public class TargetUI : MonoBehaviour
                             screenPosition.y < 0 || screenPosition.y > canvasRect.sizeDelta.y);
 
 
-        uiObject.SetActive(isInvisible == true && distance < hideDistance);
+        uiObject.SetActive(isOutsideOfCamera == false && isInvisible == true && distance < hideDistance);
+
         GameManager.TargetController.ShowTargetArrow(isOutsideOfCamera && distance < hideDistance);
     }
 }

@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ZERO.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 5a6eec39e675d5f468337aab591cea7d,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: b3abaca58131cb841b881f74e706c3df,
       type: 2}

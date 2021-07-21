@@ -93,6 +93,11 @@ public class AircraftAI : TargetObject
         get { return speed; }
     }
 
+    public void ForceChangeWaypoint(Vector3 waypoint)
+    {
+        currentWaypoint = waypoint;
+    }
+
     public static Vector3 RandomPointInBounds(Bounds bounds)
     {
         return new Vector3(

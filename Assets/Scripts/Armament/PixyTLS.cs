@@ -37,6 +37,7 @@ public class PixyTLS : MonoBehaviour
     float lineWidth;
 
     Vector3 laserTargetPosition;
+    TargetObject laserHitTargetObject;
     
 
     void ActivateTLS()
@@ -54,6 +55,16 @@ public class PixyTLS : MonoBehaviour
         isActivated = false;
         
         Invoke("ActivateTLS", laserCooldownTime);
+    }
+
+    void DamageToTargetObject()
+    {
+        if(laserHitTargetObject == null)
+        {
+            CancelInvoke("DamageToTargetObject");
+            return;
+        }
+        laserHitTargetObject.OnDamage(damage, gameObject.layer);
     }
 
     void RotateTLS()
@@ -76,8 +87,20 @@ public class PixyTLS : MonoBehaviour
 
             if(isActivated == true && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                hit.collider.GetComponent<TargetObject>()?.OnDamage(damage, gameObject.layer);
+                if(laserHitTargetObject == null)
+                {
+                    laserHitTargetObject = hit.collider.GetComponent<TargetObject>();
+                    InvokeRepeating("DamageToTargetObject", 0, 0.1f);
+                }
             }
+            else
+            {
+                laserHitTargetObject = null;
+            }
+        }
+        else
+        {
+            laserHitTargetObject = null;
         }
 
         lineRenderer.SetPosition(0, launchPosition);

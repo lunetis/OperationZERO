@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PixyScript : EnemyAircraft
 {
-    [Space(10)]
     [Header("PixyScript Properties")]
     bool isInvincible = false;
     bool isAttackable = true;
@@ -18,6 +17,12 @@ public class PixyScript : EnemyAircraft
     UnityEvent phase2EndEvents;
     [SerializeField]
     UnityEvent phase3EndEvents;
+    
+    [SerializeField]
+    int phase3LowHPScriptThreshold;
+    [SerializeField]
+    string phase3LowHPScript;
+    bool hasPrintedLowHPScript = false;
     
     EnemyWeaponController weaponController;
     PixyMPBMController mpbmController;
@@ -67,7 +72,14 @@ public class PixyScript : EnemyAircraft
         if(ecmSystem.enabled == true && tag == "Bullet") return;
 
         float applyDamage = (isInvincible == true) ? 0 : damage;
+
         base.OnDamage(applyDamage, layer);
+        
+        if(hasPrintedLowHPScript == false && phase == 3 && hp <= phase3LowHPScriptThreshold)
+        {
+            hasPrintedLowHPScript = true;
+            GameManager.ScriptManager.AddScript(phase3LowHPScript);
+        }
     }
 
     protected override void DestroyObject()
@@ -88,8 +100,6 @@ public class PixyScript : EnemyAircraft
                 phase3EndEvents.Invoke();
                 break;
         }
-
-        phase++;
     }
 
     public void CallDestroyFunction()
@@ -97,15 +107,12 @@ public class PixyScript : EnemyAircraft
         CommonDestroyFunction();
     }
 
-    public void InvokeActivateEnemy()
-    {
-        Invoke("ActivateEnemy", 3.0f);
-    }
-
     public void ActivateEnemy()
     {
         hp = objectInfo.HP;
         IsAttackable = true;
+
+        phase++;
     }
 
 

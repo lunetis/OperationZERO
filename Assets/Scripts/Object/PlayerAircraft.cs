@@ -71,7 +71,7 @@ public class PlayerAircraft : TargetObject
     public override void OnDamage(float damage, int layer, string tag = "")
     {
         base.OnDamage(damage, layer);
-        uiController.SetDamage((int)(Info.HP - hp / Info.HP * 100));
+        uiController.SetDamage((int)(((Info.HP - hp) / Info.HP) * 100));
 
         for(int i = 0; i < smokeTransformParent.childCount; i++)
         {

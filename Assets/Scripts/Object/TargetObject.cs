@@ -67,6 +67,7 @@ public class TargetObject : MonoBehaviour
 
         if(hp <= 0 && isDestroyed == false)
         {
+            hp = 0;
             DestroyObject();
         }
     }
