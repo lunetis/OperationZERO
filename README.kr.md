@@ -27,8 +27,8 @@
 - [x] 사운드
 - [x] 페이즈 시스템/보스 특수무기
 - [x] 일시정지/게임 오버 UI
-- [ ] **대사 및 자막 << 진행중**
-- [ ] 미션 스크립팅 (ZERO)
+- [x] 대사 및 자막
+- [ ] **미션 컷씬 << 진행중**
 
 *이 리스트는 개발자 마음대로 바뀔 수 있습니다.*
 
@@ -39,9 +39,15 @@ Always TODO:
 <br>
 <br>
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0710.gif)
+[![](https://img.youtube.com/vi/bL6uAw2PFIs/0.jpg)](https://www.youtube.com/watch?v=bL6uAw2PFIs)
 
-[현재 구현 예시 (Updated 2021.07.10)]
-- 일시정지/게임 오버 UI
+(유튜브 링크 이미지)
+
+<br>
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0721.gif)
+
+[현재 구현 예시 (Updated 2021.07.21)]
+- 대사 시스템 구현
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
