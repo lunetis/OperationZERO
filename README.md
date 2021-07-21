@@ -27,8 +27,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - [x] Sound System
 - [x] Phase System & Special Weapon
 - [x] Pause/Game Over UI
-- [ ] **Scripting << In Progress**
-- [ ] Campaign Direction (ZERO)
+- [x] Transcript System
+- [ ] **ZERO Mission Cutscenes << In Progress**
 
 *This list can be changed at anytime.*
 
@@ -39,9 +39,15 @@ Always TODO:
 <br>
 <br>
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0710.gif)
+[![](https://img.youtube.com/vi/bL6uAw2PFIs/0.jpg)](https://www.youtube.com/watch?v=bL6uAw2PFIs)
 
-[Current Development Status Example (Updated 2021.07.10)]
-- Pause/Game Over UI Implementation
+(YouTube link image)
+
+<br>
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0721.gif)
+
+[Current Development Status Example (Updated 2021.07.21)]
+- Transcript System Implementation
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
