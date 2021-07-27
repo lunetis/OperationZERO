@@ -13,7 +13,7 @@
 - AIM-9 Sidewinder : created by piojoman, https://www.turbosquid.com/3d-models/free-3ds-mode-missile-aim-9-sidewinder/924208 ([Turbosquid Standard License](https://blog.turbosquid.com/turbosquid-3d-model-license/))
 - AIM-120C Sidewinder (currently unused) : created by Peter Primini, https://skfb.ly/6AARv (CC BY 4.0)
 - AIM-120D Sidewinder (currently unused) : created by Bramsh 3D, https://skfb.ly/6WNYQ (CC BY 4.0)
-- V2 Missile : created by Diccbudd, https://sketchfab.com/3d-models/v2-rocket-c12726a34e534e53af7134e22b1f9cca (CC BY 4.0)
+- V2 Missile : created by Diccbudd, https://skfb.ly/6YZCS (CC BY 4.0)
 
 ## Map/Terrain Components
 
