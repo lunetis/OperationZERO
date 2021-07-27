@@ -264,6 +264,7 @@ public class UIController : MonoBehaviour
 
         this.damage = damage;
         SetAircraftDamageUI();
+        StartCoroutine(alertUIController.ShowDamagedUI());
     }
 
 

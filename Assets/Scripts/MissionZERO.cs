@@ -41,6 +41,11 @@ public class MissionZERO : MissionManager
     [Space(10)]
     [SerializeField]
     PixyScript pixy;
+    [SerializeField]
+    GameObject cutsceneCamera;
+
+    [SerializeField]
+    UnityEvent disableOnCutscene;
     
     [SerializeField]
     Transform phase3PixyTransform;
@@ -48,6 +53,7 @@ public class MissionZERO : MissionManager
     Transform phase3CipherTransform;
     [SerializeField]
     RedTimer redTimer;
+
 
     [SerializeField]
     int phase3TimeLimit;
@@ -155,5 +161,13 @@ public class MissionZERO : MissionManager
     {
         redTimer.RemainTime = phase3TimeLimit;
         redTimer.gameObject.SetActive(true);
+    }
+
+    public void PlayPhase3Cutscene()
+    {
+        disableOnCutscene.Invoke();
+        GameManager.CameraController.GetActiveCamera().GetComponent<AudioListener>().enabled = false;
+
+        cutsceneCamera.SetActive(true);
     }
 }

@@ -165,6 +165,19 @@ public class AlertUIController : MonoBehaviour
         }
     }
 
+    public IEnumerator ShowDamagedUI()
+    {
+        damaged.SetActive(true);
+        GameManager.UIController.SetWarningUIColor(true);
+        
+        yield return new WaitForSeconds(0.2f);
+
+        GameManager.UIController.SetWarningUIColor(false);
+
+        yield return new WaitForSeconds(0.8f);
+
+        damaged.SetActive(false);
+    }
 
     // Misc.
     void ShowAutopilotUI()

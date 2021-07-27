@@ -118,15 +118,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "[DEBUG] Self Destroy",
-                    "type": "Button",
-                    "id": "7ef60fd4-ced8-482c-a204-03e7913f9a13",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.3)"
-                },
-                {
-                    "name": "[DEBUG] Activate Enemy",
+                    "name": "[DEBUG]",
                     "type": "Button",
                     "id": "2e2cadf2-b1f8-4c4e-91fc-ed6375326d7d",
                     "expectedControlType": "Button",
@@ -269,23 +261,12 @@
                 },
                 {
                     "name": "",
-                    "id": "6097caeb-de60-4716-9370-f00940bda778",
-                    "path": "<Keyboard>/backspace",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "[DEBUG] Self Destroy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9eb6c8e8-44d9-492a-aa4e-f699ed61ccb3",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "[DEBUG] Activate Enemy",
+                    "action": "[DEBUG]",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

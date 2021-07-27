@@ -128,6 +128,7 @@ public class EnemyWeaponController : MonoBehaviour
         {
             targetObject.IsLocking = false;
         }
+        CancelInvoke();
     }
 
     // Start is called before the first frame update

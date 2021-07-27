@@ -28,6 +28,12 @@ public class PixyTLS : MonoBehaviour
     [SerializeField]
     AudioSource audioSource;
     [SerializeField]
+    AudioSource playerAudioSource;
+
+    [SerializeField]
+    List<AudioClip> tlsDamageAudioClips;
+
+    [SerializeField]
     float audioLerpAmount = 5;
     
     [SerializeField]
@@ -65,6 +71,7 @@ public class PixyTLS : MonoBehaviour
             return;
         }
         laserHitTargetObject.OnDamage(damage, gameObject.layer);
+        playerAudioSource.PlayOneShot(tlsDamageAudioClips[Random.Range(0, tlsDamageAudioClips.Count)]);
     }
 
     void RotateTLS()
