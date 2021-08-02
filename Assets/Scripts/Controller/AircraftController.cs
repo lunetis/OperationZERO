@@ -9,7 +9,7 @@ public class AircraftController : MonoBehaviour
     Gamepad gamepad;
 
     // Move Inputs
-    float accelValue;
+    float accelValue; 
     float brakeValue;
     float throttle;
 
@@ -313,6 +313,22 @@ public class AircraftController : MonoBehaviour
         foreach(JetEngineController jet in jetEngineControllers)
         {
             jet.InputValue = throttle;
+        }
+    }
+
+    void OnDisable()
+    {
+        foreach(JetEngineController jet in jetEngineControllers)
+        {
+            jet.enabled = false;
+        }
+    }
+
+    void OnEnable()
+    {
+        foreach(JetEngineController jet in jetEngineControllers)
+        {
+            jet.enabled = true;
         }
     }
 

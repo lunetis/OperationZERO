@@ -98,7 +98,7 @@
             "name": "Pixy",
             "side": "E",
             "preDelay": 2,
-            "invokeMethodName": "OnPhaseStart",
+            "invokeMethodName": "PlayPhase3Cutscene",
             "invokeMethodDelay": 2.5
         },
 

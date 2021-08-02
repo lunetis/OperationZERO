@@ -6,6 +6,13 @@ using UnityEngine.Events;
 
 public class FadeController : MonoBehaviour
 {
+    public enum FadeInReserveType
+    {
+        None,
+        FadeIn,
+        InstantFadeIn
+    }
+
     [SerializeField]
     Image image;
 
@@ -48,14 +55,20 @@ public class FadeController : MonoBehaviour
         set { onFadeOutComplete = value; }
     }
 
-    public void FadeOut(bool reserveFadeIn = false)
+    public void FadeOut(FadeInReserveType fadeInReserveType = FadeInReserveType.None)
     {
         isFadeIn = false;
         isFadeOut = true;
 
-        if(reserveFadeIn == true)
+        switch(fadeInReserveType)
         {
-            onFadeOutComplete.AddListener(FadeIn);
+            case FadeInReserveType.FadeIn:
+                onFadeOutComplete.AddListener(FadeIn);
+                break;
+
+            case FadeInReserveType.InstantFadeIn:
+                onFadeOutComplete.AddListener(InstantFadeIn);
+                break;
         }
     }
 
@@ -66,6 +79,20 @@ public class FadeController : MonoBehaviour
         isWaitingFadeOutEvent = false;
 
         onFadeOutComplete.RemoveAllListeners();
+    }
+
+    void InstantFadeIn()
+    {
+        onFadeOutComplete.RemoveAllListeners();
+
+        color.a = 0;
+        image.color = color;
+        
+        if(invokeOnFadeInEvents == true)
+        {
+            onFadeInComplete.Invoke();
+            invokeOnFadeInEvents = false;
+        }
     }
 
     // Start is called before the first frame update

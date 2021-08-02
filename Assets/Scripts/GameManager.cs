@@ -377,7 +377,7 @@ public class GameManager : MonoBehaviour
         CancelInvoke();
 
         fadeController.OnFadeOutComplete.AddListener(ShowGameOverUI);
-        fadeController.FadeOut(true);
+        fadeController.FadeOut(FadeController.FadeInReserveType.FadeIn);
     }
     
     // Game Over Control

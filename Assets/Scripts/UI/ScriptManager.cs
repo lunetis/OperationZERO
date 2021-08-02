@@ -112,6 +112,7 @@ public class ScriptManager : MonoBehaviour
         scriptQueue.Clear();
     }
 
+
     Color GetColorBySide(string sideString)
     {
         switch(sideString)
@@ -123,7 +124,7 @@ public class ScriptManager : MonoBehaviour
         }
     }
 
-    string GetSubtitleText(string subtitleKey)
+    public string GetSubtitleText(string subtitleKey)
     {
         XmlNode subtitleNode = subtitleXMLDocument.SelectSingleNode("subtitle/" + subtitleKey);
 
@@ -217,13 +218,34 @@ public class ScriptManager : MonoBehaviour
 
         Addressables.Release(audioClipHandle);
 
-        if(portraitUI.activeSelf == true)
+        if(portraitUI.activeInHierarchy == true)
         {
             Addressables.Release(portraitHandle);
             portraitUI.SetActive(false);
         }
 
         currentScript = null;
+    }
+
+    public void PlayCutsceneAudio(string subtitleKey)
+    {
+        // Get AudioClip
+        audioClipHandle = Addressables.LoadAssetAsync<AudioClip>(subtitleKey);
+        audioClipHandle.Completed += (operationHandle) =>
+        {
+            AudioClip audioClip = operationHandle.Result;
+            scriptAudioSource.clip = audioClip;
+            scriptAudioSource.Play();
+            if(currentScript.isImportant == true)
+            {
+                Invoke("ReleaseCutsceneAudio", audioClip.length);
+            }
+        };
+    }
+
+    void ReleaseCutsceneAudio()
+    {
+        Addressables.Release(audioClipHandle);
     }
 
     void Awake()

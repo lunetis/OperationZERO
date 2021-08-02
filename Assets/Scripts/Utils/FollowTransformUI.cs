@@ -7,9 +7,13 @@ public class FollowTransformUI : MonoBehaviour
     [SerializeField]
     protected Transform targetTransform;
 
+    [SerializeField]
     protected Camera cam;
     protected RectTransform rectTransform;
     protected RectTransform canvasRect;
+
+    [SerializeField]
+    protected bool trackCurrentCamera = true;
 
     // Recursive search
     Canvas GetCanvas(Transform parentTransform)
@@ -41,7 +45,11 @@ public class FollowTransformUI : MonoBehaviour
     {
         if(targetTransform == null) return;
         
-        cam = GameManager.CameraController.GetActiveCamera();
+        if(trackCurrentCamera == true)
+        {
+            cam = GameManager.CameraController.GetActiveCamera();
+        }
+
         Vector3 screenPosition = cam.WorldToScreenPoint(targetTransform.position);
         float distance = GameManager.Instance.GetDistanceFromPlayer(targetTransform);
 

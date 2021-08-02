@@ -39,6 +39,15 @@ public class JetEngineController : MonoBehaviour
         audioLowPassFilter.cutoffFrequency = (is1stView == true) ? lowpassValue : 22000;
     }
 
+    void OnDisable()
+    {
+        throttleAmount = 0;
+        particleColor.a = 0;
+
+        particleMainModule.startColor = particleColor;
+        if(audioSource != null) SetEngineAudio();
+    }
+
     // Start is called before the first frame update
     void Awake()
     {

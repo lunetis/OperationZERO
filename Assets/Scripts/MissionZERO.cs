@@ -41,11 +41,9 @@ public class MissionZERO : MissionManager
     [Space(10)]
     [SerializeField]
     PixyScript pixy;
-    [SerializeField]
-    GameObject cutsceneCamera;
 
     [SerializeField]
-    UnityEvent disableOnCutscene;
+    CutsceneController cutsceneController;
     
     [SerializeField]
     Transform phase3PixyTransform;
@@ -165,9 +163,11 @@ public class MissionZERO : MissionManager
 
     public void PlayPhase3Cutscene()
     {
-        disableOnCutscene.Invoke();
-        GameManager.CameraController.GetActiveCamera().GetComponent<AudioListener>().enabled = false;
+        cutsceneController.PlayPhase3Cutscene();
+    }
 
-        cutsceneCamera.SetActive(true);
+    public void PlayEndingCutscene()
+    {
+        cutsceneController.PlayEndingCutscene();
     }
 }

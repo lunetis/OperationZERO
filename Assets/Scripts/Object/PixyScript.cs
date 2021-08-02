@@ -115,7 +115,6 @@ public class PixyScript : EnemyAircraft
         phase++;
     }
 
-
     // Start is called before the first frame update
     protected override void Start()
     {

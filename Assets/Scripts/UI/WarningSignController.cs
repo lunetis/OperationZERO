@@ -23,6 +23,6 @@ public class WarningSignController : MonoBehaviour
 
     void Blink()
     {
-        warningSign.SetActive(!warningSign.activeSelf);
+        warningSign.SetActive(!warningSign.activeInHierarchy);
     }
 }
