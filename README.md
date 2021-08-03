@@ -29,6 +29,9 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - [x] Pause/Game Over UI
 - [x] Transcript System
 - [ ] **ZERO Mission Cutscenes << In Progress**
+  - [x] Phase 3 Cutscene
+  - [ ] Ending Cutscene 
+- [ ] Result Screen / Main Screen
 
 *This list can be changed at anytime.*
 
@@ -39,15 +42,15 @@ Always TODO:
 <br>
 <br>
 
-[![](https://img.youtube.com/vi/bL6uAw2PFIs/0.jpg)](https://www.youtube.com/watch?v=bL6uAw2PFIs)
+[![](https://img.youtube.com/vi/AcJ8ddI8jyU/0.jpg)](https://www.youtube.com/watch?v=AcJ8ddI8jyU)
 
 (YouTube link image)
 
 <br>
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0721.gif)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0803.gif)
 
-[Current Development Status Example (Updated 2021.07.21)]
-- Transcript System Implementation
+[Current Development Status Example (Updated 2021.08.03)]
+- Cutscene Implementation : Completed Phase 3 Cutscene
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
