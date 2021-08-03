@@ -13,7 +13,9 @@ public class EnemyAircraft : AircraftAI
 
     [SerializeField]
     [Range(0, 1)]
-    float playerTrackingRate = 0.5f;
+    protected float playerTrackingRate = 0.5f;
+
+    float accumulatedTrackingRate = 0;  // Used for adjusting rate
 
     [SerializeField]
     float minimumPlayerDistance = 2000; // If current distance is longer than this value, AI will follow the player
@@ -30,10 +32,18 @@ public class EnemyAircraft : AircraftAI
         
         if(rate < playerTrackingRate || distance > minimumPlayerDistance)
         {
+            accumulatedTrackingRate = 0;
             return GameManager.PlayerAircraft.transform.position;
         }
         else
         {
+            accumulatedTrackingRate += playerTrackingRate;
+
+            if(accumulatedTrackingRate > 1)
+            {
+                accumulatedTrackingRate = 0;
+                return GameManager.PlayerAircraft.transform.position;
+            }
             return base.CreateWaypoint();
         }
     }

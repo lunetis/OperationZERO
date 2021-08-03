@@ -131,6 +131,11 @@ public class EnemyWeaponController : MonoBehaviour
         CancelInvoke();
     }
 
+    void OnEnable()
+    {
+        InvokeRepeating("LaunchMissile", 1, fireCheckDelay);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,8 +147,6 @@ public class EnemyWeaponController : MonoBehaviour
         ResetLock();
 
         targetObject = GameManager.PlayerAircraft;
-
-        InvokeRepeating("LaunchMissile", 1, fireCheckDelay);
     }
 
     // Update is called once per frame

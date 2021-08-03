@@ -37,6 +37,9 @@ public class CutsceneController : MonoBehaviour
     [SerializeField]
     float skipCheckTime = 3.0f;
 
+    [SerializeField]
+    AudioController audioController;
+
     // ======= Input =======
 
     public void OnSkip(InputAction.CallbackContext context)
@@ -65,6 +68,7 @@ public class CutsceneController : MonoBehaviour
 
     void Skip()
     {
+        audioController.OnCutsceneFadeOut();
         fadeController.OnFadeOutComplete.AddListener(playableDirector.Stop);
         fadeController.FadeOut(FadeController.FadeInReserveType.InstantFadeIn);
     }
@@ -73,6 +77,9 @@ public class CutsceneController : MonoBehaviour
 
     void OnCutsceneStart()
     {
+        if(GameManager.Instance.IsGameOver == true) return;
+        
+        audioController.OnCutsceneStart();
         playerInput.SwitchCurrentActionMap("Cutscene");
 
         GameManager.ScriptManager.ClearScriptQueue();   // In case of remained script exists
@@ -93,12 +100,14 @@ public class CutsceneController : MonoBehaviour
 
     void OnPhase3CutsceneEnded(PlayableDirector director)
     {
+        audioController.OnCutsceneEnd();
         onPhase3CutsceneEnded.Invoke();
         cutsceneCamera.SetActive(false);
         playableDirector.stopped -= OnPhase3CutsceneEnded;
         GameManager.CameraController.GetActiveCamera().GetComponent<AudioListener>().enabled = true;
         
         playerInput.SwitchCurrentActionMap("Player");
+        skipUI.SetActive(false);
     }
 
     // ======= Ending =======
@@ -113,11 +122,13 @@ public class CutsceneController : MonoBehaviour
 
     void OnEndingCutsceneEnded(PlayableDirector director)
     {
+        audioController.OnCutsceneEnd();
         onEndingCutsceneEnded.Invoke();
         cutsceneCamera.SetActive(false);
         playableDirector.stopped -= OnEndingCutsceneEnded;
 
         playerInput.SwitchCurrentActionMap("Player");
+        skipUI.SetActive(false);
     }
 
     void Awake()

@@ -45,9 +45,9 @@ public class AircraftAI : TargetObject
     Queue<Transform> waypointQueue;
     
     [SerializeField]
-    float waypointMinHeight = 250;
+    protected float waypointMinHeight = 250;
     [SerializeField]
-    float waypointMaxHeight = 1000;
+    protected float waypointMaxHeight = 1000;
 
     [SerializeField]
     BoxCollider areaCollider;
@@ -202,6 +202,8 @@ public class AircraftAI : TargetObject
         {
             Instantiate(waypointDebugObject, currentWaypoint, Quaternion.identity);
         }
+        
+        currentWaypoint.y = Mathf.Clamp(currentWaypoint.y, waypointMinHeight, waypointMaxHeight);
         
         waypointDistance = Vector3.Distance(transform.position, currentWaypoint);
         prevWaypointDistance = waypointDistance;

@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     DeathCam deathCam;
 
+    [SerializeField]
+    AudioController audioController;
+
     public DebugText debugText;
     
     List<TargetObject> objects = new List<TargetObject>();
@@ -249,6 +252,7 @@ public class GameManager : MonoBehaviour
     public void GameOver(bool isDead, bool isInstantDeath = false)
     {
         float gameOverFadeOutDelay = 5.0f;
+        audioController.TargetBGMVolume = AudioController.MIN_VOLUME;
 
         // Set UI
         UIController.SetLabel(AlertUIController.LabelEnum.MissionFailed);
