@@ -37,3 +37,6 @@ Since **ACE COMBAT 7 Font is made for "ACE COMBAT™ 7: SKIES UNKNOWN" exclusive
 ## Misc.
 
 - Screen Space Multiple Scattering for Unity (currently unused) : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS
+
+## "ZERO" music was currently not uploaded.
+- I haven't received a report from anyone yet, but I didn't upload the background music because I thought it is the most sensitive to copyright issues.
