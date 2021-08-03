@@ -29,6 +29,9 @@
 - [x] 일시정지/게임 오버 UI
 - [x] 대사 및 자막
 - [ ] **미션 컷씬 << 진행중**
+  - [x] 페이즈 3 컷씬
+  - [ ] 엔딩 컷씬
+- [ ] 결과 화면, 메인 화면
 
 *이 리스트는 개발자 마음대로 바뀔 수 있습니다.*
 
@@ -39,15 +42,15 @@ Always TODO:
 <br>
 <br>
 
-[![](https://img.youtube.com/vi/bL6uAw2PFIs/0.jpg)](https://www.youtube.com/watch?v=bL6uAw2PFIs)
+[![](https://img.youtube.com/vi/AcJ8ddI8jyU/0.jpg)](https://www.youtube.com/watch?v=AcJ8ddI8jyU)
 
 (유튜브 링크 이미지)
 
 <br>
 
-![](https://github.com/lunetis/AceCombatZERO/blob/main/0721.gif)
+![](https://github.com/lunetis/AceCombatZERO/blob/main/0803.gif)
 
-[현재 구현 예시 (Updated 2021.07.21)]
-- 대사 시스템 구현
+[현재 구현 예시 (Updated 2021.08.03)]
+- 컷씬 구현 : 페이즈 3 
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
