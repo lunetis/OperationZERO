@@ -60,6 +60,6 @@ Always TODO:
 [현재 구현 예시 (Updated 2021.08.10)]
 - 엔딩 컷씬 구현
 - 메인 화면, 결과 화면 구현
-- 다국어 지원 기
+- 다국어 지원 기능 추가
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
