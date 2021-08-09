@@ -96,7 +96,7 @@ public class AudioController : MonoBehaviour
 
     void Start()
     {
-        if(introBGM == null || loopBGM)
+        if(introBGM == null || loopBGM == null)
         {
             enabled = false;
             return;
