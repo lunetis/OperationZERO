@@ -96,6 +96,12 @@ public class AudioController : MonoBehaviour
 
     void Start()
     {
+        if(introBGM == null || loopBGM)
+        {
+            enabled = false;
+            return;
+        }
+
         bgmIntroAudioSource.clip = introBGM;
         bgmIntroAudioSource.loop = false;
         bgmIntroAudioSource.PlayScheduled(AudioSettings.dspTime + bgmPlayDelay);

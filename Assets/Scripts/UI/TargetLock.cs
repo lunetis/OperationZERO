@@ -115,7 +115,9 @@ public class TargetLock : FollowTransformUI
         {
             // UI Position
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, targetTransform.position);
-            targetScreenPosition = screenPoint - canvasRect.sizeDelta * 0.5f;
+            Vector2 position = screenPoint - screenSize * 0.5f;
+            position *= screenAdjustFactor;
+            targetScreenPosition = position;
         }
         
         float targetAngle = GameManager.GetAngleBetweenTransform(targetTransform);

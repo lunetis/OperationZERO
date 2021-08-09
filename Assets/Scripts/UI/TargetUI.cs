@@ -75,7 +75,8 @@ public class TargetUI : MonoBehaviour
         get { return uiObject; }
     }
 
-    RectTransform canvasRect;
+    Vector2 screenSize;
+    float screenAdjustFactor;
     Camera activeCamera;
     
     // Recursive search
@@ -147,12 +148,8 @@ public class TargetUI : MonoBehaviour
         isInvisible = true;
         rectTransform = GetComponent<RectTransform>();
 
-        Canvas canvas = GetCanvas(transform.parent);
-        if(canvas != null)
-        {
-            canvasRect = canvas.GetComponent<RectTransform>();
-        }
-
+        screenSize = new Vector2(Screen.width, Screen.height);
+        screenAdjustFactor = Mathf.Max((1920.0f / Screen.width), (1080.0f / Screen.height));
         Target = targetObject;  // execute Setter code
     }
 
@@ -175,13 +172,15 @@ public class TargetUI : MonoBehaviour
             distanceText.text = string.Format("{0:0}", distance);
             // UI Position
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(activeCamera, targetObject.transform.position);
-            rectTransform.anchoredPosition = screenPoint - canvasRect.sizeDelta * 0.5f;
+            Vector2 position = screenPoint - screenSize * 0.5f;
+            position *= screenAdjustFactor;
+            rectTransform.anchoredPosition = position;
         }
 
         // the transform is outside of camera view (not behind, we need to consider Field of View)
         bool isOutsideOfCamera = (screenPosition.z < 0 || 
-                            screenPosition.x < 0 || screenPosition.x > canvasRect.sizeDelta.x || 
-                            screenPosition.y < 0 || screenPosition.y > canvasRect.sizeDelta.y);
+                            screenPosition.x < 0 || screenPosition.x > screenSize.x || 
+                            screenPosition.y < 0 || screenPosition.y > screenSize.y);
 
 
         uiObject.SetActive(isOutsideOfCamera == false && isInvisible == true && distance < hideDistance);

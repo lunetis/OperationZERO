@@ -10,10 +10,12 @@ public class FollowTransformUI : MonoBehaviour
     [SerializeField]
     protected Camera cam;
     protected RectTransform rectTransform;
-    protected RectTransform canvasRect;
 
     [SerializeField]
     protected bool trackCurrentCamera = true;
+
+    protected Vector2 screenSize;
+    protected float screenAdjustFactor;
 
     // Recursive search
     Canvas GetCanvas(Transform parentTransform)
@@ -33,11 +35,8 @@ public class FollowTransformUI : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
 
-        Canvas canvas = GetCanvas(transform.parent);
-        if(canvas != null)
-        {
-            canvasRect = canvas.GetComponent<RectTransform>();
-        }
+        screenSize = new Vector2(Screen.width, Screen.height);
+        screenAdjustFactor = Mathf.Max((1920.0f / Screen.width), (1080.0f / Screen.height));
     }
 
     // Update is called once per frame
@@ -58,7 +57,9 @@ public class FollowTransformUI : MonoBehaviour
         {
             // UI Position
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, targetTransform.position);
-            rectTransform.anchoredPosition = screenPoint - canvasRect.sizeDelta * 0.5f;
+            Vector2 position = screenPoint - screenSize * 0.5f;
+            position *= screenAdjustFactor;
+            rectTransform.anchoredPosition = position;
         }
     }
 }
