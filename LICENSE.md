@@ -34,9 +34,14 @@ Since **ACE COMBAT 7 Font is made for "ACE COMBAT™ 7: SKIES UNKNOWN" exclusive
 - Outdoor Ground Textures : created by A dog's life software, https://assetstore.unity.com/packages/2d/textures-materials/floors/outdoor-ground-textures-12555
 - Default Playables : provided by Unity Technologies, https://assetstore.unity.com/packages/essentials/default-playables-95266
 
+## Music
+
+### Musics were not uploaded due to copyright issues. (YouTube video only)
+
+- ZERO : Composed by Kobayashi Keiki, ℗ BANDAI NAMCO Entertainment Inc.
+- Main Theme (From ACE COMBAT 7) : Composed by Mitsuhiro Kitadani, ℗ BANDAI NAMCO Entertainment Inc.
+
 ## Misc.
 
 - Screen Space Multiple Scattering for Unity (currently unused) : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS
 
-## "ZERO" music was currently not uploaded.
-- I haven't received a report from anyone yet, but I didn't upload the background music because I thought it is the most sensitive to copyright issues.
