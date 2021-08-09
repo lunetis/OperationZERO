@@ -31,7 +31,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - [x] ZERO Mission Cutscenes
   - [x] Phase 3 Cutscene
   - [x] Ending Cutscene 
-- [x] Main / Result Screen
+- [x] Main/Result Screen
+- [x] English/Korean Language Support
 
 <br>
 
@@ -59,5 +60,6 @@ Always TODO:
 [Current Development Status Example (Updated 2021.08.10)]
 - Ending Cutscene Implementation
 - Main / Result Screen Implementation
+- Added In-game English/Korean Language Support 
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
