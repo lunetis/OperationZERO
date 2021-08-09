@@ -105,6 +105,9 @@ public class UIController : MonoBehaviour
     float damage = 0;
     bool isTimeLow = false;
     bool isRedTimerActive = false;
+    bool enableCount = true;
+
+    float elapsedTime = 0;
 
     public bool IsRedTimerActive
     {
@@ -114,6 +117,18 @@ public class UIController : MonoBehaviour
     public MinimapController MinimapController
     {
         get { return minimapController; }
+    }
+
+    public float StopCountAndGetElapsedTime()
+    {
+        enableCount = false;
+        return elapsedTime;
+    }
+
+    public void StartCountAndResetElapsedTime()
+    {
+        enableCount = true;
+        elapsedTime = 0;
     }
 
     // Center
@@ -167,6 +182,7 @@ public class UIController : MonoBehaviour
     void SetTime()
     {
         remainTime -= Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
         if(isRedTimerActive == false && remainTime < 10 && isTimeLow == false)
         {
@@ -346,6 +362,6 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(remainTime > 0 && GameManager.Instance.IsGameOver == false) SetTime();
+        if(enableCount == true && remainTime > 0 && GameManager.Instance.IsGameOver == false) SetTime();
     }
 }

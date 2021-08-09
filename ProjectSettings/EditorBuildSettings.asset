@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ZERO.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 5a0ffab85b65b444987f0b3993d1f734
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: d5015d90b70d64146b8775d1bfacd12a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 5a6eec39e675d5f468337aab591cea7d,
       type: 2}

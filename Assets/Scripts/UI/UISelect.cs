@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class UISelect : MonoBehaviour
 {
     [SerializeField]
-    string description;
+    string descriptionKey;
     [SerializeField]
     UnityEvent onSelectEvent;
     
-    public string Description
+    public string DescriptionKey
     {
-        get { return description; }
+        get { return descriptionKey; }
     }
 
     public UnityEvent OnSelectEvent

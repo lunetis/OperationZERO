@@ -112,10 +112,10 @@ AudioMixerController:
   - guids:
     - 7f25dabe19e096540aa8f4e88ef7c402
     - af9a8d08940aefb40b0a7fc92e89806b
-    - f2af0b5d72ae09e4cbf9261771ece895
     - 879cfab38b56fe44e8f28517d0298f61
     - a4483e635d262324fa1527f55e5c2123
     - eb06d21a4c75c0d48b6a3f7059939831
+    - f2af0b5d72ae09e4cbf9261771ece895
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}

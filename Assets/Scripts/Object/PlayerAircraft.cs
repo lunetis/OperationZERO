@@ -42,6 +42,11 @@ public class PlayerAircraft : TargetObject
         get { return missileEmergencyDistance; }
     }
 
+    public int Score
+    {
+        get { return score; }
+    }
+
     public override void AddLockedMissile(Missile missile)
     {
         base.AddLockedMissile(missile);

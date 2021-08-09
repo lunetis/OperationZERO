@@ -322,6 +322,11 @@ public class AircraftController : MonoBehaviour
         {
             jet.enabled = false;
         }
+        CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+        foreach(CapsuleCollider collider in colliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     void OnEnable()
@@ -329,6 +334,11 @@ public class AircraftController : MonoBehaviour
         foreach(JetEngineController jet in jetEngineControllers)
         {
             jet.enabled = true;
+        }
+        CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+        foreach(CapsuleCollider collider in colliders)
+        {
+            collider.enabled = true;
         }
     }
 

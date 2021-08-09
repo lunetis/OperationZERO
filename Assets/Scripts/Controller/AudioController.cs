@@ -54,10 +54,11 @@ public class AudioController : MonoBehaviour
         set { targetSFXVolume = value; }
     }
     
-    public void OnCutsceneStart()
+    public void OnCutsceneStart(bool muteBGM = false)
     {
-        targetBGMVolume = cutsceneBGMVolume;
+        targetBGMVolume = (muteBGM == true) ? MIN_VOLUME : cutsceneBGMVolume;
         targetCutsceneVolume = MAX_VOLUME;
+        cutsceneVolume = MAX_VOLUME;
         audioMixer.SetFloat("SFXVolume", MIN_VOLUME);
         audioMixer.SetFloat("CutsceneVolume", MAX_VOLUME);
     }

@@ -17,6 +17,9 @@ public class FadeController : MonoBehaviour
     Image image;
 
     [SerializeField]
+    float initialFadeInTime;
+
+    [SerializeField]
     float fadeInTime;
     [SerializeField]
     float fadeOutTime;
@@ -72,6 +75,14 @@ public class FadeController : MonoBehaviour
         }
     }
 
+    public void InstantFadeOut()
+    {
+        isFadeIn = false;
+        isFadeOut = false;
+        color = Color.black;
+        image.color = color;
+    }
+
     void FadeIn()
     {
         isFadeIn = true;
@@ -95,21 +106,28 @@ public class FadeController : MonoBehaviour
         }
     }
 
+    IEnumerator InitialFadeIn()
+    {
+        yield return new WaitForSeconds(initialFadeInTime);
+
+        isFadeIn = true;
+        isFadeOut = false;
+        isWaitingFadeOutEvent = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         fadeInReciprocal = 1 / fadeInTime;
         fadeOutReciprocal = 1 / fadeOutTime;
 
-        isFadeIn = true;
-        isFadeOut = false;
-        isWaitingFadeOutEvent = false;
-
         color = Color.black;
         image.color = color;
 
         invokeOnFadeInEvents = true;
         fadeOutEventWaitingTimer = fadeOutEventWaitingTime;
+
+        StartCoroutine(InitialFadeIn());
     }
 
     // Update is called once per frame

@@ -196,7 +196,8 @@ public class MinimapController : MonoBehaviour
             }
             else
             {
-                position = new Vector3(0, 1, 0);
+                position = transform.position;  // Minimap Controller must be at the center of the map
+                position.y = 1;
             }
             cameraRotation = 0;
         }

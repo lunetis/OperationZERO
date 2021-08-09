@@ -376,6 +376,12 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void ShowResultScene()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+
     void GameOverFadeOut()
     {
         CancelInvoke();

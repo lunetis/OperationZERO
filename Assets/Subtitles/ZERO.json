@@ -128,7 +128,9 @@
         {
             "subtitleKey": "P3_6",
             "name": "Pixy",
-            "side": "E"
+            "side": "E",
+            "invokeMethodName": "PlayEndingCutscene",
+            "invokeMethodDelay": 2.5
         },
         
         {

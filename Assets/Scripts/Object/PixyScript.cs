@@ -131,4 +131,14 @@ public class PixyScript : EnemyAircraft
         GameManager.PrintDebugText("HP : " + hp);
         GameManager.PrintDebugText("Phase : " + phase);
     }
+
+    public void CreateExplosionEffect()
+    {
+        if(Application.isPlaying)
+        {
+            GameObject effect = GameManager.Instance.explosionEffectObjectPool.GetPooledObject();
+            effect.transform.position = transform.position;
+            effect.SetActive(true);
+        }
+    }
 }

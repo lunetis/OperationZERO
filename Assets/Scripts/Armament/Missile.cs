@@ -21,6 +21,10 @@ public class Missile : MonoBehaviour
     public float accelAmount;
     public float turningForce;
 
+    [SerializeField]
+    [Range(0, 1)]
+    float smartTrackingRate = 0.3f;
+
     [Space(10)]
     public float boresightAngle;
     public float lifetime;
@@ -47,7 +51,9 @@ public class Missile : MonoBehaviour
     bool isDisabled = false;
     bool hasWarned = false;
 
+    // Prediction
     AudioSource audioSource;
+    Rigidbody targetRigidbody = null;
 
     public bool HasWarned
     {
@@ -64,6 +70,7 @@ public class Missile : MonoBehaviour
     {
         this.target = target;
         
+        targetRigidbody = target?.GetComponent<Rigidbody>();
         minimapSprite.SetMinimapSpriteVisible(target != null);
         isDisabled = (target == null);
 
@@ -83,12 +90,36 @@ public class Missile : MonoBehaviour
         Invoke("DisableMissile", lifetime);
     }
 
+    Vector3 GetPredictedTargetPosition()
+    {
+        if(targetRigidbody == null) return target.transform.position;
+
+        Vector3 predictedPos = target.transform.position;
+        float timeToCatchUp = MathHelper.GetTimeToCatchUp(targetRigidbody, rb);
+        float angle = Vector3.Angle(transform.forward, target.transform.forward);
+
+        if(timeToCatchUp > 0)
+        {
+            // Considering target velocity
+            predictedPos += timeToCatchUp * targetRigidbody.velocity;
+        }
+        else
+        {
+            // Not considering target velocity
+            float distance = Vector3.Distance(target.transform.position, transform.position);
+            predictedPos += (distance / speed) * (Mathf.Cos(angle) + 1) * 0.5f * targetRigidbody.velocity;
+        }
+
+        return predictedPos;
+    }
+
     void LookAtTarget()
     {
         if(target == null)
             return;
 
-        Vector3 targetDir = target.transform.position - transform.position;
+        Vector3 targetPos = Vector3.Lerp(target.transform.position, GetPredictedTargetPosition(), smartTrackingRate);
+        Vector3 targetDir = targetPos - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
 
         if(angle > boresightAngle)

@@ -1,0 +1,15 @@
+<option>
+    <!-- Pause -->
+    <pause>
+        <return_to_mission>Resume the mission.</return_to_mission>
+        <restart_from_checkpoint>Restart from the last checkpoint.</restart_from_checkpoint>
+        <restart_mission>Restart from the beginning.</restart_mission>
+        <quit_mission>End the mission.</quit_mission>
+    </pause>
+    <!-- Game Over -->
+    <game_over>
+        <retry_from_checkpoint>Retry this mission from the last checkpoint.</retry_from_checkpoint>
+        <retry_mission>Retry this mission from the beginning.</retry_mission>
+        <quit_mission>End the mission.</quit_mission>
+    </game_over>
+</option>

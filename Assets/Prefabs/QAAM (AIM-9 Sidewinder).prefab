@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1511718082a8334ab8856986ec8e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconSize: 100
+  iconSize: 150
   depth: 2
   showBorderIndicator: 0
 --- !u!1 &8204064068254711762
@@ -5026,6 +5026,7 @@ MonoBehaviour:
   maxSpeed: 300
   accelAmount: 60
   turningForce: 2
+  smartTrackingRate: 1
   boresightAngle: 150
   lifetime: 7
   targetSearchSpeed: 80

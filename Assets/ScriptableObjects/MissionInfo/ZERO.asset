@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b7dd8db3ba49f489486d29f2e12549, type: 3}
+  m_Name: ZERO
+  m_EditorClassIdentifier: 
+  missionName: Operation ZERO
+  rankScoreCutoff: 007d0000c05d0000803e0000401f0000
+  timeLimit: 900
+  timeBonusPerSecond: 50
+  scriptJson: {fileID: 4900000, guid: 15de8f56636fe144eb75d770d9aa2b1b, type: 3}
+  script_EN: {fileID: 4900000, guid: e6a5128b22a44224fb4353dd614bbd6f, type: 3}
+  script_KR: {fileID: 4900000, guid: db0857da7f9cfe942967941a48f0b16b, type: 3}

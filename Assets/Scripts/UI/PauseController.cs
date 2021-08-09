@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Xml;
 
 public class PauseController : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class PauseController : MonoBehaviour
     [SerializeField]
     bool playUIShowAudio;
 
+    [Header("Localization")]
+    [SerializeField]
+    TextAsset description_EN;
+    [SerializeField]
+    TextAsset description_KR;
+    XmlDocument descriptionXML;
+
     int currentIndex;
 
     UISelect GetCurrentUISelect()
@@ -41,7 +49,7 @@ public class PauseController : MonoBehaviour
         selectIndicator.anchoredPosition = new Vector2(selectIndicator.anchoredPosition.x,
                                                        selectableOptions[currentIndex].anchoredPosition.y);
         // Description
-        descriptionText.text = GetCurrentUISelect()?.Description;
+        descriptionText.text = GetDescriptionText(GetCurrentUISelect()?.DescriptionKey);
     }
 
     public void Navigate(InputAction.CallbackContext context)
@@ -70,9 +78,37 @@ public class PauseController : MonoBehaviour
         GetCurrentUISelect()?.OnSelectEvent.Invoke();
     }
 
+    void SetDescriptionXML()
+    {
+        descriptionXML = new XmlDocument();
+
+        switch(GameSettings.languageSetting)
+        {
+            case GameSettings.Language.EN:
+                descriptionXML.LoadXml(description_EN.text);
+                break;
+            
+            case GameSettings.Language.KR:
+                descriptionXML.LoadXml(description_KR.text);
+                break;
+
+            default:
+                descriptionXML.LoadXml(description_EN.text);
+                break;
+        }
+    }
+
+    string GetDescriptionText(string descriptionKey)
+    {
+        XmlNode subtitleNode = descriptionXML.SelectSingleNode("option/" + descriptionKey);
+        if(subtitleNode == null) return ""; // Exception
+        return subtitleNode.InnerText;
+    }
+
     void Awake()
     {
         audioSource.ignoreListenerPause = true;
+        SetDescriptionXML();
     }
 
     void OnEnable()

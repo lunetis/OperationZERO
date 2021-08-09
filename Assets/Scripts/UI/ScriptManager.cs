@@ -18,12 +18,7 @@ public class ScriptManager : MonoBehaviour
 {
     ScriptData scriptData;
 
-    [Header("Script Data")]
-    [SerializeField]
     TextAsset scriptJSONAsset;
-
-    [Header("Subtitle")]
-    [SerializeField]
     TextAsset subtitleXMLAsset;
     XmlDocument subtitleXMLDocument;
     
@@ -252,10 +247,10 @@ public class ScriptManager : MonoBehaviour
     {
         scriptQueue = new LinkedList<ScriptInfo>();
         scriptUI.SetActive(false);
-    }
 
-    void Start()
-    {
+        scriptJSONAsset = GameManager.MissionManager.MissionInfo.ScriptJSON;
+        subtitleXMLAsset = GameManager.MissionManager.MissionInfo.GetScriptXML();
+        
         // Load Subtitle XML
         subtitleXMLDocument = new XmlDocument();
         subtitleXMLDocument.LoadXml(subtitleXMLAsset.text);

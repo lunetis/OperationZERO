@@ -114,12 +114,13 @@ MonoBehaviour:
   isSpecialWeapon: 0
   maxSpeed: 300
   accelAmount: 50
-  turningForce: 1.5
+  turningForce: 2
+  smartTrackingRate: 0.5
   boresightAngle: 90
   lifetime: 7
   targetSearchSpeed: 60
   lockDistance: 1500
-  cooldown: 3
+  cooldown: 4
   payload: 120
   missileFrameSprite: {fileID: 21300000, guid: a4e9c0714cedb314e987e7e3d9a6cdb7, type: 3}
   missileFillSprite: {fileID: 21300000, guid: 3d269c4c088034543b462a85732f4b73, type: 3}
@@ -5033,7 +5034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1511718082a8334ab8856986ec8e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconSize: 100
+  iconSize: 150
   depth: 2
   showBorderIndicator: 0
 --- !u!1001 &2338413418020326271
