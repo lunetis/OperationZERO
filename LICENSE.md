@@ -7,6 +7,7 @@
 - F-15C Cipher 3D Model : created by Uxman, https://skfb.ly/6VnHW (CC BY 4.0)
 - F-15C Pixy 3D Model : created by Uxman, https://skfb.ly/6UY9O (CC BY 4.0)
 - F-15C Wireframe Picture : created by username_copied, http://getdrawings.com/get-drawing#f-15-drawing-29.jpg (CC BY-NC 4.0)
+- E-767 (AWACS) 3D Model : created by AmtrakP42DC, https://3dwarehouse.sketchup.com/model/98c0c90dcce8f9ee3ba77af508a192c0/AWACS-E767
 
 ## Armaments
 
