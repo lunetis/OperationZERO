@@ -128,8 +128,6 @@ public class PixyScript : EnemyAircraft
     protected override void Update()
     {         
         base.Update();
-        GameManager.PrintDebugText("HP : " + hp);
-        GameManager.PrintDebugText("Phase : " + phase);
     }
 
     public void CreateExplosionEffect()

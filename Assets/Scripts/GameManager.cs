@@ -372,7 +372,8 @@ public class GameManager : MonoBehaviour
     
     void QuitMissionEvent()
     {
-        Application.Quit();
+        ResultData.missionName = "";
+        SceneManager.LoadScene("Title");
     }
 
 

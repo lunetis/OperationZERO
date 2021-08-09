@@ -59,6 +59,7 @@ public class AudioController : MonoBehaviour
         targetBGMVolume = (muteBGM == true) ? MIN_VOLUME : cutsceneBGMVolume;
         targetCutsceneVolume = MAX_VOLUME;
         cutsceneVolume = MAX_VOLUME;
+        audioMixer.SetFloat("ABVolume", MIN_VOLUME);
         audioMixer.SetFloat("SFXVolume", MIN_VOLUME);
         audioMixer.SetFloat("CutsceneVolume", MAX_VOLUME);
     }
@@ -72,6 +73,7 @@ public class AudioController : MonoBehaviour
     {
         targetBGMVolume = MAX_VOLUME;
         audioMixer.SetFloat("SFXVolume", MAX_VOLUME);
+        audioMixer.SetFloat("ABVolume", MAX_VOLUME);
     }
 
     void PlayLoopBGM()
@@ -85,6 +87,11 @@ public class AudioController : MonoBehaviour
         targetBGMVolume = bgmVolume = 0;
         targetCutsceneVolume = cutsceneVolume = 0;
         targetSFXVolume = sfxVolume = 0;
+        
+        audioMixer.SetFloat("BGMVolume", bgmVolume);
+        audioMixer.SetFloat("SFXVolume", MAX_VOLUME);
+        audioMixer.SetFloat("ABVolume", MAX_VOLUME);
+        audioMixer.SetFloat("CutsceneVolume", cutsceneVolume);
     }
 
     void Start()

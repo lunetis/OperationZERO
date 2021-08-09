@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -20,11 +21,15 @@ public class MainMenuController : MonoBehaviour
     GameObject settingsScreen;
     [SerializeField]
     GameObject resultScreen;
+
+    [SerializeField]
+    TextMeshProUGUI descriptionText;
     
     [SerializeField]
     float initDelay;
 
     [Header("Audios")]
+    
     [SerializeField]
     AudioSource audioSource;
     [SerializeField]
@@ -35,6 +40,11 @@ public class MainMenuController : MonoBehaviour
     AudioClip backAudioClip;
 
     GameObject currentActiveScreen = null;
+
+    public void SetDescriptionText(string text)
+    {
+        descriptionText.text = text;
+    }
 
     public static MainMenuController Instance
     {
@@ -77,8 +87,15 @@ public class MainMenuController : MonoBehaviour
 
     public void SetLanguage(string language)
     {
-        if(language.ToLower() == "en") GameSettings.languageSetting = GameSettings.Language.EN;
-        if(language.ToLower() == "kr") GameSettings.languageSetting = GameSettings.Language.KR;
+        if(language.ToLower() == "en")
+        {
+            GameSettings.languageSetting = GameSettings.Language.EN;
+        }
+        
+        if(language.ToLower() == "kr")
+        {
+            GameSettings.languageSetting = GameSettings.Language.KR;
+        }
     }
 
     public void SetDifficulty(int difficulty)
@@ -107,6 +124,8 @@ public class MainMenuController : MonoBehaviour
 
         fadeController.OnFadeOutComplete.AddListener(ReserveLoadScene);
         fadeController.FadeOut();
+
+        currentActiveScreen.GetComponent<MenuController>().enabled = false; // Prevent MissingReferenceException about InputSystem
     }
 
     public void ReserveLoadScene()
@@ -147,6 +166,9 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+
         if(ResultData.missionName != "")
         {
             SetCurrentActiveScreen(resultScreen);
@@ -155,5 +177,6 @@ public class MainMenuController : MonoBehaviour
         {
             StartCoroutine(InitMainMenu());
         }
+        descriptionText.text = "";
     }
 }

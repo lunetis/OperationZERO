@@ -31,7 +31,6 @@ public class MenuController : MonoBehaviour
 
     void ChangeSelection()
     {
-        if(selectIndicator == null) return;
         // Cursor
         selectIndicator.anchoredPosition = new Vector2(selectIndicator.anchoredPosition.x,
                                                        selectableOptions[currentIndex].anchoredPosition.y);
@@ -62,6 +61,7 @@ public class MenuController : MonoBehaviour
         else return;
                                                     
         MainMenuController.Instance.PlayScrollAudioClip();
+        
         ChangeSelection();
     }
 
@@ -72,6 +72,7 @@ public class MenuController : MonoBehaviour
             selectIndicator.GetComponent<Animation>().Play();
         }
         MainMenuController.Instance.PlayConfirmAudioClip();
+
         StartCoroutine(ConfirmCoroutine());
     }
     

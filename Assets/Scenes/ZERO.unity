@@ -15,11 +15,11 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
+  m_FogColor: {r: 0.85898006, g: 0.8800229, b: 0.9150943, a: 0}
   m_FogMode: 1
   m_FogDensity: 0.001
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 3000
+  m_LinearFogStart: 1000
+  m_LinearFogEnd: 10000
   m_AmbientSkyColor: {r: 0.62824845, g: 0.662485, b: 0.735849, a: 1}
   m_AmbientEquatorColor: {r: 0.17475079, g: 0.18876824, b: 0.1981132, a: 1}
   m_AmbientGroundColor: {r: 0.46226418, g: 0.4251958, b: 0.4251958, a: 1}
@@ -606,111 +606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentTransform: {fileID: 1120013834}
---- !u!1001 &34519442
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 597262562}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.38
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.3
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7848254519473216586, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -6186161798972799288, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_Name
-      value: E-767 AWACS
-      objectReference: {fileID: 0}
-    - target: {fileID: 3666137059157814273, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 464394ad8e62af34cbd55a67d4e8ca15, type: 3}
---- !u!4 &34519443 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 464394ad8e62af34cbd55a67d4e8ca15,
-    type: 3}
-  m_PrefabInstance: {fileID: 34519442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &36854021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1244,7 @@ MonoBehaviour:
     FieldOfView: 4
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 10000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -1407,7 +1302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1533138625715334, guid: 61bb62591466c3649bdf4905822d72f6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4363000815121756, guid: 61bb62591466c3649bdf4905822d72f6, type: 3}
       propertyPath: m_RootOrder
@@ -1869,7 +1764,7 @@ Transform:
   - {fileID: 1090829048}
   - {fileID: 1869597253}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69893796
 GameObject:
@@ -1979,7 +1874,7 @@ MonoBehaviour:
     FieldOfView: 8
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 15000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -3385,7 +3280,7 @@ Transform:
   m_Children:
   - {fileID: 1491343052}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &176438394
 GameObject:
@@ -4078,12 +3973,12 @@ MonoBehaviour:
   heightFog: 1
   height: 0
   heightDensity: 0.001
-  startDistance: 1000
-  maxDensity: 0.721
+  startDistance: 500
+  maxDensity: 1
   energyLoss: 1
-  fogTint: {r: 0.93948025, g: 0.9633039, b: 0.9811321, a: 1}
+  fogTint: {r: 0.9304913, g: 0.94955504, b: 0.9622642, a: 1}
   fogShader: {fileID: 4800000, guid: f796635016f0e5340b3c4cba03dbeb2f, type: 3}
-  setGlobalSettings: 1
+  setGlobalSettings: 0
   fogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
   fogMode: 1
   fogDensity: 0.001
@@ -5013,7 +4908,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &271451484
 GameObject:
@@ -9255,12 +9150,12 @@ MonoBehaviour:
   heightFog: 1
   height: 0
   heightDensity: 0.001
-  startDistance: 1000
-  maxDensity: 0.721
+  startDistance: 500
+  maxDensity: 1
   energyLoss: 1
-  fogTint: {r: 0.93948025, g: 0.9633039, b: 0.9811321, a: 1}
+  fogTint: {r: 0.9304913, g: 0.94955504, b: 0.9622642, a: 1}
   fogShader: {fileID: 4800000, guid: f796635016f0e5340b3c4cba03dbeb2f, type: 3}
-  setGlobalSettings: 1
+  setGlobalSettings: 0
   fogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
   fogMode: 1
   fogDensity: 0.001
@@ -9533,7 +9428,7 @@ Transform:
   - {fileID: 1826902038}
   - {fileID: 981221496}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &446023072
 GameObject:
@@ -9981,7 +9876,7 @@ Transform:
   - {fileID: 317515677}
   - {fileID: 2008783435}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455025005
 GameObject:
@@ -10724,7 +10619,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -13658,37 +13553,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &597262561
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 597262562}
-  m_Layer: 0
-  m_Name: E-767 AWACS Eagle Eye
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &597262562
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597262561}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3999.3, y: 4326, z: 4111.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 34519443}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &600230190
 GameObject:
   m_ObjectHideFlags: 0
@@ -19944,7 +19808,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682671724}
-  m_LocalRotation: {x: -0.2658957, y: -0.3272157, z: -0.09649887, w: 0.9016193}
+  m_LocalRotation: {x: -0.2658957, y: -0.32721567, z: -0.096498854, w: 0.9016193}
   m_LocalPosition: {x: 26.696476, y: -25.889309, z: -31.935379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19976,7 +19840,7 @@ MonoBehaviour:
     FieldOfView: 7
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -20919,7 +20783,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: 150, z: 0}
 --- !u!1 &724953007
 GameObject:
@@ -23929,7 +23793,7 @@ MonoBehaviour:
     FieldOfView: 30
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -26741,7 +26605,7 @@ MonoBehaviour:
     FieldOfView: 20
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 30000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -28302,12 +28166,12 @@ MonoBehaviour:
   heightFog: 1
   height: 0
   heightDensity: 0.001
-  startDistance: 1000
-  maxDensity: 0.721
+  startDistance: 500
+  maxDensity: 1
   energyLoss: 1
-  fogTint: {r: 0.93948025, g: 0.9633039, b: 0.9811321, a: 1}
+  fogTint: {r: 0.9304913, g: 0.94955504, b: 0.9622642, a: 1}
   fogShader: {fileID: 4800000, guid: f796635016f0e5340b3c4cba03dbeb2f, type: 3}
-  setGlobalSettings: 1
+  setGlobalSettings: 0
   fogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
   fogMode: 1
   fogDensity: 0.001
@@ -31948,7 +31812,7 @@ Transform:
   - {fileID: 3716849}
   - {fileID: 1040214650}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186314954
 GameObject:
@@ -32624,12 +32488,12 @@ MonoBehaviour:
   heightFog: 1
   height: 0
   heightDensity: 0.001
-  startDistance: 1000
-  maxDensity: 0.721
+  startDistance: 500
+  maxDensity: 1
   energyLoss: 1
-  fogTint: {r: 0.93948025, g: 0.9633039, b: 0.9811321, a: 1}
+  fogTint: {r: 0.9304913, g: 0.94955504, b: 0.9622642, a: 1}
   fogShader: {fileID: 4800000, guid: f796635016f0e5340b3c4cba03dbeb2f, type: 3}
-  setGlobalSettings: 1
+  setGlobalSettings: 0
   fogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
   fogMode: 1
   fogDensity: 0.001
@@ -33490,7 +33354,7 @@ MonoBehaviour:
     FieldOfView: 30
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -37439,7 +37303,7 @@ Transform:
   - {fileID: 1490135528}
   - {fileID: 628028307}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375890598
 GameObject:
@@ -37529,7 +37393,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.96e-43, y: 4.08e-43, z: 0, w: -1.4223634e+35}
+  m_BoundingSphereOverride: {x: NaN, y: 0, z: 0, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -38712,7 +38576,7 @@ MonoBehaviour:
   waypointMinHeight: 1500
   waypointMaxHeight: 3000
   areaCollider: {fileID: 0}
-  evasionRate: 0.6
+  evasionRate: 0.35
   newWaypointDistance: 1000
   minimumWaypointChangeDelay: 2
   jetEngineControllers:
@@ -41086,18 +40950,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
         type: 3}
+      propertyPath: useRigidbodyForVelocity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
+        type: 3}
       propertyPath: NoiseModule.separateAxes
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
         type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 510823142176030836, guid: eab4b8b17d488564fb68a859b492215d,
         type: 3}
@@ -41347,7 +41221,7 @@ PrefabInstance:
     - target: {fileID: 8366715619585494789, guid: eab4b8b17d488564fb68a859b492215d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8624216443875971574, guid: eab4b8b17d488564fb68a859b492215d, type: 3}
@@ -43385,7 +43259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573327005}
-  m_LocalRotation: {x: 0.22283307, y: -0.44896394, z: 0.116680816, w: 0.85741615}
+  m_LocalRotation: {x: 0.22283304, y: -0.44896394, z: 0.1166808, w: 0.85741615}
   m_LocalPosition: {x: 40.4, y: 28.4, z: -28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -43417,7 +43291,7 @@ MonoBehaviour:
     FieldOfView: 7
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -44346,6 +44220,8 @@ PlayableDirector:
     value: {fileID: 1276899508}
   - key: {fileID: 3901462738494968862, guid: a2ef909c5a688664893a17522378c55a, type: 2}
     value: {fileID: 1217483301}
+  - key: {fileID: 2873573667707403359, guid: a2ef909c5a688664893a17522378c55a, type: 2}
+    value: {fileID: 1236713871}
   m_ExposedReferences:
     m_References:
     - a80f7a797919a114981657ee58a26a4f: {fileID: 1729028772}
@@ -45571,12 +45447,12 @@ MonoBehaviour:
   heightFog: 1
   height: 0
   heightDensity: 0.001
-  startDistance: 1000
-  maxDensity: 0.721
+  startDistance: 500
+  maxDensity: 1
   energyLoss: 1
-  fogTint: {r: 0.93948025, g: 0.9633039, b: 0.9811321, a: 1}
+  fogTint: {r: 0.9304913, g: 0.94955504, b: 0.9622642, a: 1}
   fogShader: {fileID: 4800000, guid: f796635016f0e5340b3c4cba03dbeb2f, type: 3}
-  setGlobalSettings: 1
+  setGlobalSettings: 0
   fogColor: {r: 0.84994656, g: 0.8865138, b: 0.9433962, a: 0}
   fogMode: 1
   fogDensity: 0.001
@@ -46869,6 +46745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MissileHatch
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbd5c747bfce57a43984d6fc2ff2677d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbd5c747bfce57a43984d6fc2ff2677d, type: 3}
@@ -49398,7 +49279,7 @@ Transform:
   - {fileID: 888250155}
   - {fileID: 1367661080}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1786108037
 GameObject:
@@ -49947,7 +49828,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803367242}
-  m_LocalRotation: {x: -0.01776974, y: 0.98176193, z: 0.11766424, w: 0.14826639}
+  m_LocalRotation: {x: -0.017769745, y: 0.98176193, z: 0.11766425, w: 0.1482664}
   m_LocalPosition: {x: -17, y: -14, z: 55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -49979,7 +49860,7 @@ MonoBehaviour:
     FieldOfView: 15
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 30000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -52621,7 +52502,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911401422}
-  m_LocalRotation: {x: 0.59099233, y: 0.22793858, z: -0.17893802, w: 0.7528302}
+  m_LocalRotation: {x: 0.59099233, y: 0.22793862, z: -0.17893808, w: 0.75283015}
   m_LocalPosition: {x: 4242, y: 2993.2393, z: 9193}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -52653,7 +52534,7 @@ MonoBehaviour:
     FieldOfView: 20
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -53938,7 +53819,7 @@ MonoBehaviour:
     FieldOfView: 50
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 100000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -54090,7 +53971,7 @@ MonoBehaviour:
     FieldOfView: 4
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 10000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -54271,7 +54152,7 @@ MonoBehaviour:
     FieldOfView: 4
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -56374,7 +56255,7 @@ MonoBehaviour:
     FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 10000
+    FarClipPlane: 20000
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -57646,19 +57527,7 @@ MonoBehaviour:
     m_ActionId: e1671f37-b650-4dec-a5f9-56d00dc06440
     m_ActionName: Player/Yaw R[/DualShock4GamepadHID/rightShoulder]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1772629017}
-        m_TargetAssemblyTypeName: MissionZERO, Assembly-CSharp
-        m_MethodName: PlayEndingCutscene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 2e2cadf2-b1f8-4c4e-91fc-ed6375326d7d
     m_ActionName: Player/New action
   - m_PersistentCalls:
