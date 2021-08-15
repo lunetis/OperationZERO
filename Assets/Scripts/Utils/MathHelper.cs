@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class MathHelper
 {
+    public static void CalcAvgPos(ref Vector2 avgPos, ref int frameCount, Vector2 pos)
+    {
+        frameCount++;
+        if(avgPos == Vector2.zero) avgPos = pos;
+        else
+        {
+            avgPos = ((frameCount - 1) / frameCount) * avgPos + (pos / frameCount);
+        }
+    }
+
     public static float GetTimeToCatchUp(Rigidbody target, Rigidbody follow)
     {
         Vector3 d = target.position - follow.position;  // d = distance between two objects

@@ -40,6 +40,7 @@ public class MainMenuController : MonoBehaviour
     AudioClip backAudioClip;
 
     GameObject currentActiveScreen = null;
+    MenuController currentMenuController = null;
 
     public void SetDescriptionText(string text)
     {
@@ -63,6 +64,33 @@ public class MainMenuController : MonoBehaviour
         get { return Instance?.playerInput; }
     }
 
+    public void Navigate(InputAction.CallbackContext context)
+    {
+        if(context.action.phase == InputActionPhase.Started)
+        {
+            PlayScrollAudioClip();
+            currentMenuController.Navigate(context);
+        }
+    }
+
+    public void Confirm(InputAction.CallbackContext context)
+    {
+        if(context.action.phase == InputActionPhase.Started)
+        {
+            PlayConfirmAudioClip();
+            currentMenuController.Confirm(context);
+        }
+    }
+    
+    public void Back(InputAction.CallbackContext context)
+    {
+        if(context.action.phase == InputActionPhase.Started)
+        {
+            PlayBackAudioClip();
+            currentMenuController.Back(context);
+        }
+    }
+
     public void PlayConfirmAudioClip()
     {
         audioSource.PlayOneShot(confirmAudioClip);
@@ -82,6 +110,7 @@ public class MainMenuController : MonoBehaviour
     {
         currentActiveScreen?.SetActive(false);
         currentActiveScreen = screenObject;
+        currentMenuController = currentActiveScreen.GetComponent<MenuController>();
         currentActiveScreen.SetActive(true);
     }
 
@@ -121,6 +150,18 @@ public class MainMenuController : MonoBehaviour
     public void StartMission()
     {
         playerInput.enabled = false;
+        LoadingController.sceneName = "ZERO";
+
+        fadeController.OnFadeOutComplete.AddListener(ReserveLoadScene);
+        fadeController.FadeOut();
+
+        currentActiveScreen.GetComponent<MenuController>().enabled = false; // Prevent MissingReferenceException about InputSystem
+    }
+
+    public void StartFreeFlight()
+    {
+        playerInput.enabled = false;
+        LoadingController.sceneName = "FreeFlight";
 
         fadeController.OnFadeOutComplete.AddListener(ReserveLoadScene);
         fadeController.FadeOut();
@@ -135,10 +176,15 @@ public class MainMenuController : MonoBehaviour
 
     public void Quit()
     {
+        #if UNITY_WEBGL
+        
+        #else
         playerInput.enabled = false;
 
         fadeController.OnFadeOutComplete.AddListener(QuitEvent);
         fadeController.FadeOut();
+        #endif
+        
     }
     
     void QuitEvent()
@@ -162,6 +208,10 @@ public class MainMenuController : MonoBehaviour
         mainMenuScreen.SetActive(false);
         resultScreen.SetActive(false);
         settingsScreen.SetActive(false);
+
+        playerInput.enabled = true;
+        playerInput.actions.Disable();
+        playerInput.SwitchCurrentActionMap("UI");
     }
 
     void Start()

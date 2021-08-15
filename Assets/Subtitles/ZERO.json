@@ -5,35 +5,43 @@
             "name": "AWACS Eagle Eye",
             "side": "A",
             "preDelay": 2,
-            "isImportant": true
+            "isImportant": true,
+            "isRemovable": false
         },
         {
             "subtitleKey": "A1_2",
             "name": "AWACS Eagle Eye",
-            "side": "A"
+            "side": "A",
+            "isRemovable": false
         },
         {
             "subtitleKey": "P1_1",
             "name": "Pixy",
             "side": "E",
-            "preDelay": 1
+            "preDelay": 1,
+            "isRemovable": false
         },
         {
             "subtitleKey": "A1_3",
             "name": "AWACS Eagle Eye",
             "side": "A",
-            "preDelay": 1.5
+            "preDelay": 1.5,
+            "invokeMethodName": "AddPhase1Scripts",
+            "invokeMethodDelay": 5,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P1_2",
             "name": "Pixy",
             "side": "E",
-            "preDelay": 2
+            "preDelay": 2,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P1_3",
             "name": "Pixy",
-            "side": "E"
+            "side": "E",
+            "isRemovable": false
         },
 
 
@@ -42,25 +50,29 @@
             "name": "AWACS Eagle Eye",
             "side": "A",
             "isImportant": true,
-            "preDelay": 3
+            "preDelay": 3,
+            "isRemovable": false
         },
         {
             "subtitleKey": "A2_2",
             "name": "AWACS Eagle Eye",
             "side": "A",
             "invokeMethodName": "OnPhaseStart",
-            "invokeMethodDelay": 2
+            "invokeMethodDelay": 2,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P2_1",
             "name": "Pixy",
             "side": "E",
-            "preDelay": 2
+            "preDelay": 2,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P2_2",
             "name": "Pixy",
-            "side": "E"
+            "side": "E",
+            "isRemovable": false
         },
 
         
@@ -107,23 +119,27 @@
             "subtitleKey": "P3_1",
             "name": "Pixy",
             "side": "E",
-            "preDelay": 3
+            "preDelay": 3,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P3_2",
             "name": "Pixy",
-            "side": "E"
+            "side": "E",
+            "isRemovable": false
         },
         {
             "subtitleKey": "P3_3",
             "name": "Pixy",
-            "side": "E"
+            "side": "E",
+            "isRemovable": false
         },
         {
             "subtitleKey": "P3_5",
             "name": "Pixy",
             "side": "E",
-            "preDelay": 1
+            "preDelay": 1,
+            "isRemovable": false
         },
         {
             "subtitleKey": "P3_6",

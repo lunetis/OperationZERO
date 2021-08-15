@@ -7,7 +7,6 @@
 Shader "Custom/DistortionShader" {
 Properties {
 	_BumpAmt  ("Distortion", range (0,128)) = 10
-	_MainTex ("Tint Color (RGB)", 2D) = "white" {}
 	_BumpMap ("Normalmap", 2D) = "bump" {}
 }
 
@@ -52,7 +51,6 @@ struct v2f {
 
 float _BumpAmt;
 float4 _BumpMap_ST;
-float4 _MainTex_ST;
 
 v2f vert (appdata_t v)
 {
@@ -66,14 +64,13 @@ v2f vert (appdata_t v)
 	o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
 	o.uvgrab.zw = o.vertex.zw;
 	o.uvbump = TRANSFORM_TEX( v.texcoord, _BumpMap );
-	o.uvmain = TRANSFORM_TEX( v.texcoord, _MainTex );
+	o.uvmain = TRANSFORM_TEX( v.texcoord, _BumpMap );
 	return o;
 }
 
 sampler2D _GrabTexture;
 float4 _GrabTexture_TexelSize;
 sampler2D _BumpMap;
-sampler2D _MainTex;
 
 half4 frag( v2f i ) : COLOR
 {
@@ -83,21 +80,9 @@ half4 frag( v2f i ) : COLOR
 	i.uvgrab.xy = offset * i.uvgrab.z + i.uvgrab.xy;
 	
 	half4 col = tex2Dproj( _GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
-	half4 tint = tex2D( _MainTex, i.uvmain );
-	return col * tint;
+	return col;
 }
 ENDCG
-		}
-	}
-
-	// ------------------------------------------------------------------
-	// Fallback for older cards and Unity non-Pro
-	
-	SubShader {
-		Blend DstColor Zero
-		Pass {
-			Name "BASE"
-			SetTexture [_MainTex] {	combine texture }
 		}
 	}
 }

@@ -4820,6 +4820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelLerpAmount: 1
   brakeLerpAmount: 1
+  maxVolume: 0.2
+  lowpassValue: 2500
 --- !u!1 &7424813845484111576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,7 +5485,7 @@ ParticleSystem:
     angle: 30
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -5566,7 +5568,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -5802,9 +5804,9 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.40350342
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -5813,7 +5815,7 @@ ParticleSystem:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 0
+          outSlope: 1
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -9578,7 +9580,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc72e972a23d12443ba6675d156f7366, type: 2}
+  - {fileID: 2100000, guid: 0a42f0bbe114a9347aae53590f65fe81, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

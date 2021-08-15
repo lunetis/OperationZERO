@@ -76,6 +76,7 @@ public class PauseController : MonoBehaviour
         audioSource.PlayOneShot(confirmAudioClip);
 
         GetCurrentUISelect()?.OnSelectEvent.Invoke();
+        enabled = false;
     }
 
     void SetDescriptionXML()
@@ -123,6 +124,8 @@ public class PauseController : MonoBehaviour
         navigateAction.started += Navigate;
         InputAction submitAction = GameManager.PlayerInput.actions.FindAction("Submit");
         submitAction.started += Confirm;
+        
+        Debug.Log(name + " onEnable");
     }
 
     void OnDisable()
@@ -134,5 +137,7 @@ public class PauseController : MonoBehaviour
         navigateAction.started -= Navigate;
         InputAction submitAction = GameManager.PlayerInput.actions.FindAction("Submit");
         submitAction.started -= Confirm;
+        
+        Debug.Log(name + " onDisable");
     }
 }

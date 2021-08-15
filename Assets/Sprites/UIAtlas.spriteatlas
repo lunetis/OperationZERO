@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 46a56ba60acc5f841a8daa93c88daf03, type: 3}
+    - {fileID: 102900000, guid: 676f0d2aab086d448add765fa5e50d34, type: 3}
+    - {fileID: 102900000, guid: bbd1ecf069cb87543b16df28e40d2370, type: 3}
+    - {fileID: 2800000, guid: 1cdd39f5962037d4e81871bebe22e877, type: 3}
+    - {fileID: 2800000, guid: 30bac1b51819f2446b58c9c02891cff1, type: 3}
+    - {fileID: 2800000, guid: 8d1d2be9d5b3f3c49987cbb4532e2bf9, type: 3}
+    - {fileID: 2800000, guid: 9551c7da87e7be847be0d13a6b73c14b, type: 3}
+    - {fileID: 2800000, guid: b2d0de2b4bcbcc443866b3f8e79d7cc7, type: 3}
+    - {fileID: 2800000, guid: 2b0f23cac09c87844805f25d9ed06958, type: 3}
+    - {fileID: 2800000, guid: e73a9dc295a74374897a4649d1f1efc3, type: 3}
+    - {fileID: 2800000, guid: 0c7a8aba1e14d2e419c48ca332bd23fa, type: 3}
+    - {fileID: 2800000, guid: 74d534ebd597ee241bdff13ef43e73fc, type: 3}
+    - {fileID: 2800000, guid: 1aa54589886f7b14189059492f6671f7, type: 3}
+    - {fileID: 2800000, guid: 86fc6b80bab4e184d93ff02d8d19b178, type: 3}
+    - {fileID: 2800000, guid: ce517e135d96abd4e9008a1591c834bd, type: 3}
+    - {fileID: 2800000, guid: e728a253d7081aa4dbce07300c098ed9, type: 3}
+    - {fileID: 2800000, guid: 25f5b3e53ec58ac41bfc2a2514cecacf, type: 3}
+    - {fileID: 2800000, guid: b423d5047edac91419cbd9d6fa768915, type: 3}
+    - {fileID: 2800000, guid: 9ecff1fcb1908394db2307bfec9db57c, type: 3}
+    - {fileID: 2800000, guid: 014b66c863dc8e040ac51d133aae14ff, type: 3}
+    - {fileID: 2800000, guid: 0b3dd6da38c23034c8ea3866b4b3f3d7, type: 3}
+    - {fileID: 2800000, guid: 4100abcee9f3f104093d6195e7806d46, type: 3}
+    - {fileID: 2800000, guid: 6c15ecb86ccba714eaed5a1eb7ce8581, type: 3}
+    totalSpriteSurfaceArea: 2279388
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f6654d7096004604bb6779e656b95bc3, type: 3}
+  - {fileID: 21300000, guid: 86fc6b80bab4e184d93ff02d8d19b178, type: 3}
+  - {fileID: 21300000, guid: a4e9c0714cedb314e987e7e3d9a6cdb7, type: 3}
+  - {fileID: 21300000, guid: 3b9098717e5bdb54193d8aeaad9ebc53, type: 3}
+  - {fileID: 21300000, guid: f3c373a1d05c91e419ecf0384b2deb03, type: 3}
+  - {fileID: 21300000, guid: 3a1041c125f9b2f46ac83f06145a113d, type: 3}
+  - {fileID: 21300000, guid: c6de2af14c97b6741ab813d20d5b9d00, type: 3}
+  - {fileID: 21300000, guid: e73a9dc295a74374897a4649d1f1efc3, type: 3}
+  - {fileID: 21300000, guid: ce517e135d96abd4e9008a1591c834bd, type: 3}
+  - {fileID: 21300000, guid: e728a253d7081aa4dbce07300c098ed9, type: 3}
+  - {fileID: 21300000, guid: b423d5047edac91419cbd9d6fa768915, type: 3}
+  - {fileID: 21300000, guid: 848d4cb492129404bb3f084d26eb7694, type: 3}
+  - {fileID: 21300000, guid: 95899e65395f3074fbd5be5d8d2b3c95, type: 3}
+  - {fileID: 21300000, guid: 09c3a4757a32b944cb639918eaf66eec, type: 3}
+  - {fileID: 21300000, guid: 30bac1b51819f2446b58c9c02891cff1, type: 3}
+  - {fileID: 21300000, guid: 25f5b3e53ec58ac41bfc2a2514cecacf, type: 3}
+  - {fileID: 21300000, guid: 1cdd39f5962037d4e81871bebe22e877, type: 3}
+  - {fileID: 21300000, guid: 08c04aa6280cebd41af2abdce8a14227, type: 3}
+  - {fileID: 21300000, guid: 3a383e47bb297b145903e3563c01b577, type: 3}
+  - {fileID: 21300000, guid: a878b967282bdd543a182d8c23f66cae, type: 3}
+  - {fileID: 21300000, guid: f4ed7d97c32099d45a1da5f1b943472d, type: 3}
+  - {fileID: 21300000, guid: c5c2f548bb2b1984c8b609bed67b05e5, type: 3}
+  - {fileID: 21300000, guid: 6c15ecb86ccba714eaed5a1eb7ce8581, type: 3}
+  - {fileID: 21300000, guid: f77061c8e181de844b6111c2dcc6d78e, type: 3}
+  - {fileID: 21300000, guid: 014b66c863dc8e040ac51d133aae14ff, type: 3}
+  - {fileID: 21300000, guid: 148878c88a6edf642a4a5e0e1dfba395, type: 3}
+  - {fileID: 21300000, guid: 929d1649ddcbe5e4289a53318a0ec3ef, type: 3}
+  - {fileID: 21300000, guid: 1aa54589886f7b14189059492f6671f7, type: 3}
+  - {fileID: 21300000, guid: 8d1d2be9d5b3f3c49987cbb4532e2bf9, type: 3}
+  - {fileID: 21300000, guid: 6d1c0c8a8099e204a8ccea06762d82e9, type: 3}
+  - {fileID: 21300000, guid: 0c7a8aba1e14d2e419c48ca332bd23fa, type: 3}
+  - {fileID: 21300000, guid: 2b0f23cac09c87844805f25d9ed06958, type: 3}
+  - {fileID: 21300000, guid: 0b3dd6da38c23034c8ea3866b4b3f3d7, type: 3}
+  - {fileID: 21300000, guid: 9551c7da87e7be847be0d13a6b73c14b, type: 3}
+  - {fileID: 21300000, guid: b2d0de2b4bcbcc443866b3f8e79d7cc7, type: 3}
+  - {fileID: 21300000, guid: b2971a3ba74e5d24d8c22c25d20c0617, type: 3}
+  - {fileID: 21300000, guid: 7109cd3bbe6bd4f40b2099c95e796f07, type: 3}
+  - {fileID: 21300000, guid: 74d534ebd597ee241bdff13ef43e73fc, type: 3}
+  - {fileID: 21300000, guid: 3d269c4c088034543b462a85732f4b73, type: 3}
+  - {fileID: 21300000, guid: 9ecff1fcb1908394db2307bfec9db57c, type: 3}
+  - {fileID: 21300000, guid: 4100abcee9f3f104093d6195e7806d46, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - MissileLine
+  - HUD Down
+  - MSL Frame
+  - Mission Updated
+  - F-15C Wireframe
+  - MyAircraft
+  - Mission Failed
+  - Gun Crosshair Distance
+  - HUD Up
+  - MSL Indicator
+  - PortraitCase
+  - Start Mission
+  - Map_Center
+  - TargetFrame
+  - Aircraft Symbol
+  - MSLLock
+  - WARNING
+  - Mission Accomplished
+  - BorderIndicator
+  - QAAM Fill
+  - Hit
+  - Target
+  - UIArrow
+  - Map_Large
+  - Side Edge
+  - QAAM Frame
+  - Destroyed
+  - HUD Center
+  - Altitude Edge
+  - Map_LargeBorder
+  - Gun Crosshair
+  - Crosshair
+  - Side Meter Long
+  - clippingmask
+  - CommonFrame
+  - Missed
+  - Map
+  - Heading
+  - MSL Fill
+  - Side Edge Fill
+  - SPWLock
+  m_RenderDataMap: {}
+  m_Tag: UIAtlas
+  m_IsVariant: 0

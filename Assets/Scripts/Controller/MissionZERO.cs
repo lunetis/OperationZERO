@@ -12,6 +12,8 @@ public class MissionZERO : MissionManager
     [SerializeField]
     List<string> onPhase1StartScripts;
     [SerializeField]
+    List<string> phase1AdditionalScripts;
+    [SerializeField]
     List<string> onPhase1EndScripts;
     
     [Header("Phase 2")]
@@ -139,6 +141,15 @@ public class MissionZERO : MissionManager
             T temp = list[n];
             list[n] = list[i];
             list[i] = temp;
+        }
+    }
+
+    public void AddPhase1Scripts()
+    {
+        // Execute when Pixy is still alive
+        if(pixy.IsAttackable == true)
+        {
+            GameManager.ScriptManager.AddScript(phase1AdditionalScripts);
         }
     }
 

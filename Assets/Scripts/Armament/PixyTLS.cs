@@ -18,7 +18,7 @@ public class PixyTLS : MonoBehaviour
     float laserRotateLerpAmount = 1;
     
     [SerializeField]
-    float distance = 1000;
+    float distance = 2000;
 
     [SerializeField]
     float damage = 50;
@@ -54,6 +54,7 @@ public class PixyTLS : MonoBehaviour
         laserTargetPosition = laserTransform.position + laserTransform.right * distance;
         lineRenderer.SetPosition(1, laserTargetPosition);
         Invoke("DeactivateTLS", laserActivateTime);
+        InvokeRepeating("DamageToTargetObject", 0, 0.1f);
     }
 
     void DeactivateTLS()
@@ -61,13 +62,13 @@ public class PixyTLS : MonoBehaviour
         isActivated = false;
         
         Invoke("ActivateTLS", laserCooldownTime);
+        CancelInvoke("DamageToTargetObject");
     }
 
     void DamageToTargetObject()
     {
         if(laserHitTargetObject == null)
         {
-            CancelInvoke("DamageToTargetObject");
             return;
         }
         laserHitTargetObject.OnDamage(damage, gameObject.layer);
@@ -97,7 +98,6 @@ public class PixyTLS : MonoBehaviour
                 if(laserHitTargetObject == null)
                 {
                     laserHitTargetObject = hit.collider.GetComponent<TargetObject>();
-                    InvokeRepeating("DamageToTargetObject", 0, 0.1f);
                 }
             }
             else

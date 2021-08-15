@@ -28,6 +28,8 @@ public class ResultController : MonoBehaviour
         InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
         backAction.started -= Back;
         MainMenuController.Instance.ShowMainMenu();
+        
+        Debug.Log(name + " onDisable");
     }
 
     IEnumerator ConfirmCoroutine()
@@ -81,5 +83,7 @@ public class ResultController : MonoBehaviour
         submitAction.started += Confirm;
         InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
         backAction.started += Back;
+        
+        Debug.Log(name + " onEnable");
     }
 }

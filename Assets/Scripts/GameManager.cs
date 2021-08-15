@@ -420,6 +420,11 @@ public class GameManager : MonoBehaviour
         Instance.debugText.AddText(text);
     }
 
+    public void SetGlobalFog(bool value)
+    {
+        RenderSettings.fog = value;
+    }
+
     void Awake()
     {
         if(instance == null)

@@ -382,20 +382,21 @@ public class WeaponController : MonoBehaviour
     void Awake()
     {
         aircraftController = GetComponent<AircraftController>();
-        uiController = GameManager.UIController;
         gamepad = Gamepad.current;
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        uiController = GameManager.UIController;
+        
         missilePool = GameManager.Instance.missileObjectPool;
         specialWeaponPool = GameManager.Instance.specialWeaponObjectPool;
         bulletPool = GameManager.Instance.bulletObjectPool;
 
         missilePool.poolObject = missile.gameObject;
         specialWeaponPool.poolObject = specialWeapon.gameObject;
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         useSpecialWeapon = false;
 
         SetArmament();

@@ -14,4 +14,6 @@ public class ScriptInfo
     public bool isImportant = false;     // AWACS only
     public string invokeMethodName = "";
     public float invokeMethodDelay = 0;
+
+    public bool isRemovable = true;     // Removable with ScriptManager.ClearScriptQueue()
 }

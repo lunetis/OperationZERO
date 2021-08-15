@@ -7,7 +7,7 @@ using TMPro;
 public class LoadingController : MonoBehaviour
 {
     [SerializeField]
-    string sceneName;
+    public static string sceneName;
 
     [SerializeField]
     FadeController fadeController;

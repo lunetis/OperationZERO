@@ -32,11 +32,13 @@ public class MissionManager : MonoBehaviour
     {
         if(isDead == true)
         {
+            if(onDeadScripts.Count == 0) return;
             int index = UnityEngine.Random.Range(0, onDeadScripts.Count);
             GameManager.ScriptManager.AddScript(onDeadScripts[index]);
         }
         else
         {
+            if(onMissionFailedScripts.Count == 0) return;
             GameManager.ScriptManager.AddScript(onMissionFailedScripts);
         }
     }

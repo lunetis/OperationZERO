@@ -59,8 +59,6 @@ public class MenuController : MonoBehaviour
             --currentIndex;
         }
         else return;
-                                                    
-        MainMenuController.Instance.PlayScrollAudioClip();
         
         ChangeSelection();
     }
@@ -71,41 +69,17 @@ public class MenuController : MonoBehaviour
         {
             selectIndicator.GetComponent<Animation>().Play();
         }
-        MainMenuController.Instance.PlayConfirmAudioClip();
-
         StartCoroutine(ConfirmCoroutine());
     }
     
     public void Back(InputAction.CallbackContext context)
     {
-        MainMenuController.Instance.PlayBackAudioClip();
         onBackEvent.Invoke();
     }
 
     void OnEnable()
     {
-        if(MainMenuController.PlayerInput == null) return;
-
         currentIndex = 0;
         ChangeSelection();
-
-        InputAction navigateAction = MainMenuController.PlayerInput.actions.FindAction("Navigate");
-        navigateAction.started += Navigate;
-        InputAction submitAction = MainMenuController.PlayerInput.actions.FindAction("Submit");
-        submitAction.started += Confirm;
-        InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
-        backAction.started += Back;
-    }
-
-    void OnDisable()
-    {
-        if(MainMenuController.PlayerInput == null) return;
-        
-        InputAction navigateAction = MainMenuController.PlayerInput.actions.FindAction("Navigate");
-        navigateAction.started -= Navigate;
-        InputAction submitAction = MainMenuController.PlayerInput.actions.FindAction("Submit");
-        submitAction.started -= Confirm;
-        InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
-        backAction.started -= Back;
     }
 }

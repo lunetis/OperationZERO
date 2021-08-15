@@ -45,7 +45,11 @@ public class PixyScript : EnemyAircraft
 
     public bool IsAttackable
     {
-        set
+        get
+        {
+            return isAttackable;
+        }
+        private set
         {
             isAttackable = value;
             SetMinimapSpriteVisible(value);
@@ -85,6 +89,7 @@ public class PixyScript : EnemyAircraft
     protected override void DestroyObject()
     {
         IsAttackable = false;
+        GameManager.ScriptManager.ClearScriptQueue();
 
         switch(phase)
         {

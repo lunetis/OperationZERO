@@ -96,6 +96,12 @@ public class AircraftAI : TargetObject
     public void ForceChangeWaypoint(Vector3 waypoint)
     {
         currentWaypoint = waypoint;
+        Invoke("Phase3ChangeWaypoint", 0.5f);
+    }
+
+    void Phase3ChangeWaypoint()
+    {
+        currentWaypoint = GameManager.PlayerAircraft.transform.position;
     }
 
     public static Vector3 RandomPointInBounds(Bounds bounds)

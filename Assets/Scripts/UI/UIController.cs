@@ -90,6 +90,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     Color cautionColor;
 
+    List<MaskColorChange> maskColorChanges = new List<MaskColorChange>();
+
     [Header("Sounds")]
     [SerializeField]
     AudioClip spwChangeAudioClip;
@@ -317,6 +319,11 @@ public class UIController : MonoBehaviour
         commonCenterUI.anchoredPosition = Vector2.zero;
     }
 
+    public void AddMaskColorChange(MaskColorChange mask)
+    {
+        maskColorChanges.Add(mask);
+    }
+
     public void SetWarningUIColor(bool isWarning)
     {
         Color color;
@@ -334,6 +341,10 @@ public class UIController : MonoBehaviour
         spriteMaterial.color = color;
         fontMaterial.SetColor("_FaceColor", color);
 
+        foreach(MaskColorChange maskColorChange in maskColorChanges)
+        {
+            maskColorChange.ChangeComponentColor(color);
+        }
     }
 
     public void SetLabel(AlertUIController.LabelEnum labelEnum)

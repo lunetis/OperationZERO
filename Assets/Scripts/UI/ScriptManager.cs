@@ -104,7 +104,17 @@ public class ScriptManager : MonoBehaviour
 
     public void ClearScriptQueue()
     {
-        scriptQueue.Clear();
+        // scriptQueue.Clear();
+        var node = scriptQueue.First;
+        while (node != null)
+        {
+            var next = node.Next;
+            if (node.Value.isRemovable == true)
+            {
+                scriptQueue.Remove(node);
+            }
+            node = next;
+        }
     }
 
 
@@ -248,6 +258,10 @@ public class ScriptManager : MonoBehaviour
         scriptQueue = new LinkedList<ScriptInfo>();
         scriptUI.SetActive(false);
 
+    }
+
+    void Start()
+    {
         scriptJSONAsset = GameManager.MissionManager.MissionInfo.ScriptJSON;
         subtitleXMLAsset = GameManager.MissionManager.MissionInfo.GetScriptXML();
         
