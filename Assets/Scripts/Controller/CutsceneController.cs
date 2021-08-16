@@ -85,8 +85,6 @@ public class CutsceneController : MonoBehaviour
 
     void OnCutsceneStart()
     {
-        if(GameManager.Instance.IsGameOver == true) return;
-        
         playerInput.SwitchCurrentActionMap("Cutscene");
 
         GameManager.ScriptManager.ClearScriptQueue();   // In case of remained script exists
@@ -99,6 +97,8 @@ public class CutsceneController : MonoBehaviour
 
     public void PlayPhase3Cutscene()
     {
+        if(GameManager.Instance.IsGameOver == true) return;
+
         OnCutsceneStart();
         audioController.OnCutsceneStart();
         playableDirector.playableAsset = phase3CutsceneAsset;
@@ -122,6 +122,8 @@ public class CutsceneController : MonoBehaviour
     
     public void PlayEndingCutscene()
     {
+        if(GameManager.Instance.IsGameOver == true) return;
+        
         OnCutsceneStart();
         audioController.OnCutsceneStart(true);
         playableDirector.playableAsset = endingCutsceneAsset;

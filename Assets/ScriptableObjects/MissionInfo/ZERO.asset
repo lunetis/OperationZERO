@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZERO
   m_EditorClassIdentifier: 
   missionName: Operation ZERO
-  rankScoreCutoff: 007d0000c05d0000803e0000401f0000
+  rankScoreCutoff: e0ab0000b888000078690000204e0000
   timeLimit: 900
   timeBonusPerSecond: 50
   scriptJson: {fileID: 4900000, guid: 15de8f56636fe144eb75d770d9aa2b1b, type: 3}

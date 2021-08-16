@@ -162,6 +162,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a11c5968-7811-4f61-9e74-e621b0066ad4",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6ffd304f-3d1e-45d4-a2f6-f7d1267639d2",
                     "path": "<Gamepad>/leftStick/x",
                     "interactions": "",
@@ -316,6 +327,17 @@
                 },
                 {
                     "name": "",
+                    "id": "020d14fc-1678-4c62-acb4-d9a04cf56131",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "12330163-8b5d-42a1-b21f-8ce878bf0ba4",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
@@ -376,6 +398,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Gun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca71cb63-0658-4825-9f0f-372d60106862",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Gun",
                     "isComposite": false,
                     "isPartOfComposite": false

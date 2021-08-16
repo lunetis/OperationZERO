@@ -70,6 +70,8 @@ public class AircraftController : MonoBehaviour
     [SerializeField]
     float stallSpeed;
     [SerializeField]
+    float stallHeight = 4000;
+    [SerializeField]
     float gravityFactor;
     [SerializeField]
     float lowAititudeThreshold;
@@ -245,7 +247,7 @@ public class AircraftController : MonoBehaviour
         
         // === Rotation ===
         Vector3 rotateVector;
-        if(speed < stallSpeed)
+        if(speed < stallSpeed || transform.position.y > stallHeight)
         {
             // Ignore all rotation input and head to the ground
             isStalling = true;

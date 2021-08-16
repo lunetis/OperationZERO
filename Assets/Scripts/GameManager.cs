@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour
         }
         
         isGameOver = true;
-        scriptManager.ClearScriptQueue();
+        scriptManager.ClearScriptQueue(true);
         missionManager.OnGameOver(isDead);
         Invoke("GameOverFadeOut", gameOverFadeOutDelay);
     }

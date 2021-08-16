@@ -105,8 +105,23 @@ public class AudioController : MonoBehaviour
 
         nextEventTime = AudioSettings.dspTime + bgmPlayDelay + introBGM.length;
         bgmLoopAudioSource.clip = loopBGM;
+        
         bgmLoopAudioSource.loop = true;
         bgmLoopAudioSource.PlayScheduled(nextEventTime);
+        
+        #if UNITY_WEBGL
+        bgmLoopAudioSource.loop = false;
+        #else
+        bgmLoopAudioSource.loop = true;
+        #endif
+    }
+
+    void CheckWebGLAudioLoop()
+    {
+        if(bgmLoopAudioSource.isPlaying == false)
+        {
+            bgmLoopAudioSource.Play();
+        }
     }
 
     // Update is called once per frame
@@ -119,5 +134,11 @@ public class AudioController : MonoBehaviour
         // Cutscene
         cutsceneVolume = Mathf.Lerp(cutsceneVolume, targetCutsceneVolume, Time.deltaTime * volumeLerpAmount);
         audioMixer.SetFloat("CutsceneVolume", cutsceneVolume);
+
+        // WebGL
+        // Issue: When playing audio with PlayScheduled(), it doesn't loop whether the loop property is checked or not.
+        #if UNITY_WEBGL
+        CheckWebGLAudioLoop();
+        #endif
     }
 }

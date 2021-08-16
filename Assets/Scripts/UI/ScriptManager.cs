@@ -102,18 +102,24 @@ public class ScriptManager : MonoBehaviour
         scriptQueue.AddFirst(SearchScriptInfoByKey(scriptKey));
     }
 
-    public void ClearScriptQueue()
+    public void ClearScriptQueue(bool clearNotRemovableScripts = false)
     {
-        // scriptQueue.Clear();
-        var node = scriptQueue.First;
-        while (node != null)
+        if(clearNotRemovableScripts == true)
         {
-            var next = node.Next;
-            if (node.Value.isRemovable == true)
+            scriptQueue.Clear();
+        }
+        else
+        {
+            var node = scriptQueue.First;
+            while (node != null)
             {
-                scriptQueue.Remove(node);
+                var next = node.Next;
+                if (node.Value.isRemovable == true)
+                {
+                    scriptQueue.Remove(node);
+                }
+                node = next;
             }
-            node = next;
         }
     }
 
