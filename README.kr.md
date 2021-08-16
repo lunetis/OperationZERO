@@ -8,7 +8,9 @@
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
 
-### itch.io에서 게임을 플레이할 수 있습니다. (웹에서 실행 가능, Windows 스탠드얼론 빌드 지원)
+### itch.io에서 게임을 플레이할 수 있습니다.
+
+####  (웹에서 실행 가능, Windows 스탠드얼론 빌드 지원)
 
 > https://lunetis.itch.io/operation-zero
 
