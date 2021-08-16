@@ -10,6 +10,8 @@ Remake Final Mission of Ace Combat Zero with Unity.
 
 ### The game is now posted on itch.io.
 
+#### Executable on Web / Downloadable Windows Standalone Build
+
 > https://lunetis.itch.io/operation-zero
 
 <br>
