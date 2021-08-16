@@ -4,6 +4,16 @@
 
 Remake Final Mission of Ace Combat Zero with Unity.
 
+<br>
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
+
+### The game is now posted on itch.io.
+
+> https://lunetis.itch.io/operation-zero
+
+<br>
+
 * This is a personal project and currently in development.
 * Since I'm testing with DualShock 4 (PlayStation 4 Controller), I'm not sure if other gamepads are working properly in this project. (XBOX Controller, etc.)
 * Due to asset's license issue, commit histories can be deleted sometimes. (In that case, commit count will be very low.)
@@ -33,18 +43,17 @@ Remake Final Mission of Ace Combat Zero with Unity.
   - [x] Ending Cutscene 
 - [x] Main/Result Screen
 - [x] English/Korean Language Support
+- [x] Build Test
 
 <br>
-
-- [ ] **Build Test << In Progress**
-
 <br>
 
 *This list can be changed at anytime.*
 
 Always TODO:
-- Graphics Enhancing (Effects, Lightings, ...)
-- Performance Optimization
+- Animations
+- Graphics Enhancing
+- Optimization
 
 <br>
 <br>
@@ -57,9 +66,6 @@ Always TODO:
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/0810.gif)
 
-[Current Development Status Example (Updated 2021.08.10)]
-- Ending Cutscene Implementation
-- Main / Result Screen Implementation
-- Added In-game English/Korean Language Support 
+[Development Example]
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
