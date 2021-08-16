@@ -4,6 +4,16 @@
 
 에이스 컴뱃 제로의 마지막 미션 "ZERO"를 유니티 엔진으로 구현하는 프로젝트입니다.
 
+<br>
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
+
+### itch.io에서 게임을 플레이할 수 있습니다. (웹에서 실행 가능, Windows 스탠드얼론 빌드 지원)
+
+> https://lunetis.itch.io/operation-zero
+
+<br>
+
 * 개인 프로젝트이며 현재 개발중입니다.
 * 듀얼쇼크 4 컨트롤러 (플레이스테이션 4 전용 컨트롤러)를 사용해서 프로젝트를 진행하고 있기 때문에, XBOX 컨트롤러를 포함한 다른 컨트롤러가 제대로 지원되는지는 아직 확인하지 못했습니다.
 * 에셋의 라이센스 문제로 인해, 때때로 커밋 내역이 초기화될 수 있습니다.
@@ -33,17 +43,15 @@
   - [x] 엔딩 컷씬
 - [x] 결과 화면, 메인 화면
 - [x] 다국어 지원 (한국어, 영어)
-
-<br>
-
-- [ ] **빌드 테스트 << 진행중**
+- [x] 빌드 테스트
 
 <br>
 
 *이 리스트는 개발자 마음대로 바뀔 수 있습니다.*
 
 Always TODO:
-- 그래픽 및 연출 강화 (이펙트, 조명 등...)
+- 애니메이션
+- 그래픽 및 연출 강화
 - 최적화
 
 <br>
@@ -57,9 +65,6 @@ Always TODO:
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/0810.gif)
 
-[현재 구현 예시 (Updated 2021.08.10)]
-- 엔딩 컷씬 구현
-- 메인 화면, 결과 화면 구현
-- 다국어 지원 기능 추가
+[구현 예시]
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
