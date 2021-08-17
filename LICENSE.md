@@ -2,6 +2,8 @@
 
 ### This project includes 3D modelings, packages, and assets from other sources.
 
+Assets not created by project owner are subject to the license set by the developer of each asset.
+
 ## Aircrafts
 
 - F-15C Cipher 3D Model : created by Uxman, https://skfb.ly/6VnHW (CC BY 4.0)
@@ -36,12 +38,25 @@ Since **ACE COMBAT 7 Font is made for "ACE COMBAT™ 7: SKIES UNKNOWN" exclusive
 
 ## Music
 
-### Musics were not uploaded due to copyright issues. (YouTube video only)
+### Musics were not uploaded due to copyright issues. (Build / YouTube video only)
 
 - ZERO : Composed by Kobayashi Keiki, ℗ BANDAI NAMCO Entertainment Inc.
 - Main Theme (From ACE COMBAT 7) : Composed by Mitsuhiro Kitadani, ℗ BANDAI NAMCO Entertainment Inc.
 
 ## Misc.
 
-- Screen Space Multiple Scattering for Unity : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS
+- Screen Space Multiple Scattering for Unity : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS (MIT License)
+
+
+---
+
+## Licenses for assets created by project owner
+
+Copyright (c) 2021 lunetis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
