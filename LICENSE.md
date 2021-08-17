@@ -18,7 +18,6 @@
 
 ## Map/Terrain Components
 
-- Dam 3D Model : Concrete overflow dam 3D Model, https://www.cadnav.com/3d-models/model-8240.html (Free License)
 - Sean's Water - Free Water Shader : https://www.reddit.com/r/Unity3D/comments/9borx7/seans_water_free_water_shader_see_comments_for/
 - Concrete Textures : https://3djungle.net/textures/concrete/
 
@@ -44,5 +43,5 @@ Since **ACE COMBAT 7 Font is made for "ACE COMBAT™ 7: SKIES UNKNOWN" exclusive
 
 ## Misc.
 
-- Screen Space Multiple Scattering for Unity (currently unused) : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS
+- Screen Space Multiple Scattering for Unity : created by Keijiro Takahashi, OCASM, https://github.com/OCASM/SSMS
 
