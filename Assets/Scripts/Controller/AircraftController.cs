@@ -76,12 +76,16 @@ public class AircraftController : MonoBehaviour
     [SerializeField]
     float lowAititudeThreshold;
 
-    
+    [Header("Model/Engine Control")]
+    [SerializeField]
+    AircraftModelController modelController;
+
     [SerializeField]
     List<JetEngineController> jetEngineControllers;
 
     Rigidbody rb;
     float speedReciprocal;
+    Vector3 rotateReciprocal;
 
     // Controllers
     CameraController cameraController;
@@ -318,6 +322,14 @@ public class AircraftController : MonoBehaviour
         }
     }
 
+    void ModelControl()
+    {
+        modelController.SetElevatorAngle(rotateValue.x * rotateReciprocal.x);       // Pitch
+        modelController.SetRudderAngle(rotateValue.y * rotateReciprocal.y);         // Yaw
+        modelController.SetAileronAndFlapAngle(rotateValue.z * rotateReciprocal.z); // Roll
+        modelController.SetBrakeStatus(brakeValue > 0.9f);
+    }
+
     void OnDisable()
     {
         foreach(JetEngineController jet in jetEngineControllers)
@@ -329,6 +341,7 @@ public class AircraftController : MonoBehaviour
         {
             collider.enabled = false;
         }
+        modelController.ResetStatus();
     }
 
     void OnEnable()
@@ -366,6 +379,10 @@ public class AircraftController : MonoBehaviour
         speedReciprocal = 1 / maxSpeed;
         speed = defaultSpeed;
 
+        rotateReciprocal.x = 1 / pitchAmount;
+        rotateReciprocal.y = 1 / yawAmount;
+        rotateReciprocal.z = 1 / rollAmount;
+
         // UI
         SetUI();
     }
@@ -375,6 +392,8 @@ public class AircraftController : MonoBehaviour
         SetUI();
         CheckLowAltitude();
         JetEngineControl();
+
+        ModelControl();
     }
     
     void FixedUpdate()

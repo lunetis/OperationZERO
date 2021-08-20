@@ -1645,6 +1645,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83453748}
   m_CullTransparentMesh: 1
+--- !u!4 &100374338 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2362981437555290076, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &101552772
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,8 +3014,10 @@ MonoBehaviour:
   highGFactor: 1.2
   highGTurnTime: 2
   stallSpeed: 25
+  stallHeight: 4000
   gravityFactor: 5
   lowAititudeThreshold: 0
+  modelController: {fileID: 1460154602}
   jetEngineControllers:
   - {fileID: 1821689794}
   - {fileID: 284471631}
@@ -3164,6 +3172,8 @@ MonoBehaviour:
   targetTransform: {fileID: 1312377745}
   cam: {fileID: 0}
   trackCurrentCamera: 1
+  preventBlinkError: 0
+  errorRange: 0.1
 --- !u!114 &237960707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5687,6 +5697,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350934845}
   m_CullTransparentMesh: 1
+--- !u!4 &358738320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8476068566942431186, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &376820591
 GameObject:
   m_ObjectHideFlags: 0
@@ -6944,6 +6960,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450094416}
   m_CullTransparentMesh: 1
+--- !u!4 &452304677 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2249198794212277079, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &453597154
 GameObject:
   m_ObjectHideFlags: 0
@@ -13714,6 +13736,12 @@ RectTransform:
   m_AnchoredPosition: {x: 39, y: -24}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &901645315 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1614203123516615366, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &903160095
 GameObject:
   m_ObjectHideFlags: 0
@@ -14752,6 +14780,8 @@ MonoBehaviour:
   targetTransform: {fileID: 782338643}
   cam: {fileID: 0}
   trackCurrentCamera: 1
+  preventBlinkError: 0
+  errorRange: 0.1
 --- !u!114 &983204284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15010,6 +15040,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991799558}
   m_CullTransparentMesh: 1
+--- !u!4 &993114200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2376275507456512009, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &997935969
 GameObject:
   m_ObjectHideFlags: 0
@@ -16584,6 +16620,12 @@ MonoBehaviour:
   poolObject: {fileID: 1888173643860524760, guid: 71d330e937c182c40bbfde16791a1a45,
     type: 3}
   initPoolAmount: 1
+--- !u!4 &1061422442 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7622402575637604827, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1075826976
 GameObject:
   m_ObjectHideFlags: 0
@@ -18383,6 +18425,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198460112}
   m_CullTransparentMesh: 1
+--- !u!4 &1232432510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6529883559634456468, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1235801225
 GameObject:
   m_ObjectHideFlags: 0
@@ -22525,6 +22573,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409816416}
   m_CullTransparentMesh: 1
+--- !u!4 &1414577573 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2022092510440655217, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1424123256
 GameObject:
   m_ObjectHideFlags: 0
@@ -23647,6 +23701,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1460154599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1460154602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460154600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9d4b47516d9f49b0c0e046722031c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ailerons:
+  - {fileID: 1925961383}
+  - {fileID: 1636058271}
+  aileronAngle: 7
+  flaps:
+  - {fileID: 1061422442}
+  - {fileID: 100374338}
+  flapAngle: -7
+  elevators:
+  - {fileID: 452304677}
+  - {fileID: 1414577573}
+  elevatorAngle: 5
+  rudders:
+  - {fileID: 993114200}
+  - {fileID: 1232432510}
+  rudderAngle: -10
+  airBrake: {fileID: 358738320}
+  brakeAngle: 58
+  airBrakeRod: {fileID: 901645315}
+  brakeRodAngle: -58
+  brakeLerpAmount: 5
 --- !u!1 &1463164016
 GameObject:
   m_ObjectHideFlags: 0
@@ -26996,6 +27083,7 @@ MonoBehaviour:
   onMissionFailedScripts: []
   onDeadScripts: []
   onPhase1StartScripts: []
+  phase1AdditionalScripts: []
   onPhase1EndScripts: []
   onPhase2StartEvents:
     m_PersistentCalls:
@@ -28047,6 +28135,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631260073}
   m_CullTransparentMesh: 1
+--- !u!4 &1636058271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1147799069388820707, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1642326956
 GameObject:
   m_ObjectHideFlags: 0
@@ -33965,6 +34059,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921900598}
   m_CullTransparentMesh: 1
+--- !u!4 &1925961383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4060933247326636902, guid: fd570233da174be45ac2c22493eb4d94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1460154599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1926322079
 GameObject:
   m_ObjectHideFlags: 0
@@ -34149,6 +34249,8 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   cam: {fileID: 0}
   trackCurrentCamera: 1
+  preventBlinkError: 0
+  errorRange: 0.1
   mslLockTexture: {fileID: 2800000, guid: 25f5b3e53ec58ac41bfc2a2514cecacf, type: 3}
   spwLockTexture: {fileID: 2800000, guid: 4100abcee9f3f104093d6195e7806d46, type: 3}
   crosshair: {fileID: 983204282}

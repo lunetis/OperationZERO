@@ -39,6 +39,8 @@ public class CutsceneController : MonoBehaviour
 
     [SerializeField]
     AudioController audioController;
+    [SerializeField]
+    SnowController snowController;
 
     // ======= Input =======
 
@@ -86,6 +88,7 @@ public class CutsceneController : MonoBehaviour
     void OnCutsceneStart()
     {
         playerInput.SwitchCurrentActionMap("Cutscene");
+        snowController.IsPlayingCutscene = true;
 
         GameManager.ScriptManager.ClearScriptQueue();   // In case of remained script exists
         onCutsceneStart.Invoke();
@@ -108,6 +111,7 @@ public class CutsceneController : MonoBehaviour
 
     void OnPhase3CutsceneEnded(PlayableDirector director)
     {
+        snowController.IsPlayingCutscene = false;
         audioController.OnCutsceneEnd();
         onPhase3CutsceneEnded.Invoke();
         cutsceneCamera.SetActive(false);
