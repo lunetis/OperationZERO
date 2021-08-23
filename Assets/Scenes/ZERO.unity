@@ -8057,8 +8057,8 @@ MonoBehaviour:
     type: 3}
   bulletCnt: 4000
   gunTransform: {fileID: 46228064}
-  gunRPM: 1200
-  vibrateAmount: 0.4
+  gunRPM: 700
+  vibrateAmount: 0.5
   minimapController: {fileID: 1489829122}
   gunCrosshair: {fileID: 2006253361}
   ammunitionZeroClip: {fileID: 8300000, guid: b38fb4bfdd4c1f24abda2ce60cbae9b9, type: 3}
@@ -29703,7 +29703,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.05
+  m_MaxParticleSize: 0.01
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -34447,7 +34447,6 @@ MonoBehaviour:
   heightOffset: 20
   followTargetRigidbody: {fileID: 432070751}
   cinemachine: {fileID: 1213497982}
-  isPlayingCutscene: 0
 --- !u!1001 &1208168048
 PrefabInstance:
   m_ObjectHideFlags: 0

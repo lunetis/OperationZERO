@@ -86,6 +86,11 @@ public class WeaponController : MonoBehaviour
     AircraftController aircraftController;
     UIController uiController;
 
+    public Transform GunTransform
+    {
+        get { return gunTransform; }
+    }
+
     // For vibration
     Gamepad gamepad;
 
@@ -229,8 +234,10 @@ public class WeaponController : MonoBehaviour
         bullet.transform.rotation = transform.rotation;
         bullet.SetActive(true);
 
+        TargetObject reservedHitTargetObject = gunCrosshair.CheckGunHit();
+
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.Fire(aircraftController.Speed, gameObject.layer);
+        bulletScript.Fire(aircraftController.Speed, gameObject.layer, reservedHitTargetObject);
         bulletCnt--;
         
         // Vibration

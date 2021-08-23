@@ -5023,10 +5023,10 @@ MonoBehaviour:
   missileName: QAAM
   damage: 15
   isSpecialWeapon: 1
-  maxSpeed: 300
-  accelAmount: 60
+  maxSpeed: 320
+  accelAmount: 80
   turningForce: 2
-  smartTrackingRate: 1
+  smartTrackingRate: 0.9
   boresightAngle: 150
   lifetime: 7
   targetSearchSpeed: 80

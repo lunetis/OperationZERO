@@ -112,8 +112,8 @@ MonoBehaviour:
   missileName: MSL
   damage: 10
   isSpecialWeapon: 0
-  maxSpeed: 300
-  accelAmount: 50
+  maxSpeed: 270
+  accelAmount: 60
   turningForce: 2
   smartTrackingRate: 0.5
   boresightAngle: 90

@@ -15,6 +15,9 @@ public class GunCrosshair : Crosshair
     [SerializeField]
     Image fillImage;
 
+    Transform gunTransform;
+    int objectLayer;
+
     float reciprocal;
 
     public void SetTarget(Transform target)
@@ -26,10 +29,27 @@ public class GunCrosshair : Crosshair
         this.target = target;
     }
 
+    public TargetObject CheckGunHit()
+    {
+        RaycastHit hit;
+        Vector3 direction = transform.position - gunTransform.position;
+        if(Physics.Raycast(transform.position, direction, out hit, visibleDistance, objectLayer) == true)
+        {
+            return hit.collider.GetComponent<TargetObject>();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
     protected override void Start()
     {
         base.Start();
         reciprocal = 1 / visibleDistance;
+        gunTransform = GameManager.WeaponController.GunTransform;
+        objectLayer = 1 << LayerMask.NameToLayer("Object");
     }
 
     // Update is called once per frame
@@ -41,7 +61,8 @@ public class GunCrosshair : Crosshair
         float fillAmount = distance * reciprocal;
         Vector2 aircraftRotation = GameManager.AircraftController.RotateValue;
         Vector3 convertedPosition = new Vector3(-aircraftRotation.y * offset.x * fillAmount, aircraftRotation.x * offset.y * fillAmount, zDistance);
-        convertedPosition *= distance * reciprocal;
+
+        convertedPosition *= fillAmount;
         transform.localPosition = Vector3.Lerp(transform.localPosition, convertedPosition, lerpAmount);
 
         if(distance < visibleDistance)

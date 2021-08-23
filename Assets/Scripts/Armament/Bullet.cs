@@ -11,14 +11,32 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float lifetime;
 
+    TargetObject reservedTargetObject;
+
     [SerializeField]
     float damage;
     
-    public void Fire(float launchSpeed, int layer)
+    public void Fire(float launchSpeed, int layer, TargetObject reservedHitTargetObject = null)
     {
         speed += launchSpeed;
         gameObject.layer = layer;
         rb.velocity = transform.forward * speed;
+
+        if(reservedHitTargetObject != null)
+        {
+            reservedTargetObject = reservedHitTargetObject;
+            GetComponent<Collider>().isTrigger = true;
+
+            float reachTime = Vector3.Distance(transform.position, reservedHitTargetObject.transform.position) / (speed + launchSpeed);
+            Invoke("ReserveHit", reachTime);
+        }
+    }
+
+    public void ReserveHit()
+    {
+        reservedTargetObject.OnDamage(damage, gameObject.layer, gameObject.tag);
+        CreateHitEffect(GameManager.Instance.bulletHitEffectObjectPool);
+        DisableBullet();
     }
 
     void OnCollisionEnter(Collision other)
@@ -62,6 +80,7 @@ public class Bullet : MonoBehaviour
     void OnEnable()
     {
         trailRenderer.Clear();
+        GetComponent<Collider>().isTrigger = false;
         Invoke("DisableBullet", lifetime);
     }
 
