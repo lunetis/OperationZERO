@@ -172,8 +172,18 @@ public class WeaponController : MonoBehaviour
         }
 
         if(newTarget != null && newTarget == target) return;
+
+        // Previous Target
+        if(target != null)
+        {
+            target.SetMinimapSpriteBlink(false);
+        }
+
+        // Current Target
         target = GetNextTarget();
+
         target.isNextTarget = false;
+        target.SetMinimapSpriteBlink(true);
         GameManager.TargetController.ChangeTarget(target);
         gunCrosshair.SetTarget(target.transform);
     }

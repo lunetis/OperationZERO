@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public ObjectPool explosionEffectObjectPool;
     public ObjectPool mpbmEffectObjectPool;
     public ObjectPool smokeTrailEffectObjectPool;
+    public ObjectPool borderIncicatorObjectPool;
 
     [SerializeField]
     ObjectPool smokeTrailDamagePool;

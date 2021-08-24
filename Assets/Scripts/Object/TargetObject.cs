@@ -19,6 +19,7 @@ public class TargetObject : MonoBehaviour
     protected List<Missile> lockedMissiles = new List<Missile>();
     protected bool isWarning;
     
+    protected MinimapSprite minimapSprite;
     protected Collider objectCollider;
     protected bool isDestroyed;
 
@@ -126,25 +127,25 @@ public class TargetObject : MonoBehaviour
 
     public void DeleteMinimapSprite()
     {
-        for(int i = 0; i < transform.childCount; i++)
+        if(minimapSprite != null)   
         {
-            GameObject childObject = transform.GetChild(i).gameObject;
-            if(childObject.layer == LayerMask.NameToLayer("Minimap"))
-            {
-                Destroy(childObject);
-            }
+            Destroy(minimapSprite.gameObject);
         }
     }
 
     public void SetMinimapSpriteVisible(bool visible)
     {
-        for(int i = 0; i < transform.childCount; i++)
+        if(minimapSprite != null)   
         {
-            GameObject childObject = transform.GetChild(i).gameObject;
-            if(childObject.layer == LayerMask.NameToLayer("Minimap"))
-            {
-                childObject.SetActive(visible);
-            }
+            minimapSprite.gameObject.SetActive(visible);
+        }
+    }
+
+    public void SetMinimapSpriteBlink(bool blink)
+    {
+        if(minimapSprite != null)   
+        {
+            minimapSprite.SetMinimapSpriteBlink(blink);
         }
     }
 
@@ -189,6 +190,16 @@ public class TargetObject : MonoBehaviour
 
         hp = objectInfo.HP;
         lastHitLayer = 0;
+
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            GameObject childObject = transform.GetChild(i).gameObject;
+            if(childObject.layer == LayerMask.NameToLayer("Minimap"))
+            {
+                minimapSprite = childObject.GetComponent<MinimapSprite>();
+                break;
+            }
+        }
     }
 
     protected void OnDestroy()

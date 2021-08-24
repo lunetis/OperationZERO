@@ -10,13 +10,46 @@ public class MinimapSprite : MonoBehaviour
     public float iconSize;
     public float depth;
 
-    public bool showBorderIndicator;
+    BorderIndicator borderIndicator;
+
+    [SerializeField]
+    bool showBorderIndicator = false;
+    
+    [SerializeField]
+    float blinkRepeatTime = 0.2f;
 
     float initSize;
+
 
     public void SetMinimapSpriteVisible(bool visible)
     {
         spriteRenderer.enabled = visible;
+    }
+
+    public void SetMinimapSpriteBlink(bool blink)
+    {
+        if(blink == true)
+        {
+            InvokeRepeating("Blink", blinkRepeatTime, blinkRepeatTime);
+        }
+        else
+        {
+            CancelInvoke();
+            spriteRenderer.color = Color.white;
+        }
+    }
+
+    void Blink()
+    {
+        spriteRenderer.color = (spriteRenderer.color == Color.white) ? Color.clear : Color.white;
+    }
+
+    void OnDestroy()
+    {
+        if(borderIndicator != null)
+        {
+            borderIndicator.gameObject.SetActive(false);
+        }
     }
 
     void Awake()
@@ -44,11 +77,18 @@ public class MinimapSprite : MonoBehaviour
         {
             if(spriteRenderer.isVisible == false)
             {
-                minimapController.ShowBorderIndicator(transform.position);
+                if(borderIndicator == null)
+                {
+                    GameObject borderIndicatorObject = GameManager.Instance.borderIncicatorObjectPool.GetPooledObject();
+                    borderIndicator = borderIndicatorObject.GetComponent<BorderIndicator>();
+                    borderIndicator.Target = transform.parent;
+                    borderIndicatorObject.SetActive(true);
+                }
+                borderIndicator?.gameObject.SetActive(true);
             }
             else
             {
-                minimapController.HideBorderIncitator();
+                borderIndicator?.gameObject.SetActive(false);
             }
         }
     }

@@ -35,14 +35,20 @@ public class MinimapController : MonoBehaviour
     [Header("Minimap UI")]
     public GameObject[] minimaps = new GameObject[3];
 
-    [Header("Indicator")]
-    public Transform indicator;
-    public float indicatorSize;
-
     Vector2 cameraSize;
     float sizeReciprocal;
     int minimapIndex;
     int savedMinimapIndex;  // saved on pause
+
+    public MinimapIndex GetMinimapIndex()
+    {
+        return (MinimapIndex)minimapIndex;
+    }
+
+    public Vector2 CameraSize
+    {
+        get { return cameraSize; }
+    }
 
     // Input Event
     public void ChangeMinimapView(InputAction.CallbackContext context)
@@ -98,54 +104,6 @@ public class MinimapController : MonoBehaviour
         cameraSize = new Vector2(minimapCamera.orthographicSize, minimapCamera.orthographicSize * minimapCamera.aspect);
     }
 
-
-    public void ShowBorderIndicator(Vector3 position)
-    {
-        if(target == null) return;
-        
-        float reciprocal;
-        float rotation;
-        Vector2 distance = new Vector3(minimapCamera.transform.position.x - position.x, minimapCamera.transform.position.z - position.z);
-
-        // When the x, z positions are same
-        if(distance.x == 0 || distance.y == 0)
-            return;
-
-        if((MinimapIndex)minimapIndex == MinimapIndex.Small)
-        {
-            distance = Quaternion.Euler(0, 0, target.eulerAngles.y) * distance;
-        }
-        
-        // X axis
-        if(Mathf.Abs(distance.x) > Mathf.Abs(distance.y))
-        {
-            reciprocal = -Mathf.Abs(cameraSize.x / distance.x);
-            rotation = (distance.x > 0) ? 90 : -90;
-        }
-        // Y axis
-        else
-        {
-            reciprocal = -Mathf.Abs(cameraSize.y / distance.y);
-            rotation = (distance.y > 0) ? 180 : 0;
-        }
-        
-        // change indicator
-        float scale = sizeReciprocal * minimapCamera.orthographicSize;
-
-        indicator.localScale = new Vector3(scale, scale, scale);
-        indicator.localPosition = new Vector3(distance.x * reciprocal, distance.y * reciprocal, 1);
-        indicator.localEulerAngles = new Vector3(0, 0, rotation);
-        
-        if(indicator.gameObject.activeInHierarchy == false)
-        {
-            indicator.gameObject.SetActive(true);
-        }
-    }
-
-    public void HideBorderIncitator()
-    {
-        indicator.gameObject.SetActive(false);
-    }
 
     public float GetInitCameraViewSize()
     {
@@ -230,7 +188,6 @@ public class MinimapController : MonoBehaviour
     {
         minimapIndex = (int)MinimapIndex.Small;
         SetCamera();
-        sizeReciprocal = indicatorSize / minimapCamera.orthographicSize;
         isZooming = false;
     }
     

@@ -91,7 +91,10 @@ public class PixyTLS : MonoBehaviour
 
         if(hit.collider != null)
         {
-            lineDistance = hit.distance;
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                lineDistance = hit.distance;
+            }
 
             if(isActivated == true && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
