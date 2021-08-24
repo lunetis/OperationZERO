@@ -138,6 +138,7 @@ public class TargetObject : MonoBehaviour
         if(minimapSprite != null)   
         {
             minimapSprite.gameObject.SetActive(visible);
+            SetMinimapSpriteBlink(false);
         }
     }
 
