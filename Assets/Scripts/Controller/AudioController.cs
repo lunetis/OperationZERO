@@ -12,6 +12,8 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     AudioClip introBGM;
     [SerializeField]
+    AudioClip checkpointIntroBGM;
+    [SerializeField]
     AudioClip loopBGM;
     [SerializeField]
     float bgmPlayDelay = 1;
@@ -99,11 +101,18 @@ public class AudioController : MonoBehaviour
             return;
         }
 
-        bgmIntroAudioSource.clip = introBGM;
+        AudioClip introAudioClip = introBGM;
+
+        if(MissionManager.phase > 1 && checkpointIntroBGM != null)
+        {
+            introAudioClip = checkpointIntroBGM;
+            bgmPlayDelay = 0.2f;
+        }
+        bgmIntroAudioSource.clip = introAudioClip;
         bgmIntroAudioSource.loop = false;
         bgmIntroAudioSource.PlayScheduled(AudioSettings.dspTime + bgmPlayDelay);
 
-        nextEventTime = AudioSettings.dspTime + bgmPlayDelay + introBGM.length;
+        nextEventTime = AudioSettings.dspTime + bgmPlayDelay + introAudioClip.length;
         bgmLoopAudioSource.clip = loopBGM;
         
         bgmLoopAudioSource.loop = true;

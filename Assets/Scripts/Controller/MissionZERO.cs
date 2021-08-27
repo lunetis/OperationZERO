@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class MissionZERO : MissionManager
 {
-    int phase = 1;
-
     [Header("Phase System")]
     [Header("Phase 1")]
     [SerializeField]
@@ -57,23 +55,16 @@ public class MissionZERO : MissionManager
     [SerializeField]
     int phase3TimeLimit;
 
-    float elapsedTimeBeforePhase3;
-    float elapsedTimeAfterPhase3;
-
     ResultData resultData;
 
     public void CheckElapsedTimeBeforePhase3()
     {
-        elapsedTimeBeforePhase3 = GameManager.UIController.StopCountAndGetElapsedTime();
+        ResultData.elapsedTime += GameManager.UIController.StopCountAndGetElapsedTime();
     }
 
     public void CheckElapsedTimeAfterPhase3()
     {
-        elapsedTimeAfterPhase3 = GameManager.UIController.StopCountAndGetElapsedTime();
-
-        Debug.Log(elapsedTimeBeforePhase3 + " // " + elapsedTimeAfterPhase3);
-
-        ResultData.elapsedTime = (int)(elapsedTimeBeforePhase3 + elapsedTimeAfterPhase3);
+        ResultData.elapsedTime += GameManager.UIController.StopCountAndGetElapsedTime();
         ResultData.score = GameManager.PlayerAircraft.Score;
     }
 
@@ -177,10 +168,8 @@ public class MissionZERO : MissionManager
     {
         GameManager.UIController.SetLabel(AlertUIController.LabelEnum.MissionUpdated);
 
-        GameManager.AircraftController.transform.SetPositionAndRotation(
-            phase3CipherTransform.position, phase3CipherTransform.rotation);
-        pixy.transform.SetPositionAndRotation(
-            phase3PixyTransform.position, phase3PixyTransform.rotation);
+        GameManager.AircraftController.transform.SetPositionAndRotation(phase3CipherTransform.position, phase3CipherTransform.rotation);
+        pixy.transform.SetPositionAndRotation(phase3PixyTransform.position, phase3PixyTransform.rotation);
 
         pixy.ForceChangeWaypoint(phase3CipherTransform.position);
     }
@@ -199,5 +188,34 @@ public class MissionZERO : MissionManager
     public void PlayEndingCutscene()
     {
         cutsceneController.PlayEndingCutscene();
+    }
+
+
+    public override void SetupForRestartFromCheckpoint()
+    {
+        if(phase < 3)
+        {
+            phase = 1;
+            ResultData.elapsedTime = 0;
+        }
+    }
+
+    public void PlayAtCheckpoint()
+    {
+        pixy.SetPhase3();
+        OnPhaseStart();
+    }
+
+    protected override void Start()
+    {
+        if(phase == 3)
+        {
+            SetResultData();
+            PlayAtCheckpoint();
+        }
+        else
+        {
+            base.Start();
+        }
     }
 }

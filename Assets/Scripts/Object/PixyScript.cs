@@ -10,6 +10,9 @@ public class PixyScript : EnemyAircraft
     bool isAttackable = true;
 
     int phase = 1;
+    
+    [SerializeField]
+    PixyTLS pixyTLS;
 
     [SerializeField]
     UnityEvent phase1EndEvents;
@@ -27,6 +30,12 @@ public class PixyScript : EnemyAircraft
     EnemyWeaponController weaponController;
     PixyMPBMController mpbmController;
     ECMSystem ecmSystem;
+
+    public void SetPhase3()
+    {
+        phase = 3;
+        pixyTLS.enabled = false;
+    }
 
     public bool MPBMController
     {
@@ -117,7 +126,7 @@ public class PixyScript : EnemyAircraft
         hp = objectInfo.HP;
         IsAttackable = true;
 
-        phase++;
+        if(phase < 3) phase++;
     }
 
     // Start is called before the first frame update

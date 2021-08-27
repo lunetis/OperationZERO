@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MissionManager : MonoBehaviour
 {
+    public static int phase = 1;
+
     [Header("Game Properties")]
     [SerializeField]
     MissionInfo missionInfo;
@@ -43,12 +45,19 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public virtual void SetupForRestartFromCheckpoint() {}
+
+    protected void SetResultData()
     {
         ResultData.missionName = missionInfo.MissionName;
         ResultData.maxTime = missionInfo.TimeLimit;
         ResultData.timeBonusPerSecond = missionInfo.TimeBonusPerSecond;
         ResultData.rankScoreCutoff = missionInfo.RankScoreCutoff;
+    }
+
+    protected virtual void Start()
+    {
+        SetResultData();
         
         GameManager.UIController.SetRemainTime(missionInfo.TimeLimit);
         GameManager.ScriptManager.AddScript(onMissionStartScripts);

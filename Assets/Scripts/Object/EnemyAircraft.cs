@@ -69,6 +69,11 @@ public class EnemyAircraft : AircraftAI
         {
             GameManager.Instance.CreateDamageSmokeEffect(smokeTransformParent.GetChild(i));
         }
+
+        if(hp > 0)
+        {
+            ChangeWaypoint();
+        }
     }
 
 

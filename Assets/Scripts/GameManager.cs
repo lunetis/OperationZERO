@@ -298,6 +298,8 @@ public class GameManager : MonoBehaviour
         
         isGameOver = true;
         scriptManager.ClearScriptQueue(true);
+
+        ResultData.elapsedTime += GameManager.UIController.StopCountAndGetElapsedTime();
         missionManager.OnGameOver(isDead);
         Invoke("GameOverFadeOut", gameOverFadeOutDelay);
     }
@@ -343,11 +345,15 @@ public class GameManager : MonoBehaviour
 
     void RestartFromCheckpointEvent()
     {
+        missionManager.SetupForRestartFromCheckpoint();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void RestartMission()
     {
+        MissionManager.phase = 1;
+        ResultData.elapsedTime = 0;
+
         playerInput.enabled = false;
         pauseController.enabled = false;
         gameOverController.enabled = false;

@@ -191,7 +191,7 @@ public class AircraftAI : TargetObject
         return waypointPosition;
     }
 
-    void ChangeWaypoint()
+    protected void ChangeWaypoint()
     {
         waypointChangeDelay = minimumWaypointChangeDelay;
         

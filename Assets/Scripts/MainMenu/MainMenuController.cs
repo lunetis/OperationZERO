@@ -69,7 +69,7 @@ public class MainMenuController : MonoBehaviour
         if(context.action.phase == InputActionPhase.Started)
         {
             PlayScrollAudioClip();
-            currentMenuController.Navigate(context);
+            currentMenuController?.Navigate(context);
         }
     }
 
@@ -78,7 +78,7 @@ public class MainMenuController : MonoBehaviour
         if(context.action.phase == InputActionPhase.Started)
         {
             PlayConfirmAudioClip();
-            currentMenuController.Confirm(context);
+            currentMenuController?.Confirm(context);
         }
     }
     
@@ -87,7 +87,7 @@ public class MainMenuController : MonoBehaviour
         if(context.action.phase == InputActionPhase.Started)
         {
             PlayBackAudioClip();
-            currentMenuController.Back(context);
+            currentMenuController?.Back(context);
         }
     }
 

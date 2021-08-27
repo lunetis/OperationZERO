@@ -28,8 +28,6 @@ public class ResultController : MonoBehaviour
         InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
         backAction.started -= Back;
         MainMenuController.Instance.ShowMainMenu();
-        
-        Debug.Log(name + " onDisable");
     }
 
     IEnumerator ConfirmCoroutine()
@@ -66,9 +64,10 @@ public class ResultController : MonoBehaviour
     {
         missionNameText.text = string.Format("[ {0} ]", ResultData.missionName);
 
-        int min = ResultData.elapsedTime / 60;
-        int sec = ResultData.elapsedTime % 60;
-        elapsedTimeText.text = string.Format("{0:00}:{1:00}", min, sec);
+        int min = (int)ResultData.elapsedTime / 60;
+        int sec = (int)ResultData.elapsedTime % 60;
+        int millisec = (int)((ResultData.elapsedTime * 100) % 100);
+        elapsedTimeText.text = string.Format("{0:00}'{1:00}\"{2:00}", min, sec, millisec);
 
         timeBonusText.text = string.Format("{0:n0}", ResultData.GetTimeBonusScore());
         scoreText.text = string.Format("{0:n0}", ResultData.score);
@@ -83,7 +82,5 @@ public class ResultController : MonoBehaviour
         submitAction.started += Confirm;
         InputAction backAction = MainMenuController.PlayerInput.actions.FindAction("Back");
         backAction.started += Back;
-        
-        Debug.Log(name + " onEnable");
     }
 }

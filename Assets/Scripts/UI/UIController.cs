@@ -39,6 +39,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     HeadingUIController headingUIController;
 
+    // Upper Right
+    [Header("Upper Left UI")]
+    [SerializeField]
+    GameObject checkpointReachedUI;
+
     // Upper Left
     [Header("Upper Left UI")]
     [SerializeField]
@@ -350,6 +355,18 @@ public class UIController : MonoBehaviour
     public void SetLabel(AlertUIController.LabelEnum labelEnum)
     {
         alertUIController.SetLabel(labelEnum);
+    }
+
+    public void ShowCheckpointReachedUI()
+    {
+        StartCoroutine(SetCheckpointReachedUI());
+    }
+
+    public IEnumerator SetCheckpointReachedUI()
+    {
+        checkpointReachedUI.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        checkpointReachedUI.SetActive(false);
     }
 
     void Awake()

@@ -48,6 +48,9 @@ public class LoadingController : MonoBehaviour
     void Start()
     {
         progressText.text = "";
+        ResultData.missionName = "";
+        ResultData.elapsedTime = 0;
+        MissionManager.phase = 1;
         fadeController.OnFadeInComplete.AddListener(StartLoadScene);
     }
 }
