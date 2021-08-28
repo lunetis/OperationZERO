@@ -12,6 +12,7 @@ public class TargetObject : MonoBehaviour
 
     protected bool isEnemy;
     protected float hp;
+    protected float maxhp;
     public bool isNextTarget;
 
     int lastHitLayer;
@@ -177,6 +178,11 @@ public class TargetObject : MonoBehaviour
         
         Destroy(gameObject);
     }
+
+    protected virtual void AdjustValuesByDifficulty()
+    {
+        
+    }
     
     protected virtual void Start()
     {
@@ -189,7 +195,7 @@ public class TargetObject : MonoBehaviour
             GameManager.Instance?.AddEnemy(this);
         }
 
-        hp = objectInfo.HP;
+        maxhp = hp = objectInfo.HP;
         lastHitLayer = 0;
 
         for(int i = 0; i < transform.childCount; i++)
@@ -201,6 +207,8 @@ public class TargetObject : MonoBehaviour
                 break;
             }
         }
+
+        AdjustValuesByDifficulty();
     }
 
     protected void OnDestroy()

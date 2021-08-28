@@ -1,0 +1,36 @@
+<data>
+    <difficulty>
+        <easy>
+            <evasionRateMultiplyFactor>0.5</evasionRateMultiplyFactor>
+            <playerHPMultiplyFactor>2</playerHPMultiplyFactor>
+            <aiAircraftTurningForceFactor>0.5</aiAircraftTurningForceFactor>
+            <enemyMissileTrackingRate>0.5</enemyMissileTrackingRate>
+            <enemyMissileBoresightAngle>90</enemyMissileBoresightAngle>
+            <enemyMissileTurningForce>1.5</enemyMissileTurningForce>
+        </easy>
+        <normal>
+            <evasionRateMultiplyFactor>1</evasionRateMultiplyFactor>
+            <playerHPMultiplyFactor>1</playerHPMultiplyFactor>
+            <aiAircraftTurningForceFactor>1</aiAircraftTurningForceFactor>
+            <enemyMissileTrackingRate>0.7</enemyMissileTrackingRate>
+            <enemyMissileBoresightAngle>100</enemyMissileBoresightAngle>
+            <enemyMissileTurningForce>2</enemyMissileTurningForce>
+        </normal>
+        <hard>
+            <evasionRateMultiplyFactor>2</evasionRateMultiplyFactor>
+            <playerHPMultiplyFactor>0.67</playerHPMultiplyFactor>
+            <aiAircraftTurningForceFactor>1.2</aiAircraftTurningForceFactor>
+            <enemyMissileTrackingRate>0.8</enemyMissileTrackingRate>
+            <enemyMissileBoresightAngle>100</enemyMissileBoresightAngle>
+            <enemyMissileTurningForce>2</enemyMissileTurningForce>
+        </hard>
+        <ace>
+            <evasionRateMultiplyFactor>3</evasionRateMultiplyFactor>
+            <playerHPMultiplyFactor>0.1</playerHPMultiplyFactor>
+            <aiAircraftTurningForceFactor>1.5</aiAircraftTurningForceFactor>
+            <enemyMissileTrackingRate>0.9</enemyMissileTrackingRate>
+            <enemyMissileBoresightAngle>110</enemyMissileBoresightAngle>
+            <enemyMissileTurningForce>2</enemyMissileTurningForce>
+        </ace>
+    </difficulty>
+</data>

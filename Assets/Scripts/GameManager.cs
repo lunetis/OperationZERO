@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     PlayerInput playerInput;
 
     [Header("Object Pools")]
+    public ObjectPool enemyMissileObjectPool;
     public ObjectPool missileObjectPool;
     public ObjectPool specialWeaponObjectPool;
     public ObjectPool explosionEffectObjectPool;

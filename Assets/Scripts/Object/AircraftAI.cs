@@ -319,6 +319,13 @@ public class AircraftAI : TargetObject
         }
     }
 
+    protected override void AdjustValuesByDifficulty()
+    {
+        float evasionRateMultiplyFactor = MissionData.GetFloatFromDifficultyXML("evasionRateMultiplyFactor");
+        evasionRate = Mathf.Clamp01(evasionRate * evasionRateMultiplyFactor);
+        float turningForceFactor = MissionData.GetFloatFromDifficultyXML("aiAircraftTurningForceFactor");
+        turningForce *= turningForceFactor;
+    }
 
     protected override void Start()
     {
@@ -345,7 +352,7 @@ public class AircraftAI : TargetObject
                 waypointQueue.Enqueue(t);
             }
         }
-        ChangeWaypoint();      
+        ChangeWaypoint();
     }
 
     protected virtual void Update()

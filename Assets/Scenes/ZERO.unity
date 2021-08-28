@@ -2942,6 +2942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2135136380}
+  enemyMissileObjectPool: {fileID: 1144772533}
   missileObjectPool: {fileID: 474201793}
   specialWeaponObjectPool: {fileID: 7858492}
   explosionEffectObjectPool: {fileID: 1321214062}
@@ -3036,6 +3037,7 @@ Transform:
   - {fileID: 1122564803}
   - {fileID: 1839389194}
   - {fileID: 673919205}
+  - {fileID: 1144772532}
   m_Father: {fileID: 1783504582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8746,8 +8748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3934ae231967070488f63612f1fbd370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObject: {fileID: 0}
-  initPoolAmount: 6
+  poolObject: {fileID: 776904845}
+  initPoolAmount: 2
 --- !u!4 &474201794
 Transform:
   m_ObjectHideFlags: 0
@@ -29031,6 +29033,52 @@ Transform:
   m_Father: {fileID: 1922460605}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1144772531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144772532}
+  - component: {fileID: 1144772533}
+  m_Layer: 0
+  m_Name: Enemy Missile Object Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144772532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144772531}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 191293117}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1144772533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144772531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3934ae231967070488f63612f1fbd370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 8269578546773501747, guid: 99304186a4c022f459351406fc59aaa2,
+    type: 3}
+  initPoolAmount: 1
 --- !u!1 &1156855375
 GameObject:
   m_ObjectHideFlags: 0
@@ -40276,9 +40324,9 @@ MonoBehaviour:
   destroyEffect: {fileID: 1556574608389113247, guid: 8d4b3caee090b1247bf61af54d4d0905,
     type: 3}
   isNextTarget: 0
-  maxSpeed: 200
-  minSpeed: 60
-  defaultSpeed: 90
+  maxSpeed: 220
+  minSpeed: 100
+  defaultSpeed: 150
   accelerateLerpAmount: 1
   accelerateAmount: 20
   turningForce: 1
@@ -40288,7 +40336,7 @@ MonoBehaviour:
   initialWaypoints:
   - {fileID: 432070743}
   waypointMinHeight: 1500
-  waypointMaxHeight: 3000
+  waypointMaxHeight: 3500
   areaCollider: {fileID: 0}
   evasionRate: 0.35
   newWaypointDistance: 1000
@@ -40446,7 +40494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba88170c1b993434290ed46d4dd7a22f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missile: {fileID: 5286992299650033890, guid: ac340c911b1a1c8439acd116fe36d84b, type: 3}
+  missile: {fileID: 215191563594908272, guid: 99304186a4c022f459351406fc59aaa2, type: 3}
   missileLaunchTransform: {fileID: 2019972128}
   lockSpeedPenalty: 1
   fireCheckDelay: 3

@@ -76,7 +76,7 @@ public class PlayerAircraft : TargetObject
     public override void OnDamage(float damage, int layer, string tag = "")
     {
         base.OnDamage(damage, layer);
-        uiController.SetDamage((int)(((Info.HP - hp) / Info.HP) * 100));
+        uiController.SetDamage((int)(((maxhp - hp) / maxhp) * 100));
 
         for(int i = 0; i < smokeTransformParent.childCount; i++)
         {
@@ -162,6 +162,12 @@ public class PlayerAircraft : TargetObject
         }
 
         return WarningStatus.NONE;
+    }
+    
+    protected override void AdjustValuesByDifficulty()
+    {
+        float playerHPMultiplyFactor = MissionData.GetFloatFromDifficultyXML("playerHPMultiplyFactor");
+        maxhp = hp = Mathf.Clamp(hp * playerHPMultiplyFactor, 1, 100);
     }
 
     // Start is called before the first frame update

@@ -18,5 +18,5 @@ public class GameSettings : MonoBehaviour
     }
     
     public static Language languageSetting = Language.EN;
-    public static Difficulty difficultySetting;
+    public static Difficulty difficultySetting = Difficulty.NORMAL;
 }

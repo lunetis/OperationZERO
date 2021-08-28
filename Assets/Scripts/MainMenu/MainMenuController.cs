@@ -17,6 +17,9 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField]
     GameObject mainMenuScreen;
+    
+    [SerializeField]
+    GameObject difficultyMenuScreen;
     [SerializeField]
     GameObject settingsScreen;
     [SerializeField]
@@ -130,6 +133,11 @@ public class MainMenuController : MonoBehaviour
     public void SetDifficulty(int difficulty)
     {
         GameSettings.difficultySetting = (GameSettings.Difficulty)difficulty;
+    }
+    
+    public void ShowDifficultySettings()
+    {
+        SetCurrentActiveScreen(difficultyMenuScreen);
     }
 
     public void ShowMainMenu()

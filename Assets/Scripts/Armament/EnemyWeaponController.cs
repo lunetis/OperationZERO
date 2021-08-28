@@ -113,7 +113,7 @@ public class EnemyWeaponController : MonoBehaviour
         if(isLocked == false) return;
         
         // Get from Object Pool and Launch
-        GameObject missile = GameManager.Instance.missileObjectPool.GetPooledObject();
+        GameObject missile = GameManager.Instance.enemyMissileObjectPool.GetPooledObject();
         missile.transform.position = missileLaunchTransform.position;
         missile.transform.rotation = transform.rotation;
         missile.SetActive(true);

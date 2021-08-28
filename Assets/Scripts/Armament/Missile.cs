@@ -23,7 +23,7 @@ public class Missile : MonoBehaviour
 
     [SerializeField]
     [Range(0, 1)]
-    float smartTrackingRate = 0.3f;
+    protected float smartTrackingRate = 0.3f;
 
     [Space(10)]
     public float boresightAngle;
@@ -218,12 +218,21 @@ public class Missile : MonoBehaviour
         }
     }
 
+    protected virtual void AdjustValuesByDifficulty()
+    {
+        
+    }
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         parent = transform.parent;
+    }
+
+    void Start()
+    {
+        AdjustValuesByDifficulty();
     }
     
 

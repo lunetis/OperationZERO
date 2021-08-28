@@ -14,6 +14,9 @@ public class MenuController : MonoBehaviour
     RectTransform selectIndicator;
     
     [SerializeField]
+    UnityEvent onNavigateEvent;
+
+    [SerializeField]
     UnityEvent onBackEvent;
 
     [SerializeField]
@@ -60,6 +63,7 @@ public class MenuController : MonoBehaviour
         }
         else return;
         
+        onNavigateEvent.Invoke();
         ChangeSelection();
     }
 

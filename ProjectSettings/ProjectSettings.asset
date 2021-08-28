@@ -127,8 +127,9 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.3
+  bundleVersion: 0.1.4
   preloadedAssets:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -182,7 +183,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.Company.ProductName
-    Standalone: com.Lunetis.ZERO
+    Standalone: com.Lunetis.OperationZERO
     Tizen: com.Company.ProductName
     iPhone: com.Company.ProductName
     tvOS: com.Company.ProductName
@@ -690,7 +691,7 @@ PlayerSettings:
     tvOS: 1
   scriptingBackend:
     Android: 0
-    Standalone: 0
+    Standalone: 1
     WP8: 2
     WebGL: 1
     WebPlayer: 0
@@ -709,7 +710,7 @@ PlayerSettings:
   enableRoslynAnalyzers: 1
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
-  gcIncremental: 0
+  gcIncremental: 1
   assemblyVersionValidation: 1
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform:
