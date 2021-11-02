@@ -58,8 +58,7 @@ Always TODO:
 
 <br>
 
-
-[![](https://img.youtube.com/vi/soBTSXnX7hA/0.jpg)](https://www.youtube.com/watch?v=AcJ8ddI8jyU)
+[![](https://img.youtube.com/vi/gNUb0X9rimQ/0.jpg)](https://www.youtube.com/watch?v=gNUb0X9rimQ)
 
 (YouTube 링크 이미지)
 
