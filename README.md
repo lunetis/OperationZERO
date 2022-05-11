@@ -4,6 +4,9 @@
 
 Remake Final Mission of Ace Combat Zero with Unity.
 
+- __Editor version: 2020.2.3f1__
+- __You have to install [Blender](https://www.blender.org/download/) to explore this project.__
+
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
@@ -71,3 +74,19 @@ Always TODO:
 [Development Example]
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero (Korean language only)
+
+---
+
+### Note: Resolving missing prefab error
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/missingerror.PNG)
+
+If you open the project when Blender is not installed, .blend files may cause missing prefab errors.
+
+To resolve this, you have to install [Blender](https://www.blender.org/download/), and reimport all assets.
+
+After installing Blender, go to Unity Editor Menu - Assets - Reimport All.
+
+<br>
+
+If you have installed blender before you open the project first time, no error occurs.
