@@ -4,6 +4,9 @@
 
 에이스 컴뱃 제로의 마지막 미션 "ZERO"를 유니티 엔진으로 구현하는 프로젝트입니다.
 
+- __Editor version: 2020.2.3f1__
+- __프로젝트를 확인하기 위해서는 [Blender](https://www.blender.org/download/)를 설치해주세요.__
+
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
@@ -69,3 +72,20 @@ Always TODO:
 [구현 예시]
 
 devlog : https://velog.io/@lunetis/series/Ace-Combat-Zero
+
+
+---
+
+### 참고: Missing prefab 에러 해결 방법
+
+![](https://github.com/lunetis/AceCombatZERO/blob/main/missingerror.PNG)
+
+Blender가 설치되어 있지 않은 상태에서 프로젝트를 열 때 위와 같은 에러가 발생할 수 있습니다.
+
+[Blender](https://www.blender.org/download/)를 설치한 후, Unity 에디터의 상단 메뉴에서 Assets - Reimport All 을 실행해주세요.
+
+(한 번 에러가 발생한 상태에서는 단순 설치만으로 에러가 해결되지 않으며, 에셋들을 다시 임포트해야 합니다.)
+
+<br>
+
+프로젝트를 최초로 열 때 Blender가 이미 설치되어 있는 상태라면 위 에러가 발생하지 않습니다.
