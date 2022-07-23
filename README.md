@@ -1,4 +1,4 @@
-# AceCombatZERO
+# Operation ZERO
 
 [[한국어 Readme]](https://github.com/lunetis/AceCombatZERO/blob/main/README.kr.md)
 
@@ -19,7 +19,7 @@ Remake Final Mission of Ace Combat Zero with Unity.
 
 <br>
 
-* This is a personal project and currently in development.
+* This is a personal project ~~and currently in development.~~
 * Since I'm testing with DualShock 4 (PlayStation 4 Controller), I'm not sure if other gamepads are working properly in this project. (XBOX Controller, etc.)
 * Due to asset's license issue, commit histories can be deleted sometimes. (In that case, commit count will be very low.)
 * Please check [LICENSE.md](https://github.com/lunetis/AceCombatZERO/blob/main/LICENSE.md) for other used assets.
