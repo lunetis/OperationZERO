@@ -1,4 +1,4 @@
-# AceCombatZERO
+# Operation ZERO
 
 [[English Readme]](https://github.com/lunetis/AceCombatZERO/blob/main/README.md)
 
@@ -19,7 +19,7 @@
 
 <br>
 
-* 개인 프로젝트이며 현재 개발중입니다.
+* 개인 프로젝트~~이며 현재 개발중~~입니다.
 * 듀얼쇼크 4 컨트롤러 (플레이스테이션 4 전용 컨트롤러)를 사용해서 프로젝트를 진행하고 있기 때문에, XBOX 컨트롤러를 포함한 다른 컨트롤러가 제대로 지원되는지는 아직 확인하지 못했습니다.
 * 에셋의 라이센스 문제로 인해, 때때로 커밋 내역이 초기화될 수 있습니다.
 * 이 프로젝트에 사용된 에셋은 [LICENSE.md](https://github.com/lunetis/AceCombatZERO/blob/main/LICENSE.md) 파일을 확인해주세요.
