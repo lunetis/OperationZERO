@@ -6,9 +6,9 @@ public class EnemyMissile : Missile
 {
     protected override void AdjustValuesByDifficulty()
     {
-        smartTrackingRate = MissionData.GetFloatFromDifficultyXML("enemyMissileTrackingRate");
-        boresightAngle = MissionData.GetFloatFromDifficultyXML("enemyMissileBoresightAngle");
-        turningForce = MissionData.GetFloatFromDifficultyXML("enemyMissileTurningForce");
+        smartTrackingRate = MissionData.GetFloatFromDifficultyXML("enemyMissileTrackingRate", smartTrackingRate);
+        boresightAngle = MissionData.GetFloatFromDifficultyXML("enemyMissileBoresightAngle", boresightAngle);
+        turningForce = MissionData.GetFloatFromDifficultyXML("enemyMissileTurningForce", turningForce);
 
         Debug.Log("Adjuested missile values");
     }

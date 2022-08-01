@@ -115,7 +115,7 @@ public class EnemyWeaponController : MonoBehaviour
         // Get from Object Pool and Launch
         GameObject missile = GameManager.Instance.enemyMissileObjectPool.GetPooledObject();
         missile.transform.position = missileLaunchTransform.position;
-        missile.transform.rotation = transform.rotation;
+        missile.transform.rotation = missileLaunchTransform.rotation;
         missile.SetActive(true);
 
         Missile missileScript = missile.GetComponent<Missile>();

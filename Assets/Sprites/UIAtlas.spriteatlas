@@ -28,6 +28,7 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 0
+      enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -54,7 +55,6 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 0b3dd6da38c23034c8ea3866b4b3f3d7, type: 3}
     - {fileID: 2800000, guid: 4100abcee9f3f104093d6195e7806d46, type: 3}
     - {fileID: 2800000, guid: 6c15ecb86ccba714eaed5a1eb7ce8581, type: 3}
-    totalSpriteSurfaceArea: 2279388
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
