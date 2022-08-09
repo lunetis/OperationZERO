@@ -119,7 +119,9 @@ public class Missile : MonoBehaviour
             return;
 
         Vector3 targetPos = Vector3.Lerp(target.transform.position, GetPredictedTargetPosition(), smartTrackingRate);
-        Vector3 targetDir = targetPos - transform.position;
+        Vector3 targetDir = target.transform.position - transform.position;
+
+        // Angle : Based on current target position
         float angle = Vector3.Angle(targetDir, transform.forward);
 
         if(angle > boresightAngle)
@@ -137,7 +139,8 @@ public class Missile : MonoBehaviour
             return;
         }
 
-        Quaternion lookRotation = Quaternion.LookRotation(targetDir);
+        // LookRotation: Based on target's predicted position
+        Quaternion lookRotation = Quaternion.LookRotation(targetPos - transform.position);
         rb.rotation = Quaternion.Slerp(rb.rotation, lookRotation, turningForce * Time.fixedDeltaTime);
     }
 
