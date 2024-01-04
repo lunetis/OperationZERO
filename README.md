@@ -7,6 +7,9 @@ Remake Final Mission of Ace Combat Zero with Unity.
 - __Editor version: 2020.2.3f1__
 - __You have to install [Blender](https://www.blender.org/download/) to explore this project.__
 
+> Note: If you’re considering forking this project for reference in creating a flight shooting game, I recommend forking [Operation Maverick](https://github.com/lunetis/OperationMaverick).
+> The code is a bit more improved compared to this project.
+
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
