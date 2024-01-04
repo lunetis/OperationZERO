@@ -7,6 +7,8 @@
 - __Editor version: 2020.2.3f1__
 - __프로젝트를 확인하기 위해서는 [Blender](https://www.blender.org/download/)를 설치해주세요.__
 
+> 참고: 만약 비행 슈팅 게임을 만들기 위해 프로젝트를 참고하려 한다면, 좀 더 개선된 코드를 사용하고 있는 [Operation Maverick](https://github.com/lunetis/OperationMaverick)을 살펴보시는 것을 추천드립니다.
+
 <br>
 
 ![](https://github.com/lunetis/AceCombatZERO/blob/main/itchio.PNG)
